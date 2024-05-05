@@ -1,0 +1,15 @@
+﻿services:
+  app:
+    image: hackathon_dw_2024
+    build: ./Backend
+    env_file: Backend/.env
+    ports:
+      - "8080:8080"
+  pg_database:
+    image: hackathon_dw_2024_db
+    build: ./Database
+    env_file: Backend/.env
+    ports:
+      - "5432:5432"
+    
+    
