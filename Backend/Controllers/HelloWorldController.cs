@@ -1,4 +1,5 @@
 ﻿using Hackaton_DW_2024.Data.DataSources;
+using Hackaton_DW_2024.Data.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hackaton_DW_2024.Controllers;
@@ -17,6 +18,6 @@ public class HelloWorldController: ControllerBase
     [HttpGet("/hello")]
     public IActionResult Test()
     {
-        return Ok(_ds.Users.First());
+        return Ok(_ds.Users.FirstOrDefault());
     }
 }

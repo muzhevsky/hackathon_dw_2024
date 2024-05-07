@@ -12,10 +12,13 @@ public class UsersDataSource : DbContext
     public UsersDataSource(DatabaseConnectionConfig config)
     {
         _config = config;
-        Database.EnsureCreated();
-        foreach (var u in Users)
+        try
         {
-            Console.WriteLine(u);
+            Database.OpenConnection();;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
         }
     }
 
@@ -25,7 +28,7 @@ public class UsersDataSource : DbContext
                                  $"Port={_config.Port};" +
                                  $"Database={_config.Database};" +
                                  $"Username={_config.Username};" +
-                                 $"Password={_config.Password}");
+                                 $"Password={_config.Password};",
+            builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(20),null));
     }
 }
-
