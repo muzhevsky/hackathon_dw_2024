@@ -45,8 +45,7 @@ create table achievements
         constraint achievements_users_fk
             references users,
     filename       varchar(256) not null,
-    score          integer      not null,
-    verified_by_nn boolean      not null
+    score          integer      not null
 );
 
 alter table achievements
@@ -57,6 +56,7 @@ create table customization_items
     id        serial
         constraint customization_items_pk
             primary key,
+    title varchar(128) not null,
     file_path varchar(128) not null
 );
 
@@ -120,20 +120,11 @@ create table news
         constraint news_pk
             primary key,
     title   varchar(256) not null,
+    publication_date timestamp not null default current_date,
     content text         not null
 );
 
 alter table news
-    owner to postgres;
-
-create table pinnednews
-(
-    news_id integer
-        constraint pinnednews_unique
-            unique
-);
-
-alter table pinnednews
     owner to postgres;
 
 create table event_statuses
@@ -191,6 +182,32 @@ create table achievements_and_events
 
 alter table achievements_and_events
     owner to postgres;
+
+create table pinned_news
+(
+    news_id serial
+        constraint pinned_news_pk
+            primary key
+);
+
+alter table pinned_news
+    owner to postgres;
+
+create table news_and_events
+(
+    news_id  integer not null
+        constraint news_and_events_news_fk
+            references news,
+                
+    event_id integer not null
+        constraint news_and_events_event_fk
+            references events
+);
+
+alter table news_and_events
+    owner to postgres;
+
+
 
 insert into roles(title) values ('user'), ('admin'), ('deanery');
 insert into users(email, surname, name, patronymic, password_hash, salt, role_id)

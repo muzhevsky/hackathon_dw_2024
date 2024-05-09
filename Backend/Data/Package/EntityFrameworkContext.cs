@@ -1,20 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Hackaton_DW_2024.Data.Dto;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Hackaton_DW_2024.Data.DataSources;
+namespace Hackaton_DW_2024.Data.Package;
 
-public class UsersDataSource : DbContext
+public abstract class EntityFrameworkDataSource : DbContext
 {
-    public DbSet<UserDto> Users { get; set; }
     DatabaseConnectionConfig _config;
 
-    public UsersDataSource(DatabaseConnectionConfig config)
+    public EntityFrameworkDataSource(DatabaseConnectionConfig config)
     {
         _config = config;
         try
         {
-            Database.OpenConnection();;
+            Database.OpenConnection();
         }
         catch (Exception ex)
         {
@@ -29,6 +26,6 @@ public class UsersDataSource : DbContext
                                  $"Database={_config.Database};" +
                                  $"Username={_config.Username};" +
                                  $"Password={_config.Password};",
-            builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(20),null));
+            builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(20), null));
     }
 }

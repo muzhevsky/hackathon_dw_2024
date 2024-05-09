@@ -8,6 +8,8 @@
       - "8080:8080"
     networks:
       - docker-network
+    volumes:
+      - database:/var/lib/postgresql/data
   pg_database:
     container_name: pg_database
     image: hackathon_dw_2024_db
