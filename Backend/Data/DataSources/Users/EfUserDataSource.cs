@@ -1,15 +1,14 @@
-﻿using Hackaton_DW_2024.Data.Dto;
+﻿using Hackaton_DW_2024.Data.Dto.Users;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Users;
 
-public class EFUserDataSource : EntityFrameworkDataSource, IUsersDataSource
+public class EfUserDataSource : EntityFrameworkDataSource, IUsersDataSource
 {
     protected DbSet<UserDto> Users { get; set; }
-
-
-    public EFUserDataSource(DatabaseConnectionConfig config) : base(config)
+    
+    public EfUserDataSource(DatabaseConnectionConfig config) : base(config)
     {
     }
 
@@ -41,6 +40,6 @@ public class EFUserDataSource : EntityFrameworkDataSource, IUsersDataSource
         var deleteTarget = SelectById(id);
         if (deleteTarget == null) throw new Exception("no entity found");
         Users.Remove(deleteTarget);
-        // SaveChanges();
+        SaveChanges();
     }
 }

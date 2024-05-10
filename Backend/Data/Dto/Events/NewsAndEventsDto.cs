@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hackaton_DW_2024.Data.Dto;
+namespace Hackaton_DW_2024.Data.Dto.Events;
 
 [Table("news_and_events")]
 [Keyless]
-public class NewsAndEvents
+public class NewsAndEventsDto: Dto
 {
     [Column("news_id")]
     public int NewsId { get; set; }

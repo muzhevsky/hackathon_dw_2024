@@ -1,31 +1,23 @@
-﻿using System.Collections;
-using Hackaton_DW_2024.Data.Dto;
+﻿using Hackaton_DW_2024.Data.Dto.Events;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.News;
 
-public class EFNewsDataSource : EntityFrameworkDataSource, INewsDataSource
+public class EfNewsDataSource : EntityFrameworkDataSource, INewsDataSource
 {
     DbSet<NewsDto> News { get; set; }
     DbSet<PinnedNewsDto> Pinned { get; set; }
-    DbSet<NewsAndEvents> NewsAndEvents { get; set; }
 
-    public EFNewsDataSource(DatabaseConnectionConfig config) : base(config)
+    public EfNewsDataSource(DatabaseConnectionConfig config) : base(config)
     {
     }
 
-    public NewsDto? SelectById(int id)
-    {
-        return News.FirstOrDefault(news => news.Id == id);
-    }
+    public NewsDto? SelectById(int id) => News.FirstOrDefault(news => news.Id == id);
 
-    public List<NewsDto> SelectAll()
-    {
-        return News.ToList();
-    }
+    public IEnumerable<NewsDto> SelectAll() => News.ToList();
 
-    public List<NewsDto> SelectPinned()
+    public IEnumerable<NewsDto> SelectPinned()
     {
         return News
             .Where(news => Pinned
@@ -33,23 +25,11 @@ public class EFNewsDataSource : EntityFrameworkDataSource, INewsDataSource
             .ToList();
     }
 
-    public List<NewsDto> SelectRangeWithOffsetByDate(int range, int offset, bool ascending = true)
+    public IEnumerable<NewsDto> SelectRangeWithOffsetByDate(int range, int offset, bool ascending = true)
     {
         return ascending
             ? News.OrderBy(news => news.PublicationDate).Skip(offset).Take(range).ToList()
             : News.OrderByDescending(news => news.PublicationDate).Skip(offset).Take(range).ToList();
-    }
-
-    public List<NewsDto> SelectByConnectedEvent(int eventId)
-    {
-        var newsAndEvents = NewsAndEvents.Where(record => record.EventId == eventId).ToList();
-        var result = new List<NewsDto>();
-        foreach (var record in newsAndEvents)
-        {
-            result.AddRange(News.Where(dto => dto.Id == record.EventId));
-        }
-
-        return result;
     }
 
     public void Insert(NewsDto dto)

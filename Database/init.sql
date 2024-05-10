@@ -57,6 +57,7 @@ create table customization_items
         constraint customization_items_pk
             primary key,
     title varchar(128) not null,
+    price int not null,
     file_path varchar(128) not null
 );
 
@@ -87,18 +88,19 @@ create table requests
 alter table requests
     owner to postgres;
 
-create table rejection_reasons
+create table rejections
 (
     id         serial
-        constraint rejection_reasons_pk
+        constraint rejections_pk
             primary key,
     request_id integer not null
-        constraint rejection_reasons_requests_fk
+        constraint rejections_requests_fk
             references requests,
+    date date not null,
     reason     text    not null
 );
 
-alter table rejection_reasons
+alter table rejections
     owner to postgres;
 
 create table requests_and_achievements
@@ -162,8 +164,8 @@ create table users_and_events
     user_id   integer not null
         constraint users_and_events_users_fk
             references users,
-    events_id integer not null
-        constraint users_and_events_events_fk
+    event_id integer not null
+        constraint users_and_events_event_fk
             references events
 );
 

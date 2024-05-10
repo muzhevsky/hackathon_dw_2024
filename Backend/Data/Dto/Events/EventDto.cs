@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.InteropServices.JavaScript;
 
-namespace Hackaton_DW_2024.Data.Dto;
+namespace Hackaton_DW_2024.Data.Dto.Events;
 
 [Table("events")]
-public class EventDto
+public class EventDto: Dto
 {
     [Column("id")] 
     public int Id { get; set; }

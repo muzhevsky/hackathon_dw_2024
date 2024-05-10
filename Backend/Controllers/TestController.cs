@@ -1,9 +1,5 @@
-﻿using Hackaton_DW_2024.Data.DataSources;
-using Hackaton_DW_2024.Data.DataSources.FileSystem;
-using Hackaton_DW_2024.Data.DataSources.News;
-using Hackaton_DW_2024.Data.DataSources.Users;
-using Hackaton_DW_2024.Data.DataSources.Users.Roles;
-using Hackaton_DW_2024.Data.Dto;
+﻿using Hackaton_DW_2024.Data.DataSources.FileSystem;
+using Hackaton_DW_2024.Data.Dto.Achievements;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hackaton_DW_2024.Controllers;

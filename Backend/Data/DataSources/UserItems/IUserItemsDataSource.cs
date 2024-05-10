@@ -1,6 +1,6 @@
-﻿using Hackaton_DW_2024.Data.Dto;
+﻿using Hackaton_DW_2024.Data.Dto.Customization;
 
-namespace Hackaton_DW_2024.Data.DataSources.CustomizationItems;
+namespace Hackaton_DW_2024.Data.DataSources.UserItems;
 
 public interface IUserItemsDataSource
 {

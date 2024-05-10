@@ -1,19 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Hackaton_DW_2024.Data.Dto;
+namespace Hackaton_DW_2024.Data.Dto.Events;
 
-[Table("customization_items")]
-public class CustomizationItemDto
+[Table("event_statuses")]
+public class EventStatusDto: Dto
 {
     [Column("id")]
     public int Id { get; set; }
     
     [Column("title")]
-    [MaxLength(128)]
+    [MaxLength(32)]
     public string Title { get; set; }
-    
-    [Column("file_path")]
-    [MaxLength(128)]
-    public int FilePath { get; set; }
 }

@@ -1,5 +1,4 @@
-﻿using Hackaton_DW_2024.Data.Dto;
-using Microsoft.EntityFrameworkCore;
+﻿using Hackaton_DW_2024.Data.Dto.Users;
 
 namespace Hackaton_DW_2024.Data.DataSources.Users;
 

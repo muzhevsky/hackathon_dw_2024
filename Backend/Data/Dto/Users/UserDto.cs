@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
-namespace Hackaton_DW_2024.Data.Dto;
+namespace Hackaton_DW_2024.Data.Dto.Users;
 
 [Table("users")]
-public class UserDto
+public class UserDto: Dto
 {
     [Column("id")] 
     public int Id { get; set; }

@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Hackaton_DW_2024.Data.Dto;
+namespace Hackaton_DW_2024.Data.Dto.Events;
 
 [Table("news")]
-public class NewsDto
+public class NewsDto: Dto
 {
     [Column("id")]
     public int Id { get; set; }

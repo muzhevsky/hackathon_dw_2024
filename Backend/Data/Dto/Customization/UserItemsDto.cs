@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hackaton_DW_2024.Data.Dto;
+namespace Hackaton_DW_2024.Data.Dto.Customization;
 
 [Table("user_items")]
 [Keyless]
-public class UserItemsDto
+public class UserItemsDto: Dto
 {
     [Column("user_id")]
     public int UserId { get; set; }

@@ -1,29 +1,28 @@
-﻿using Hackaton_DW_2024.Data.Dto;
+﻿using Hackaton_DW_2024.Data.Dto.Customization;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hackaton_DW_2024.Data.DataSources.CustomizationItems;
+namespace Hackaton_DW_2024.Data.DataSources.UserItems;
 
 public class EfUserItemsDataSources : EntityFrameworkDataSource, IUserItemsDataSource
 {
-    protected DbSet<UserItemsDto> Purchases { get; set; }
+    protected DbSet<UserItemsDto> UserItems { get; set; }
 
     public EfUserItemsDataSources(DatabaseConnectionConfig config) : base(config)
     {
     }
 
-    public List<UserItemsDto> SelectByUserId(int userId)
-    {
-        return Purchases.Where(dto => dto.UserId == userId).ToList();
-    }
+    public List<UserItemsDto> SelectByUserId(int userId) => UserItems.Where(dto => dto.UserId == userId).ToList();
 
     public void InsertOne(UserItemsDto dto)
     {
-        Purchases.Add(dto);
+        UserItems.Add(dto);
+        SaveChanges();
     }
 
     public void InsertMany(IEnumerable<UserItemsDto> dtos)
     {
-        Purchases.AddRange(dtos);
+        UserItems.AddRange(dtos);
+        SaveChanges();
     }
 }

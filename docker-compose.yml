@@ -33,4 +33,4 @@ networks:
   docker-network:
     driver: bridge
 volumes:
-  database:
+  data:
