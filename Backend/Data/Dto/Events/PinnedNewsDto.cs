@@ -9,4 +9,7 @@ public class PinnedNewsDto: Dto
 {
     [Column("news_id")]
     public int NewsId { get; set; }
+    
+    static string _structureName = "pinned_news";
+    public static string StructureName => _structureName;
 }

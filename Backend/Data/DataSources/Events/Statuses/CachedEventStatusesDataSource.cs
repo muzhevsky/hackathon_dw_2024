@@ -17,10 +17,8 @@ public class CachedEventStatusesDataSource: IEventStatusesDataSource
         }
     }
 
-    public IEnumerable<EventStatusDto> SelectAll()
-    {
-        return _statuses.Select(kv => kv.Value).ToList();
-    }
+    public IEnumerable<EventStatusDto> SelectAll() =>
+        _statuses.Select(kv => kv.Value);
 
     public EventStatusDto? SelectById(int id)
     {

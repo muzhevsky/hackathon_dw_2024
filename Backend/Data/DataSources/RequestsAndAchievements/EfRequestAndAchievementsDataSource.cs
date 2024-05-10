@@ -4,32 +4,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.RequestsAndAchievements;
 
-public class EfRequestAndAchievementsDataSource: EntityFrameworkDataSource, IRequestsAndAchievementsDataSource
+public class EfRequestAndAchievementsDataSource : EntityFrameworkDataSource, IRequestsAndAchievementsDataSource
 {
-    DbSet<RequestsAndAchievementDto> RequestsAndAchievements;
-    public EfRequestAndAchievementsDataSource(DatabaseConnectionConfig config) : base(config)
+    DbSet<RequestAndAchievementDto> RequestsAndAchievements;
+
+    public EfRequestAndAchievementsDataSource(DatabaseConnectionConfig config, Infrastructure.ILogger logger) : base(
+        config, logger)
     {
     }
 
-    public IEnumerable<RequestsAndAchievementDto> SelectByRequestId(int requestId) =>
+    public IEnumerable<RequestAndAchievementDto> SelectByRequestId(int requestId) =>
         RequestsAndAchievements.Where(dto => dto.RequestId == requestId);
 
-    public IEnumerable<RequestsAndAchievementDto> SelectByAchievementId(int achievementId) =>
+    public IEnumerable<RequestAndAchievementDto> SelectByAchievementId(int achievementId) =>
         RequestsAndAchievements.Where(dto => dto.AchievementId == achievementId);
 
-    public void Insert(RequestsAndAchievementDto dto)
+    public void Insert(RequestAndAchievementDto dto)
     {
         RequestsAndAchievements.Add(dto);
         SaveChanges();
     }
 
-    public void Delete(RequestsAndAchievementDto dto)
+    public void Delete(RequestAndAchievementDto dto)
     {
         var deleteTarget = RequestsAndAchievements.FirstOrDefault(record =>
             record.RequestId == dto.RequestId &&
             record.AchievementId == dto.AchievementId
         );
-        if (deleteTarget == null) throw new Exception("no entity found");
+        if (deleteTarget == null)
+        {
+            RaiseNotFoundError(RequestAndAchievementDto.StructureName,
+                new List<KeyValuePair<string, object>>
+                {
+                    new(nameof(dto.AchievementId), dto.AchievementId),
+                    new(nameof(dto.RequestId), dto.RequestId)
+                });
+        }
+
         RequestsAndAchievements.Remove(deleteTarget);
         SaveChanges();
     }

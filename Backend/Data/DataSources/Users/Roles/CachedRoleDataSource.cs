@@ -2,7 +2,7 @@
 
 namespace Hackaton_DW_2024.Data.DataSources.Users.Roles;
 
-public class CachedRoleDataSource: IRolesDataSource
+public class CachedRoleDataSource : IRolesDataSource
 {
     IRolesDataSource _wrappedDataSource;
     Dictionary<int, RoleDto> _cachedStorage = new();
@@ -17,10 +17,7 @@ public class CachedRoleDataSource: IRolesDataSource
         }
     }
 
-    public IEnumerable<RoleDto> SelectAll()
-    {
-        return _cachedStorage.Select(kv => kv.Value).ToList();
-    }
+    public IEnumerable<RoleDto> SelectAll() => _cachedStorage.Select(kv => kv.Value);
 
     public RoleDto? SelectById(int id)
     {
@@ -28,7 +25,7 @@ public class CachedRoleDataSource: IRolesDataSource
         {
             return result;
         }
-        
+
         return _wrappedDataSource.SelectById(id) ?? throw new Exception("no entity found");
     }
 }

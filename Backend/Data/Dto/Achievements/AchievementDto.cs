@@ -18,4 +18,8 @@ public class AchievementDto: Dto
     
     [Column("score")]
     public int Score { get; set; }
+
+    
+    static string _structureName = "achievements";
+    public static string StructureName => _structureName;
 }

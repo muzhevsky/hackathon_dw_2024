@@ -1,6 +1,7 @@
 ﻿using Hackaton_DW_2024.Data.Dto.Customization;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
+using ILogger = Hackaton_DW_2024.Infrastructure.ILogger;
 
 namespace Hackaton_DW_2024.Data.DataSources.UserItems;
 
@@ -8,11 +9,11 @@ public class EfUserItemsDataSources : EntityFrameworkDataSource, IUserItemsDataS
 {
     protected DbSet<UserItemsDto> UserItems { get; set; }
 
-    public EfUserItemsDataSources(DatabaseConnectionConfig config) : base(config)
+    public EfUserItemsDataSources(DatabaseConnectionConfig config, ILogger logger) : base(config, logger)
     {
     }
 
-    public List<UserItemsDto> SelectByUserId(int userId) => UserItems.Where(dto => dto.UserId == userId).ToList();
+    public IEnumerable<UserItemsDto> SelectByUserId(int userId) => UserItems.Where(dto => dto.UserId == userId);
 
     public void InsertOne(UserItemsDto dto)
     {

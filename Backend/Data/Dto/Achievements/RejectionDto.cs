@@ -16,4 +16,7 @@ public class RejectionDto: Dto
     
     [Column("date")]
     public DateTime Date { get; set; } // TODO date should be UTC
+    
+    static string _structureName = "rejections";
+    public static string StructureName => _structureName;
 }

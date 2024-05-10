@@ -12,4 +12,7 @@ public class UsersAndEventsDto: Dto
     
     [Column("event_id")]
     public int EventId { get; set; }
+
+    static string _structureName = "users_and_events";
+    public static string StructureName { get => _structureName;}
 }

@@ -4,7 +4,7 @@ namespace Hackaton_DW_2024.Data.DataSources.UserItems;
 
 public interface IUserItemsDataSource
 {
-    List<UserItemsDto> SelectByUserId(int userId);
+    IEnumerable<UserItemsDto> SelectByUserId(int userId);
     void InsertOne(UserItemsDto dto);
     void InsertMany(IEnumerable<UserItemsDto> dtos);
 }

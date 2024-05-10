@@ -15,4 +15,7 @@ public class UserItemsDto: Dto
     
     [Column("count")]
     public int Count { get; set; }
+    
+    static string _structureName = "user_items";
+    public static string StructureName => _structureName;
 }

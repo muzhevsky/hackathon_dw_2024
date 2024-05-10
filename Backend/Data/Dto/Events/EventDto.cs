@@ -24,4 +24,7 @@ public class EventDto: Dto
     
     [Column("description")]
     public string Description { get; set; }
+    
+    static string _structureName = "events";
+    public static string StructureName => _structureName;
 }

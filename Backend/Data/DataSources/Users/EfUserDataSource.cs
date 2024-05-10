@@ -1,14 +1,15 @@
 ﻿using Hackaton_DW_2024.Data.Dto.Users;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
+using ILogger = Hackaton_DW_2024.Infrastructure.ILogger;
 
 namespace Hackaton_DW_2024.Data.DataSources.Users;
 
 public class EfUserDataSource : EntityFrameworkDataSource, IUsersDataSource
 {
     protected DbSet<UserDto> Users { get; set; }
-    
-    public EfUserDataSource(DatabaseConnectionConfig config) : base(config)
+
+    public EfUserDataSource(DatabaseConnectionConfig config, ILogger logger) : base(config, logger)
     {
     }
 
@@ -30,7 +31,16 @@ public class EfUserDataSource : EntityFrameworkDataSource, IUsersDataSource
     public void UpdateById(int id, Action<UserDto> updateFunc)
     {
         var updateTarget = SelectById(id);
-        if (updateTarget == null) throw new Exception("no entity found");
+        if (updateTarget == null)
+        {
+            RaiseNotFoundError(UserDto.StructureName,
+                new List<KeyValuePair<string, object>>
+                {
+                    new(nameof(UserDto.Id), id)
+                });
+            return;
+        }
+
         updateFunc(updateTarget);
         SaveChanges();
     }
@@ -38,7 +48,16 @@ public class EfUserDataSource : EntityFrameworkDataSource, IUsersDataSource
     public void DeleteById(int id)
     {
         var deleteTarget = SelectById(id);
-        if (deleteTarget == null) throw new Exception("no entity found");
+        if (deleteTarget == null)
+        {
+            RaiseNotFoundError(UserDto.StructureName,
+                new List<KeyValuePair<string, object>>
+                {
+                    new(nameof(UserDto.Id), id)
+                });
+            return;
+        }
+
         Users.Remove(deleteTarget);
         SaveChanges();
     }

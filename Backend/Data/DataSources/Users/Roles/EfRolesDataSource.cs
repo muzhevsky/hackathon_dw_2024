@@ -8,7 +8,7 @@ public class EfRolesDataSource : EntityFrameworkDataSource, IRolesDataSource
 {
     protected DbSet<RoleDto> Roles { get; set; }
 
-    public EfRolesDataSource(DatabaseConnectionConfig config) : base(config)
+    public EfRolesDataSource(DatabaseConnectionConfig config, Infrastructure.ILogger logger) : base(config, logger)
     {
     }
 

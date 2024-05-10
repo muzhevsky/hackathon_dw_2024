@@ -12,4 +12,8 @@ public class AchievementsAndEventsDto: Dto
     
     [Column]
     public int EventId { get; set; }
+    
+    
+    static string _structureName = "achievements_and_events";
+    public static string StructureName => _structureName;
 }

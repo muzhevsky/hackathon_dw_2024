@@ -37,8 +37,6 @@ public class UserDto: Dto
     [Column("role_id")] 
     public int RoleId { get; set; }
 
-    public override string ToString()
-    {
-        return JsonConvert.SerializeObject(this);
-    }
+    static string _structureName = "users";
+    public static string StructureName => _structureName;
 }

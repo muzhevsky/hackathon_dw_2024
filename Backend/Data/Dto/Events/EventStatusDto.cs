@@ -12,4 +12,7 @@ public class EventStatusDto: Dto
     [Column("title")]
     [MaxLength(32)]
     public string Title { get; set; }
+    
+    static string _structureName = "event_statuses";
+    public static string StructureName => _structureName;
 }

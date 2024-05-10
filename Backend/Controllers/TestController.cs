@@ -1,6 +1,8 @@
-﻿using Hackaton_DW_2024.Data.DataSources.FileSystem;
+﻿using Hackaton_DW_2024.Data.DataSources.Achievements;
+using Hackaton_DW_2024.Data.DataSources.FileSystem;
 using Hackaton_DW_2024.Data.Dto.Achievements;
 using Microsoft.AspNetCore.Mvc;
+using ILogger = Hackaton_DW_2024.Infrastructure.ILogger;
 
 namespace Hackaton_DW_2024.Controllers;
 
@@ -9,9 +11,11 @@ namespace Hackaton_DW_2024.Controllers;
 public class TestController: ControllerBase
 {
     IFileSystem _fs;
-    public TestController(IFileSystem fs)
+    IAchievementsDataSource _asd;
+    public TestController(IFileSystem fs, IAchievementsDataSource asd)
     {
         _fs = fs;
+        _asd = asd;
     }
     
     [HttpGet("/hello")]
@@ -30,12 +34,12 @@ public class TestController: ControllerBase
 
         var content = bytes.ReadBytes((int)stream.Length);
         
-        
         _fs.Write(new FileDto
         {
             Name = fileName,
             Content = content
         });
+        
         return Ok();
     }
 }

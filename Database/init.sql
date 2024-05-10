@@ -44,7 +44,7 @@ create table achievements
     user_id        integer      not null
         constraint achievements_users_fk
             references users,
-    filename       varchar(256) not null,
+    file_name       varchar(256) not null,
     score          integer      not null
 );
 

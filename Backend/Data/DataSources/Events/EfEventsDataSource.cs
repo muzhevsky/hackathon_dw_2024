@@ -8,7 +8,7 @@ public class EfEventsDataSource : EntityFrameworkDataSource, IEventsDataSource
 {
     DbSet<EventDto> Events { get; set; }
 
-    public EfEventsDataSource(DatabaseConnectionConfig config) : base(config)
+    public EfEventsDataSource(DatabaseConnectionConfig config, Infrastructure.ILogger logger) : base(config, logger)
     {
     }
 
@@ -17,10 +17,10 @@ public class EfEventsDataSource : EntityFrameworkDataSource, IEventsDataSource
     public IEnumerable<EventDto> SelectAll() => Events.ToList();
 
     public IEnumerable<EventDto> SelectActive() =>
-        Events.Where(dto => dto.StartDate < DateTime.Now && dto.EndDate > DateTime.Now).ToList();
+        Events.Where(dto => dto.StartDate < DateTime.Now && dto.EndDate > DateTime.Now);
 
     public IEnumerable<EventDto> SelectByStatusId(int statusId) =>
-        Events.Where(dto => dto.StatusId == statusId).ToList();
+        Events.Where(dto => dto.StatusId == statusId);
 
     public void InsertOne(EventDto dto)
     {
@@ -31,7 +31,15 @@ public class EfEventsDataSource : EntityFrameworkDataSource, IEventsDataSource
     public void UpdateById(int id, Action<EventDto> updateFunc)
     {
         var updateTarget = Events.FirstOrDefault(dto => dto.Id == id);
-        if (updateTarget == null) throw new Exception("no entity found");
+        if (updateTarget == null)
+        {
+            RaiseNotFoundError(EventDto.StructureName,
+                new List<KeyValuePair<string, object>>
+                {
+                    new(nameof(EventDto.Id), id)
+                });
+            return;
+        }
         updateFunc(updateTarget);
         SaveChanges();
     }
@@ -39,7 +47,15 @@ public class EfEventsDataSource : EntityFrameworkDataSource, IEventsDataSource
     public void DeleteById(int id)
     {
         var deleteTarget = Events.FirstOrDefault(dto => dto.Id == id);
-        if (deleteTarget == null) throw new Exception("no entity found");
+        if (deleteTarget == null) 
+        {
+            RaiseNotFoundError(EventDto.StructureName,
+                new List<KeyValuePair<string, object>>
+                {
+                    new(nameof(EventDto.Id), id)
+                });
+            return;
+        }
         Events.Remove(deleteTarget);
         SaveChanges();
     }

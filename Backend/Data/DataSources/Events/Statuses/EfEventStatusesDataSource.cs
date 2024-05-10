@@ -8,7 +8,7 @@ public class EfEventStatusesDataSource : EntityFrameworkDataSource, IEventStatus
 {
     DbSet<EventStatusDto> _statuses;
 
-    public EfEventStatusesDataSource(DatabaseConnectionConfig config) : base(config)
+    public EfEventStatusesDataSource(DatabaseConnectionConfig config, Infrastructure.ILogger logger) : base(config, logger)
     {
     }
 

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Hackaton_DW_2024.Data.Dto;
 

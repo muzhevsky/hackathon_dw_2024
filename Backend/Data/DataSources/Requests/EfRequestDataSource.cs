@@ -1,19 +1,21 @@
 ﻿using Hackaton_DW_2024.Data.Dto.Achievements;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
+using ILogger = Hackaton_DW_2024.Infrastructure.ILogger;
 
 namespace Hackaton_DW_2024.Data.DataSources.Requests;
 
-public class EfRequestDataSource: EntityFrameworkDataSource, IRequestDataSource
+public class EfRequestDataSource : EntityFrameworkDataSource, IRequestDataSource
 {
     DbSet<RequestDto> Requests;
-    public EfRequestDataSource(DatabaseConnectionConfig config) : base(config)
+
+    public EfRequestDataSource(DatabaseConnectionConfig config, ILogger logger) : base(config, logger)
     {
     }
 
     public RequestDto? SelectById(int id) => Requests.FirstOrDefault(dto => dto.Id == id);
 
-    public IEnumerable<RequestDto> SelectByUserId(int userId) => Requests.Where(dto => dto.UserId == userId).ToList();
+    public IEnumerable<RequestDto> SelectByUserId(int userId) => Requests.Where(dto => dto.UserId == userId);
 
     public void Insert(RequestDto dto)
     {
@@ -23,8 +25,17 @@ public class EfRequestDataSource: EntityFrameworkDataSource, IRequestDataSource
 
     public void UpdateById(int id, Action<RequestDto> updateFunc)
     {
-        var updateTarget = Requests.FirstOrDefault(dto => dto.Id == id);
-        if (updateTarget == null) throw new Exception("no entity found");
+        var updateTarget = Requests.First(dto => dto.Id == id);
+        if (updateTarget == null)
+        {
+            RaiseNotFoundError(RequestDto.StructureName,
+                new List<KeyValuePair<string, object>>
+                {
+                    new(nameof(RequestDto.Id), id)
+                });
+            return;
+        }
+
         updateFunc(updateTarget);
         SaveChanges();
     }
@@ -32,7 +43,16 @@ public class EfRequestDataSource: EntityFrameworkDataSource, IRequestDataSource
     public void DeleteById(int id)
     {
         var deleteTarget = Requests.FirstOrDefault(dto => dto.Id == id);
-        if (deleteTarget == null) throw new Exception("no entity found");
+        if (deleteTarget == null)
+        {
+            RaiseNotFoundError(RequestDto.StructureName,
+                new List<KeyValuePair<string, object>>
+                {
+                    new(nameof(RequestDto.Id), id)
+                });
+            return;
+        }
+
         Requests.Remove(deleteTarget);
         SaveChanges();
     }

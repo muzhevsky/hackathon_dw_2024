@@ -19,4 +19,7 @@ public class CustomizationItemDto: Dto
     [Column("file_path")]
     [MaxLength(128)]
     public int FilePath { get; set; }
+    
+    static string _structureName = "customization_items";
+    public static string StructureName => _structureName;
 }

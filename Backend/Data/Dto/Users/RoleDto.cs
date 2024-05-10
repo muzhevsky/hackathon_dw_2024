@@ -12,7 +12,7 @@ public class RoleDto: Dto
     [Column("title")] 
     [MaxLength(32)] 
     public string Title { get; set; }
-
-
-
+    
+    static string _structureName = "roles";
+    public static string StructureName => _structureName;
 }
