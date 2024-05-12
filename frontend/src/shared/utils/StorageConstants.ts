@@ -1,0 +1,1 @@
+export const STORAGE_TOKEN: string = "lk_token";
