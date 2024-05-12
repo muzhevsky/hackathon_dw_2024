@@ -1,6 +1,6 @@
+using Hackaton_DW_2024.Data;
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Logging;
-using Hackaton_DW_2024.Internal.Data;
 using Hackaton_DW_2024.Internal.UseCases;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
