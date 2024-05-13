@@ -20,7 +20,7 @@ const LoginForm: React.FC = observer(() => {
     const password = useInput();
 
     const authHandler = async () => {
-        const response = await AuthService.login({email: login.value, password: password.value});
+        const response = await AuthService.login({login: login.value, password: password.value});
         userStore.activeToken = response.token;
         const user = await UserService.GetUserById(response.user.id);
         userStore.user = user;

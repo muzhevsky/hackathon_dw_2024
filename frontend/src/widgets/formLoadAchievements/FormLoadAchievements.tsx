@@ -4,6 +4,7 @@ import { RcFile } from "antd/es/upload";
 import { useState } from "react";
 import { FormAchievement } from "../../entities/achievement/FormAchievement";
 import LoadingPage from "../../pages/loadingPage/LoadingPage";
+import AchievementService from "../../servises/AchievementService";
 import FormForAchievement from "../formAchievement/FormForAchievement";
 import styles from "./FormLoadAchievements.module.css";
 
@@ -24,10 +25,13 @@ const FormLoadAchievements: React.FC<FormLoadAchievementsProps> = ({ closeHandle
     });
 
     //@ts-ignore
-    const dummyRequest = async ({ file, onSuccess }) => {    
-        setTimeout(() => {
-           onSuccess("ok");
-        }, 0);
+    const dummyRequest = async ({ file, onSuccess }) => { 
+        const response = await AchievementService.create({File: file});   
+        console.log(response);
+        onSuccess("ok");
+        // setTimeout(() => {
+        //    onSuccess("ok");
+        // }, 0);
       }
 
     return (
