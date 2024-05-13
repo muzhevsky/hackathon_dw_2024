@@ -1,7 +1,9 @@
+import AddAchievement from "../addAchievements/AddAchievement";
+
 const Achievements: React.FC = () => {
     return(
         <>
-            <h2>Достижения</h2>
+            <AddAchievement/>            
         </>
     )
 }
