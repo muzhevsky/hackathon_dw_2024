@@ -1,4 +1,5 @@
 import { AchievementCreateDto } from "../dto/achievement/CreateDro";
+import { Achievement } from "../entities/achievement/Achievement";
 import $api, { API_URL } from "../shared/utils/Api";
 
 class AchievementService{
@@ -9,6 +10,10 @@ class AchievementService{
               },
               withCredentials: true
         })
+    }
+
+    public static async getAchievements(): Promise<Achievement[]>{
+        return (await $api.get<Achievement[]>(`${API_URL}/achievements`)).data;
     }
 }
 
