@@ -2,5 +2,5 @@
 
 public interface ITokenProvider
 {
-    string ProvideToken(Dictionary<string, string> claims);
+    string ProvideToken(TokenClaims claims);
 }

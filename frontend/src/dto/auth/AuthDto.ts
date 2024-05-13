@@ -1,4 +1,4 @@
 export interface AuthDto{
-    email: string;
+    login: string;
     password: string;
 }

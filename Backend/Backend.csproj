@@ -14,6 +14,7 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+        <PackageReference Include="Spire.Doc" Version="12.4.7" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
@@ -22,11 +23,23 @@
         <Link>.dockerignore</Link>
         <DependentUpon>Dockerfile</DependentUpon>
       </Content>
+      <Content Remove="Internal\UseCases\Converters\**" />
+      <Content Remove="Api\Requests\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Api\Responses\" />
-      <Folder Include="Internal\Repositories\Hash\" />
+      <Compile Remove="Internal\UseCases\Converters\**" />
+      <Compile Remove="Api\Requests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Internal\UseCases\Converters\**" />
+      <EmbeddedResource Remove="Api\Requests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Internal\UseCases\Converters\**" />
+      <None Remove="Api\Requests\**" />
     </ItemGroup>
 
 </Project>

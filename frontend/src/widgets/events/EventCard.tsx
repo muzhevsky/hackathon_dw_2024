@@ -16,7 +16,6 @@ const EventCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, sta
 
     return (
         <div className={styles.cardViev}>
-
             <p className={styles.title}>{title}</p>
             <div className={styles.container__image}>
                 <div className={styles.img}>
@@ -31,7 +30,7 @@ const EventCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, sta
                 ) : (
                     <>
                         <p className={styles.date}>{endDate.toLocaleDateString()}</p>
-                        <p className={styles.additions}>Подробнее</p>
+                        <p className={styles.additions}>Подробнее (Мероприятие)</p>
                     </>
 
                 )}
