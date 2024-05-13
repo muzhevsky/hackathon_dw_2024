@@ -9,6 +9,7 @@ import { HOME_PATH } from "../../routing/RouterConstants";
 import AuthService from "../../servises/AuthService";
 import PrimaryButton from "../../shared/ui/button/PrimaryButton";
 import { STORAGE_TOKEN } from "../../shared/utils/StorageConstants";
+import styles from "./LoginForm.module.css";
 
 const LoginForm: React.FC = observer(() => {
     const {userStore} = useContext(Context);
@@ -25,7 +26,7 @@ const LoginForm: React.FC = observer(() => {
     }
 
     return(
-        <div>
+        <div className={styles.FormWrap}>
             <Input 
                 size="large" 
                 placeholder="Ваш логин..." 
