@@ -47,13 +47,14 @@ public class StudentProfileUseCase
         _achievementsRepository.AddAchievement(achievement, request.File.OpenReadStream());
         var res = await _recognitionRepository.Recognize(achievement.FilePath);
         await _gigaChatRepository.Authorize();
-        return await _gigaChatRepository.SendMessage($"Распознай в представленном тексте данные в формате:" +
-                                                     "Название конкурса: \n" +
-                                                     "Имя участника: \n" +
-                                                     "Дата проведения: \n" +
-                                                     "Статус (региональный, международный и т.д): \n" +
-                                                     "Занятое на конкурсе место:\n " +
-                                                     $"Вот текст: {res}");
+        return "тут должен быть ответ от гигачата (я пока выключил)";
+        // return await _gigaChatRepository.SendMessage($"Распознай в представленном тексте данные в формате:" +
+        //                                              "Название конкурса: \n" +
+        //                                              "Имя участника: \n" +
+        //                                              "Дата проведения: \n" +
+        //                                              "Статус (региональный, международный и т.д): \n" +
+        //                                              "Занятое на конкурсе место:\n " +
+        //                                              $"Вот текст: {res}");
     }
 
     public List<Achievement> GetAchievements(int userId)

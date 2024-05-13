@@ -11,11 +11,9 @@ public class UsersAndEventsDto: Dto
     
     [Column("user_id")] 
     public int UserId { get; set; }
-    public UserDto User { get; set; }
     
     [Column("event_id")]
     public int EventId { get; set; }
-    public EventDto Event { get; set; }
     
     
     static string _structureName = "users_and_events";
