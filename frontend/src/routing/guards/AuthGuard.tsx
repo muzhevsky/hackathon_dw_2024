@@ -21,25 +21,18 @@ const AuthGuard : React.FC<AuthGuardProps> = observer(({children}) => {
     }, [])
 
     const refreshToken = async() => {
-        console.log("tyt");
-        console.log(userStore.activeToken);
         if(userStore.activeToken) 
         {
-            console.log("tyt1");
             userStore.isAuth = true;
         } 
         else
         {
-            console.log("tyt2");
             if (localStorage.getItem(STORAGE_TOKEN) !== null) 
             {
-                console.log("tyt3");
-                console.log(localStorage.getItem(STORAGE_TOKEN));
                 userStore.activeToken = localStorage.getItem(STORAGE_TOKEN);
                 userStore.isAuth = true;
             }
         }
-        console.warn(userStore.isAuth);
         setIsLoadingState(false);
     }
 

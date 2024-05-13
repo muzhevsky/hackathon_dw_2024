@@ -19,7 +19,7 @@ const LoginForm: React.FC = observer(() => {
     const authHandler = async() => {
         const response = await AuthService.login({email: login.value, password: password.value});
         userStore.activeToken = response;
-        sessionStorage.setItem(STORAGE_TOKEN, response);
+        localStorage.setItem(STORAGE_TOKEN, response);
         userStore.isAuth = true;
         navigate(HOME_PATH);
     }
