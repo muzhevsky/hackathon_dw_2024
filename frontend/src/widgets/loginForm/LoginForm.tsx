@@ -4,11 +4,12 @@ import {observer} from "mobx-react-lite";
 import {useContext} from "react";
 import {useNavigate} from "react-router-dom";
 import {Context} from "../..";
+import { testUser } from "../../entities/user/User";
 import useInput from "../../hooks/UseInput";
 import {HOME_PATH} from "../../routing/RouterConstants";
 import AuthService from "../../servises/AuthService";
 import PrimaryButton from "../../shared/ui/button/PrimaryButton";
-import {STORAGE_TOKEN} from "../../shared/utils/StorageConstants";
+import {STORAGE_TOKEN, STORAGE_USER} from "../../shared/utils/StorageConstants";
 import styles from "./LoginForm.module.css";
 
 const LoginForm: React.FC = observer(() => {
@@ -19,8 +20,10 @@ const LoginForm: React.FC = observer(() => {
 
     const authHandler = async () => {
         const response = await AuthService.login({email: login.value, password: password.value});
-        userStore.activeToken = response;
-        localStorage.setItem(STORAGE_TOKEN, response);
+        userStore.activeToken = response.token;
+        userStore.user = response.user;
+        localStorage.setItem(STORAGE_TOKEN, response.token);
+        localStorage.setItem(STORAGE_USER, JSON.stringify(response.user ?? testUser));
         userStore.isAuth = true;
         navigate(HOME_PATH);
     }
