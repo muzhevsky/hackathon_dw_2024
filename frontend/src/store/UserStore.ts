@@ -1,8 +1,11 @@
 import { makeAutoObservable } from "mobx";
+import { Role } from "../entities/role/Role";
 
 class UserStore{
     private _activeToken: string | null = null;
     private _isAuth: boolean = false;
+    //TODO исправить начальное положение на null
+    private _activeRole: Role | null = {id: 4, title: "user"};
 
     constructor() {
         makeAutoObservable(this);
@@ -22,6 +25,14 @@ class UserStore{
 
     set isAuth(isAuth: boolean){
         this._isAuth = isAuth;
+    }
+
+    get activeRole() {
+        return this._activeRole;
+    }
+
+    set activeRole(activeRole: Role | null){
+        this._activeRole = activeRole;
     }
 }
 
