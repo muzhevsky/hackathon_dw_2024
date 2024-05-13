@@ -3,4 +3,7 @@
 public class AddAchievementRequest
 {
     public int? EventId;
+    public int? StatusId;
+    public int TeamSize;
+    public byte[] File;
 }

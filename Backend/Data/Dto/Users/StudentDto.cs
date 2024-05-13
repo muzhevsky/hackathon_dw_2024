@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Hackaton_DW_2024.Data.Dto.Users.Hierarchy;
-using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.Dto.Users;
 

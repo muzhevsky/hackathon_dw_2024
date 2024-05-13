@@ -1,13 +1,12 @@
 ﻿using Hackaton_DW_2024.Data.Dto.Users;
-using Hackaton_DW_2024.Internal.Entities;
 
-namespace Hackaton_DW_2024.Internal.UseCases.Converters;
+namespace Hackaton_DW_2024.Internal.UseCases.Converters.User;
 
-public class UserFromDtoConverter: IConverter<UserDto, User>
+public class UserToDtoConverter : IConverter<Entities.User, UserDto>
 {
-    public User Convert(UserDto convertable)
+    public UserDto Convert(Entities.User convertable)
     {
-        return new User
+        return new UserDto
         {
             Login = convertable.Login,
             Surname = convertable.Surname,

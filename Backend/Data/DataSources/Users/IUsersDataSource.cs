@@ -7,7 +7,6 @@ public interface IUsersDataSource
 {
     UserDto? SelectById(int id);
     UserDto? SelectByLogin(string login);
-    List<AchievementDto> SelectAchievements(int userId);
     int InsertOne(UserDto item);
     void InsertMany(IEnumerable<UserDto> items);
     void UpdateById(int id, Action<UserDto> updateFunc);

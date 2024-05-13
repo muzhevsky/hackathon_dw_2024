@@ -1,5 +1,4 @@
-﻿using Hackaton_DW_2024.Data.Config;
-using Hackaton_DW_2024.Data.Dto.Achievements;
+﻿using Hackaton_DW_2024.Data.Dto.Achievements;
 using Hackaton_DW_2024.Data.Dto.Users;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
@@ -9,20 +8,14 @@ namespace Hackaton_DW_2024.Data.DataSources.Users;
 public class EfUserDataSource : EntityFrameworkDataSource, IUsersDataSource
 {
     protected DbSet<UserDto> Users { get; set; }
-    protected DbSet<AchievementDto> Achievements { get; set; }
 
     public EfUserDataSource(ApplicationContext context) : base(context)
     {
         Users = context.Users;
-        Achievements = context.Achievements;
     }
 
     public UserDto? SelectById(int id) => Users.FirstOrDefault(dto => dto.Id == id);
     public UserDto? SelectByLogin(string login) => Users.FirstOrDefault(dto => dto.Login == login);
-    public List<AchievementDto> SelectAchievements(int userId)
-    {
-        return Achievements.Where(dto => dto.UserId == userId).ToList();
-    }
 
     public int InsertOne(UserDto item)
     {

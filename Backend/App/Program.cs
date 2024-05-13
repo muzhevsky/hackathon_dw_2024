@@ -1,7 +1,7 @@
 using Hackaton_DW_2024.Data;
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Logging;
-using Hackaton_DW_2024.Internal.UseCases;
+using Hackaton_DW_2024.Internal;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);

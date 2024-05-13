@@ -16,13 +16,12 @@ public static class AuthConfiguration
                     {
                         ValidateIssuer = false,
                         ValidateAudience = false,
-                        ValidateLifetime = true,
+                        ValidateLifetime = false,
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.SigningKey)),
                         ClockSkew = TimeSpan.Zero
                     };
                 }
-                
             );
         
     }

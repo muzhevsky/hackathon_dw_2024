@@ -1,5 +1,4 @@
-﻿using Hackaton_DW_2024.Data.Config;
-using Hackaton_DW_2024.Data.Dto.Customization;
+﻿using Hackaton_DW_2024.Data.Dto.Customization;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,5 +1,4 @@
-﻿using Hackaton_DW_2024.Data.Config;
-using Hackaton_DW_2024.Data.Dto.Users.Hierarchy;
+﻿using Hackaton_DW_2024.Data.Dto.Users.Hierarchy;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,9 +7,11 @@ namespace Hackaton_DW_2024.Data.DataSources.Groups;
 public class EfGroupsDataSource: EntityFrameworkDataSource, IGroupsDataSource
 {
     DbSet<GroupDto> Groups { get; set; }
+    DbSet<DepartmentDto> Departments { get; set; }
 
     public EfGroupsDataSource(ApplicationContext context) : base(context)
     {
+        Departments = context.Departments;
         Groups = context.Groups;
     }
     

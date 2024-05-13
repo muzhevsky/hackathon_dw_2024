@@ -1,7 +1,4 @@
-﻿using Hackaton_DW_2024.Data.Config;
-using Hackaton_DW_2024.Data.Dto.Achievements;
-using Hackaton_DW_2024.Data.Dto.Events;
-using Hackaton_DW_2024.Data.Dto.Users;
+﻿using Hackaton_DW_2024.Data.Dto.Events;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
 
