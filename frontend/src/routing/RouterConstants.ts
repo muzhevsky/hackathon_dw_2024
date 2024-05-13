@@ -8,4 +8,7 @@ export const SHOP_PATH: string = "/shop";
 export const TICKET_PATH: string = "/ticket";
 export const RATING_PATH: string = "/rating";
 
+export const SUGGESTIONS_PATH: string = "/suggestions";
+export const DOCUMENT_VERIFICATION_PATH: string = "/document_verification"; 
+
 export const ERROR_PAGE: string = "*";

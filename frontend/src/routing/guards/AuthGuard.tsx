@@ -4,7 +4,8 @@ import { Context } from "../..";
 import { observer } from "mobx-react-lite";
 import LoadingPage from "../../pages/loadingPage/LoadingPage";
 import { LOGIN_PATH } from "../RouterConstants";
-import { STORAGE_TOKEN } from "../../shared/utils/StorageConstants";
+import { STORAGE_TOKEN, STORAGE_USER } from "../../shared/utils/StorageConstants";
+import { testUser } from "../../entities/user/User";
 
 
 interface AuthGuardProps{
@@ -30,6 +31,7 @@ const AuthGuard : React.FC<AuthGuardProps> = observer(({children}) => {
             if (localStorage.getItem(STORAGE_TOKEN) !== null) 
             {
                 userStore.activeToken = localStorage.getItem(STORAGE_TOKEN);
+                userStore.user = JSON.parse(localStorage.getItem(STORAGE_USER) ?? '') ?? testUser;
                 userStore.isAuth = true;
             }
         }
