@@ -4,7 +4,12 @@ public class User
 {
     public int Id { get; set; }
     string _login;
-    public string Login { get => _login; set => _login = $"sstudurdom/{value}"; }
+
+    public string Login
+    {
+        get => _login; 
+        set => _login = $"sstudurdom/{value}";
+    }
     public string Surname { get; set; }
     public string Name { get; set; }
     public string? Patronymic { get; set; }

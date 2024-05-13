@@ -7,11 +7,13 @@ COPY *.csproj ./
 RUN dotnet restore
 
 COPY . ./
+COPY ./Infrastructure/Repositories/Api/template.docx ./
 
 RUN dotnet build -c Release -o out
 
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
+COPY --from=build /app/template.docx ./
 COPY --from=build /app/out ./
 ENTRYPOINT ["dotnet", "Backend.dll"]

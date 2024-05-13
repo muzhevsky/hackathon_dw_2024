@@ -1,5 +1,7 @@
+using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Internal.Entities;
+using Hackaton_DW_2024.Internal.Entities.Users;
 using Hackaton_DW_2024.Internal.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +23,7 @@ public class StudentProfileController : ControllerBase
     [Authorize]
     public async Task<IActionResult> AddAchievement([FromForm] AddAchievementRequest request)
     {
-        var res = await _useCase.AddAchievement(request, int.Parse(User.Claims.First(claim => claim.Type == "id").Value));
+        var res = await _useCase.AddAchievement(request, this.UserId());
         return Ok(res);
     }
 
@@ -29,8 +31,21 @@ public class StudentProfileController : ControllerBase
     [Authorize]
     public ActionResult<List<Achievement>> GetAchievements()
     {
-        return Ok(
-            _useCase.GetAchievements(
-                int.Parse(User.Claims.First(claim => claim.Type == "id").Value)));
+        return Ok(_useCase.GetAchievements(this.UserId()));
+    }
+
+    [HttpGet("/student")]
+    [Authorize]
+    public ActionResult<StudentBasicDataResponse> GetStudent()
+    {
+        return _useCase.GetStudent(this.UserId());
+    }
+}
+
+public static class ControllerExtension
+{
+    public static int UserId(this ControllerBase controller)
+    {
+        return int.Parse(controller.User.Claims.First(claim => claim.Type == "id").Value);
     }
 }

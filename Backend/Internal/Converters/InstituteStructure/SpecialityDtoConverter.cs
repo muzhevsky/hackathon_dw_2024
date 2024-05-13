@@ -3,20 +3,20 @@ using Hackaton_DW_2024.Internal.Entities;
 
 namespace Hackaton_DW_2024.Internal.Converters.InstituteStructure;
 
-public class InstituteDtoConverter: IConverter<Institute, InstituteDto>
+public class SpecialityDtoConverter: IConverter<Speciality, SpecialityDto>
 {
-    public InstituteDto Convert(Institute convertable)
+    public SpecialityDto Convert(Speciality convertable)
     {
-        return new InstituteDto
+        return new SpecialityDto
         {
             Title = convertable.Title,
             FullTitle = convertable.FullTitle
         };
     }
 
-    public Institute ConvertBack(InstituteDto convertable)
+    public Speciality ConvertBack(SpecialityDto convertable)
     {
-        return new Institute
+        return new Speciality
         {
             Id = convertable.Id,
             Title = convertable.Title,

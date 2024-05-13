@@ -1,8 +1,9 @@
+using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Api.Student;
+using Hackaton_DW_2024.Infrastructure.Repositories.Api;
+using Hackaton_DW_2024.Infrastructure.Repositories.Database;
 using Hackaton_DW_2024.Internal.Entities;
-using Hackaton_DW_2024.Internal.Repositories;
-using Hackaton_DW_2024.Internal.Repositories.Api;
-using Hackaton_DW_2024.Internal.Repositories.Database;
+using Hackaton_DW_2024.Internal.Entities.Users;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
 namespace Hackaton_DW_2024.Internal.UseCases;
@@ -67,5 +68,22 @@ public class StudentProfileUseCase
         }
 
         return _achievementsRepository.AchievementsOfStudent(student);
+    }
+
+    public StudentBasicDataResponse GetStudent(int userId)
+    {
+        var details = _studentRepository.GetStudentDetailsByUserId(userId);
+        return new StudentBasicDataResponse
+        {
+            StudentId = details.Student.StudentId,
+            UserId = details.Student.UserId,
+            Id = details.Student.Id,
+            Surname = details.User.Surname,
+            Name = details.User.Name,
+            Patronymic = details.User.Patronymic,
+            GroupId = details.Student.GroupId,
+            Telegram = details.Student.Telegram,
+            PhoneNumber = details.Student.PhoneNumber
+        };
     }
 }

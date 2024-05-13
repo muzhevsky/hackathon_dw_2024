@@ -1,4 +1,4 @@
-namespace Hackaton_DW_2024.Internal.Repositories.Api;
+namespace Hackaton_DW_2024.Infrastructure.Repositories.Api;
 
 public class GigaChatApiConfiguration
 {

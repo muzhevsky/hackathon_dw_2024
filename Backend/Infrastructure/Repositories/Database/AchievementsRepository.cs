@@ -4,7 +4,7 @@ using Hackaton_DW_2024.Data.Dto.Achievements;
 using Hackaton_DW_2024.Internal.Entities;
 using Hackaton_DW_2024.Internal.Entities.Users;
 
-namespace Hackaton_DW_2024.Internal.Repositories.Database;
+namespace Hackaton_DW_2024.Infrastructure.Repositories.Database;
 
 public class AchievementsRepository
 {

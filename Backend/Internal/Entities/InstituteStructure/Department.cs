@@ -4,6 +4,6 @@ public class Department
 {
     public int Id { get; set; }
     public string Title { get; set; }
+    public string FullTitle { get; set; }
     public int InstituteId { get; set; }
-    public string Institute { get; set; }
 }
