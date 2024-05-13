@@ -1,7 +1,6 @@
 using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Internal.Entities;
-using Hackaton_DW_2024.Internal.Entities.Users;
 using Hackaton_DW_2024.Internal.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,18 +11,18 @@ namespace Hackaton_DW_2024.Api;
 [Route("/student")]
 public class StudentProfileController : ControllerBase
 {
-    StudentProfileUseCase _useCase;
+    StudentAchievementsUseCase _achievementsUseCase;
 
-    public StudentProfileController(StudentProfileUseCase useCase)
+    public StudentProfileController(StudentAchievementsUseCase achievementsUseCase)
     {
-        _useCase = useCase;
+        _achievementsUseCase = achievementsUseCase;
     }
 
     [HttpPost("/achievements")]
     [Authorize]
     public async Task<IActionResult> AddAchievement([FromForm] AddAchievementRequest request)
     {
-        var res = await _useCase.AddAchievement(request, this.UserId());
+        var res = await _achievementsUseCase.AddAchievement(request, this.UserId());
         return Ok(res);
     }
 
@@ -31,14 +30,14 @@ public class StudentProfileController : ControllerBase
     [Authorize]
     public ActionResult<List<Achievement>> GetAchievements()
     {
-        return Ok(_useCase.GetAchievements(this.UserId()));
+        return Ok(_achievementsUseCase.GetAchievements(this.UserId()));
     }
 
     [HttpGet("/student")]
     [Authorize]
     public ActionResult<StudentBasicDataResponse> GetStudent()
     {
-        return _useCase.GetStudent(this.UserId());
+        return _achievementsUseCase.GetStudent(this.UserId());
     }
 }
 

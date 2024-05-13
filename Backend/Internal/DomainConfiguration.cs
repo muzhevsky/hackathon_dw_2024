@@ -47,7 +47,7 @@ public static class DomainConfiguration
         
         
         services.AddSingleton<AuthUseCase>();
-        services.AddSingleton<StudentProfileUseCase>();
+        services.AddSingleton<StudentAchievementsUseCase>();
         services.AddSingleton<StudentRequestUseCase>();
     }
 }

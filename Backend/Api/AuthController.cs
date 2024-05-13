@@ -1,6 +1,4 @@
 ﻿using Hackaton_DW_2024.Api.Auth;
-using Hackaton_DW_2024.Data.DataSources.Events;
-using Hackaton_DW_2024.Data.DataSources.Users;
 using Hackaton_DW_2024.Internal.UseCases;
 using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 using Microsoft.AspNetCore.Mvc;

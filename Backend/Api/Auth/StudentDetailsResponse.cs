@@ -1,5 +1,3 @@
-using Hackaton_DW_2024.Internal.Entities;
-
 namespace Hackaton_DW_2024.Api.Auth;
 
 public class StudentBasicDataResponse

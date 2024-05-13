@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Hackaton_DW_2024.Data.Dto.Users.Hierarchy;
 
 namespace Hackaton_DW_2024.Data.Dto.Users;
 

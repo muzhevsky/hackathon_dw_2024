@@ -4,11 +4,12 @@ using Hackaton_DW_2024.Infrastructure.Repositories.Api;
 using Hackaton_DW_2024.Infrastructure.Repositories.Database;
 using Hackaton_DW_2024.Internal.Entities;
 using Hackaton_DW_2024.Internal.Entities.Users;
+using Newtonsoft.Json;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
 namespace Hackaton_DW_2024.Internal.UseCases;
 
-public class StudentProfileUseCase
+public class StudentAchievementsUseCase
 {
     StudentRepository _studentRepository;
     AchievementsRepository _achievementsRepository;
@@ -16,10 +17,12 @@ public class StudentProfileUseCase
     GigaChatRepository _gigaChatRepository;
     ILogger _logger;
 
-    public StudentProfileUseCase(
+    public StudentAchievementsUseCase(
         AchievementsRepository achievementsRepository,
         StudentRepository studentRepository,
-        ILogger logger, RecognizeTextApiRepository recognitionRepository, GigaChatRepository gigaChatRepository)
+        ILogger logger,
+        RecognizeTextApiRepository recognitionRepository,
+        GigaChatRepository gigaChatRepository)
     {
         _achievementsRepository = achievementsRepository;
         _studentRepository = studentRepository;
@@ -28,13 +31,13 @@ public class StudentProfileUseCase
         _gigaChatRepository = gigaChatRepository;
     }
 
-    public async Task<string> AddAchievement(AddAchievementRequest request, int userId)
+    public async Task<AddAchievementResponse> AddAchievement(AddAchievementRequest request, int userId)
     {
         var student = _studentRepository.GetStudentByUserId(userId);
         if (student == null)
         {
             _logger.Warn("user not found");
-            return "";
+            return null;
         }
 
         var achievement = new Achievement
@@ -48,14 +51,27 @@ public class StudentProfileUseCase
         _achievementsRepository.AddAchievement(achievement, request.File.OpenReadStream());
         var res = await _recognitionRepository.Recognize(achievement.FilePath);
         await _gigaChatRepository.Authorize();
-        return "тут должен быть ответ от гигачата (я пока выключил)";
-        // return await _gigaChatRepository.SendMessage($"Распознай в представленном тексте данные в формате:" +
-        //                                              "Название конкурса: \n" +
-        //                                              "Имя участника: \n" +
-        //                                              "Дата проведения: \n" +
-        //                                              "Статус (региональный, международный и т.д): \n" +
-        //                                              "Занятое на конкурсе место:\n " +
-        //                                              $"Вот текст: {res}");
+        // return "тут должен быть ответ от гигачата (я пока выключил)";
+        var response = await _gigaChatRepository.SendMessage(
+            "Распознай в тексте данные в формате:" +
+            "{" +
+            "\"title\": название конкурса," +
+            "\"date\": дата проведения конкурса," +
+            "\"status\": статус конкурса (пример: региональный, международный и т.д)," +
+            "result: результат участия (пример: 3 место, 2 место, победитель, фииналист, полуфиналист, призер, участник)" +
+            "}" +
+            $"Текст: {res}");
+        try
+        {
+            return JsonConvert.DeserializeObject<AddAchievementResponse>(response);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(response);
+            Console.WriteLine(ex);
+        }
+
+        return null;
     }
 
     public List<Achievement> GetAchievements(int userId)
@@ -64,7 +80,7 @@ public class StudentProfileUseCase
         if (student == null)
         {
             _logger.Warn("user not found");
-            return new List<Achievement>();
+            return [];
         }
 
         return _achievementsRepository.AchievementsOfStudent(student);

@@ -47,7 +47,7 @@ public class GigaChatRepository
                 {
                     var result = await response.Content.ReadAsStringAsync();
                     var authData = JsonConvert.DeserializeObject<GigaChatAuthResponse>(result);
-                    _token = authData.access_token;
+                    _token = authData.AccessToken;
                 }
                 else
                 {
@@ -100,8 +100,9 @@ public class GigaChatRepository
 
             if (response.IsSuccessStatusCode)
             {
-                result = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(result);
+                result = await response.Content.ReadAsStringAsync(); 
+                var json = JsonConvert.DeserializeObject<GigaChatMessageResponse>(result);
+                result = json.Choices[0].Message.Content;
             }
             else
             {
@@ -115,6 +116,50 @@ public class GigaChatRepository
 
 public class GigaChatAuthResponse
 {
-    public string access_token { get; set; }
-    public long expires_at { get; set; }
+    [JsonProperty("access_token")]
+    public string AccessToken { get; set; }
+    [JsonProperty("expires_at")]
+    public long ExpiresAt { get; set; }
+}
+
+public class GigaChatMessageResponse
+{
+    [JsonProperty("choices")]
+    public GigaChatChoice[] Choices { get; set; }
+    [JsonProperty("created")]
+    public long Created { get; set; }
+    [JsonProperty("model")]
+    public string Model { get; set; }
+    [JsonProperty("object")]
+    public string Object { get; set; }
+    [JsonProperty("usage")]
+    public GigaChatMessageUsage Usage { get; set; }
+}
+
+public class GigaChatChoice
+{
+    [JsonProperty("message")]
+    public GigaChatMessage Message { get; set; }
+    [JsonProperty("index")]
+    public int Index { get; set; }
+    [JsonProperty("finish_reason")]
+    public string FinishReason { get; set; }
+}
+
+public class GigaChatMessage
+{
+    [JsonProperty("content")]
+    public string Content { get; set; }
+    [JsonProperty("role")]
+    public string Role { get; set; }
+}
+
+public class GigaChatMessageUsage
+{
+    [JsonProperty("prompt_tokens")]
+    public int PromptTokens { get; set; }
+    [JsonProperty("completion_tokens")]
+    public int CompletionTokens { get; set; }
+    [JsonProperty("total_tokens")]
+    public int TotalTokens { get; set; }
 }

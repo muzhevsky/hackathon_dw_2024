@@ -1,6 +1,4 @@
 ﻿using Hackaton_DW_2024.Data.DataSources.Groups;
-using Hackaton_DW_2024.Data.DataSources.Institutes;
-using Hackaton_DW_2024.Data.DataSources.Specialities;
 using Hackaton_DW_2024.Data.DataSources.Students;
 using Hackaton_DW_2024.Data.DataSources.Users;
 using Hackaton_DW_2024.Data.Dto.Users;

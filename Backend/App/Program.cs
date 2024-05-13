@@ -1,7 +1,6 @@
 using Hackaton_DW_2024.Data;
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Logging;
-using Hackaton_DW_2024.Infrastructure.Repositories.Api;
 using Hackaton_DW_2024.Internal;
 using Microsoft.Extensions.FileProviders;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
