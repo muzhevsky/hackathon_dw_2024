@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './RequestCard.module.css'
+import styles from './ScholarshipCard.module.css'
 
 interface RequestCardProps {
     id: number;

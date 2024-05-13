@@ -25,8 +25,9 @@ const Achievements: React.FC = observer(() => {
                 ?   <>
                         <AddAchievement/>
                         {
-                            achievements.achievements.map(item => {
-                                return <AchievementCard 
+                            achievements.achievements.map((item, index) => {
+                                return <AchievementCard
+                                            key={index} 
                                             id={Number(item.id)} 
                                             userId={Number(item.userId)} 
                                             fileName={item.filePath} 

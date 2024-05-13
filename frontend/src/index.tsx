@@ -5,18 +5,22 @@ import Router from './routing/Router';
 import { createContext } from 'react';
 import UserStore from './store/UserStore';
 import AchievementsStore from './store/Achievements';
+import EventsStore from './store/EventsStore';
 
 interface State {
 	userStore: UserStore,
-	achievements: AchievementsStore
+	achievements: AchievementsStore,
+	eventsStore: EventsStore
 }
 
 export const userStore = new UserStore();
 export const achievements = new AchievementsStore();
+export const eventsStore = new EventsStore();
 
 export const Context = createContext<State>({
 	userStore,
-	achievements
+	achievements,
+	eventsStore
 })
 
 const root = ReactDOM.createRoot(
@@ -25,7 +29,8 @@ const root = ReactDOM.createRoot(
 root.render(
 	<Context.Provider value={{
 		userStore,
-		achievements
+		achievements,
+		eventsStore
 	}}>
 		<RouterProvider router={Router} />
 	</Context.Provider>
