@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Hackaton_DW_2024.Data.Dto.Achievements;
-using Hackaton_DW_2024.Data.Dto.Users;
 
 namespace Hackaton_DW_2024.Data.Dto.Events;
 

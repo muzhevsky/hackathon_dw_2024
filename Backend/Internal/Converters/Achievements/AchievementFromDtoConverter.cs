@@ -3,16 +3,30 @@ using Hackaton_DW_2024.Internal.Entities;
 
 namespace Hackaton_DW_2024.Internal.Converters.Achievements;
 
-public class AchievementFromDtoConverter: IConverter<AchievementDto, Achievement>
+public class AchievementDtoConverter: IConverter<Achievement, AchievementDto>
 {
-    public Achievement Convert(AchievementDto convertable)
+    public AchievementDto Convert(Achievement convertable)
+    {
+        return new AchievementDto
+        {
+            Score = convertable.Score,
+            UserId = convertable.UserId,
+            WithTeam = convertable.WithTeam,
+            ResultId = convertable.ResultId,
+            FilePath = convertable.FilePath
+        };
+    }
+
+    public Achievement ConvertBack(AchievementDto convertable)
     {
         return new Achievement
         {
             Id = convertable.Id,
             Score = convertable.Score,
-            TeamSize = convertable.TeamSize,
-            UserId = convertable.UserId
+            WithTeam = convertable.WithTeam,
+            UserId = convertable.UserId,
+            FilePath = convertable.FilePath,
+            ResultId = convertable.ResultId
         };
     }
 }

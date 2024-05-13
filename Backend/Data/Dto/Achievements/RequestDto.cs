@@ -14,7 +14,6 @@ public class RequestDto: Dto
     [Column("rejected")]
     public bool Rejected { get; set; }
     
-    public List<AchievementDto> Achievements { get; set; }
     
     static string _structureName = "requests";
     public static string StructureName => _structureName;

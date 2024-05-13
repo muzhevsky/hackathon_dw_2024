@@ -13,6 +13,9 @@ public class EventStatusDto: Dto
     [MaxLength(32)]
     public string Title { get; set; }
     
+    [Column("score_percentage")]
+    public int ScorePercentage { get; set; }
+    
     static string _structureName = "event_statuses";
     public static string StructureName => _structureName;
 }

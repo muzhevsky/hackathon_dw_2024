@@ -10,27 +10,49 @@ namespace Hackaton_DW_2024.Api;
 [Route("/student")]
 public class StudentProfileController : ControllerBase
 {
-    StudentProfileUseCase _useCase;
+    StudentAchievementsUseCase _achievementsUseCase;
 
-    public StudentProfileController(StudentProfileUseCase useCase)
+    public StudentProfileController(StudentAchievementsUseCase achievementsUseCase)
     {
-        _useCase = useCase;
+        _achievementsUseCase = achievementsUseCase;
     }
 
-    [HttpPost("/achievements")]
+    [HttpPost("/achievement/attach")]
     [Authorize]
-    public async Task<IActionResult> AddAchievement([FromForm] AddAchievementRequest request)
+    public async Task<IActionResult> AttachAchievementFile([FromForm] AddAchievementFileRequest fileRequest)
     {
-        var res = await _useCase.AddAchievement(request, int.Parse(User.Claims.First(claim => claim.Type == "id").Value));
+        var res = await _achievementsUseCase.AddAchievement(fileRequest, this.UserId());
         return Ok(res);
     }
+
+    [HttpPost("/achievement/connected")]
+    public ActionResult AddConnectedAchievement([FromBody] AddConnectedAchievementRequest request)
+    {
+        _achievementsUseCase.AddConnected(request);
+        return Ok();
+    }
+    
+    // [HttpPost("/achievement/custom")]
+    // public ActionResult AddCustomAchievement([FromBody] AddCustomAchievementRequest request)
+    // {
+    //     _achievementsUseCase.AddCustom(request);
+    //     return Ok();
+    // }
 
     [HttpGet("/achievements")]
     [Authorize]
     public ActionResult<List<Achievement>> GetAchievements()
     {
-        return Ok(
-            _useCase.GetAchievements(
-                int.Parse(User.Claims.First(claim => claim.Type == "id").Value)));
+        return Ok(_achievementsUseCase.GetAchievements(this.UserId()));
+    }
+
+
+}
+
+public static class ControllerExtension
+{
+    public static int UserId(this ControllerBase controller)
+    {
+        return int.Parse(controller.User.Claims.First(claim => claim.Type == "id").Value);
     }
 }
