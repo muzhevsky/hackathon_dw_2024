@@ -1,9 +1,7 @@
-using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Infrastructure.Repositories.Api;
 using Hackaton_DW_2024.Infrastructure.Repositories.Database;
 using Hackaton_DW_2024.Internal.Entities;
-using Hackaton_DW_2024.Internal.Entities.Users;
 using Newtonsoft.Json;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
@@ -44,7 +42,8 @@ public class StudentAchievementsUseCase
         {
             UserId = userId,
             Score = 0,
-            FilePath = fileRequest.File.FileName
+            FilePath = fileRequest.File.FileName,
+            ResultId = 1
         };
 
         _achievementsRepository.AddAchievement(achievement, fileRequest.File.OpenReadStream());
@@ -87,20 +86,18 @@ public class StudentAchievementsUseCase
         return _achievementsRepository.AchievementsOfStudent(student);
     }
 
-    public StudentBasicDataResponse GetStudent(int userId)
+    public void AddConnected(AddConnectedAchievementRequest request)
     {
-        var details = _studentRepository.GetStudentDetailsByUserId(userId);
-        return new StudentBasicDataResponse
-        {
-            StudentId = details.Student.StudentId,
-            UserId = details.Student.UserId,
-            Id = details.Student.Id,
-            Surname = details.User.Surname,
-            Name = details.User.Name,
-            Patronymic = details.User.Patronymic,
-            GroupId = details.Student.GroupId,
-            Telegram = details.Student.Telegram,
-            PhoneNumber = details.Student.PhoneNumber
-        };
+        var achievement = _achievementsRepository.GetById(request.Id);
+        achievement.WithTeam = request.WithTeam;
+        achievement.ResultId = request.ResultId;
+        _achievementsRepository.AttachToEvent(achievement, request.EventId);
+        _achievementsRepository.UpdateAchievement(achievement);
+    }
+
+    public void AddCustom(AddCustomAchievementRequest request)
+    {
+        var achievement = _achievementsRepository.GetById(request.Id);
+        _achievementsRepository.AddCustom(achievement, request);
     }
 }

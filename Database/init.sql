@@ -297,7 +297,10 @@ create table achievements_and_events
             references achievements,
     event_id       integer not null
         constraint achievements_and_events_events_fk
-            references events
+            references events,
+    id             serial
+        constraint achievements_and_events_pk
+            primary key
 );
 
 alter table achievements_and_events
@@ -324,6 +327,7 @@ alter table custom_achievements
 
 
 
+
 insert into institutes(title, full_title) values('ИнПИТ', 'Институт прикладных информационных технологий и коммуникаций');
 insert into departments(institute_id, title, full_title) values (1, 'ПИТ', 'Прикладные информационные технологии');
 insert into specialities(full_title, title) values ('Информационные системы и технологии', 'ИФСТ');
@@ -334,3 +338,6 @@ values ('победитель', 100), ('призер', 50), ('участник',
 
 insert into event_statuses(title, score_percentage)
 values ('международный', 100), ('всероссийский', 50), ('региональный', 25), ('внутривузовский', 10);
+
+insert into events(title, start_date, end_date, status_id, description)
+values ('Хакатон "Цифровой Ветер 2024"', '2024-05-13', '2024-05-15', '2','описание потом придумаем');

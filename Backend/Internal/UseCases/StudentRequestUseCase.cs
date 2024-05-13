@@ -1,7 +1,6 @@
-using Hackaton_DW_2024.Api.Student;
+using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Infrastructure.Repositories.Api;
 using Hackaton_DW_2024.Infrastructure.Repositories.Database;
-using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 
 namespace Hackaton_DW_2024.Internal.UseCases;
 
@@ -30,11 +29,21 @@ public class StudentRequestUseCase
         var groupDetails = _instituteStructureRepository.GetGroupDetails(studentDetails.Group.Id);
         _docFileRepository.GenerateDoc(studentDetails, groupDetails);
     }
-
-    public void ConfirmAchievement(AddCustomAchievementRequest request, int userId)
+    
+    public StudentBasicDataResponse GetStudent(int userId)
     {
-        // var stored = _achievementsRepository.GetById(request.Id);
-        // if (stored.UserId != userId) throw new AuthException("user is not owner of achievement");
-        // _achievementsRepository.ConfirmAchievement(request, userId);
+        var details = _studentRepository.GetStudentDetailsByUserId(userId);
+        return new StudentBasicDataResponse
+        {
+            StudentId = details.Student.StudentId,
+            UserId = details.Student.UserId,
+            Id = details.Student.Id,
+            Surname = details.User.Surname,
+            Name = details.User.Name,
+            Patronymic = details.User.Patronymic,
+            GroupId = details.Student.GroupId,
+            Telegram = details.Student.Telegram,
+            PhoneNumber = details.Student.PhoneNumber
+        };
     }
 }

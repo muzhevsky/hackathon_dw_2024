@@ -20,6 +20,7 @@ public class ApplicationContext : DbContext
 {
     DatabaseConnectionConfig _config;
     public DbSet<AchievementDto> Achievements { get; set; }
+    public DbSet<CustomAchievementDto> CustomAchievements { get; set; }
     public DbSet<EventDto> Events { get; set; }
     
     public DbSet<DepartmentDto> Departments { get; set; }
@@ -36,6 +37,7 @@ public class ApplicationContext : DbContext
     public DbSet<EventStatusDto> EventStatuses { get; set; }
     public DbSet<EventResultDto> EventResults { get; set; }
     public DbSet<UsersAndEventsDto> UsersAndEvents { get; set; }
+    public DbSet<AchievementsAndEventsDto> AchievementsAndEvents { get; set; }
     
     public ApplicationContext(DatabaseConnectionConfig config)
     {

@@ -38,4 +38,10 @@ public class EventsController: ControllerBase
     {
         return Ok(_eventsRepository.GetResultById(id));
     }
+
+    [HttpGet("/events")]
+    public ActionResult<List<EventDto>> GetEvents()
+    {
+        return Ok(_eventsRepository.GetAll());
+    }
 }

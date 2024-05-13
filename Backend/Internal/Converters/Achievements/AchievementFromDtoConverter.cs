@@ -12,6 +12,8 @@ public class AchievementDtoConverter: IConverter<Achievement, AchievementDto>
             Score = convertable.Score,
             UserId = convertable.UserId,
             WithTeam = convertable.WithTeam,
+            ResultId = convertable.ResultId,
+            FilePath = convertable.FilePath
         };
     }
 
@@ -22,7 +24,9 @@ public class AchievementDtoConverter: IConverter<Achievement, AchievementDto>
             Id = convertable.Id,
             Score = convertable.Score,
             WithTeam = convertable.WithTeam,
-            UserId = convertable.UserId
+            UserId = convertable.UserId,
+            FilePath = convertable.FilePath,
+            ResultId = convertable.ResultId
         };
     }
 }

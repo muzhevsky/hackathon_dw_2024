@@ -1,4 +1,3 @@
-using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Internal.Entities;
 using Hackaton_DW_2024.Internal.UseCases;
@@ -18,13 +17,27 @@ public class StudentProfileController : ControllerBase
         _achievementsUseCase = achievementsUseCase;
     }
 
-    [HttpPost("/achievements")]
+    [HttpPost("/achievement/attach")]
     [Authorize]
-    public async Task<IActionResult> AddAchievementFile([FromForm] AddAchievementFileRequest fileRequest)
+    public async Task<IActionResult> AttachAchievementFile([FromForm] AddAchievementFileRequest fileRequest)
     {
         var res = await _achievementsUseCase.AddAchievement(fileRequest, this.UserId());
         return Ok(res);
     }
+
+    [HttpPost("/achievement/connected")]
+    public ActionResult AddConnectedAchievement([FromBody] AddConnectedAchievementRequest request)
+    {
+        _achievementsUseCase.AddConnected(request);
+        return Ok();
+    }
+    
+    // [HttpPost("/achievement/custom")]
+    // public ActionResult AddCustomAchievement([FromBody] AddCustomAchievementRequest request)
+    // {
+    //     _achievementsUseCase.AddCustom(request);
+    //     return Ok();
+    // }
 
     [HttpGet("/achievements")]
     [Authorize]
@@ -33,12 +46,7 @@ public class StudentProfileController : ControllerBase
         return Ok(_achievementsUseCase.GetAchievements(this.UserId()));
     }
 
-    [HttpGet("/student")]
-    [Authorize]
-    public ActionResult<StudentBasicDataResponse> GetStudent()
-    {
-        return _achievementsUseCase.GetStudent(this.UserId());
-    }
+
 }
 
 public static class ControllerExtension

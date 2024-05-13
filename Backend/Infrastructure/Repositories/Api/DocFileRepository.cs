@@ -1,9 +1,6 @@
-using System.Drawing;
 using Hackaton_DW_2024.Internal.Entities;
 using Hackaton_DW_2024.Internal.Entities.Users;
 using Spire.Doc;
-using Spire.Doc.Documents;
-using Spire.Doc.Fields;
 
 namespace Hackaton_DW_2024.Infrastructure.Repositories.Api;
 

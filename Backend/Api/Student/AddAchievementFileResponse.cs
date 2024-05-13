@@ -1,6 +1,3 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
 namespace Hackaton_DW_2024.Api.Student;
 
 public class AddAchievementFileResponse

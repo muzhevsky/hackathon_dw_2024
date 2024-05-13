@@ -1,4 +1,6 @@
+using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Data.DataSources.Achievements;
+using Hackaton_DW_2024.Data.DataSources.EventsAndAchievements;
 using Hackaton_DW_2024.Data.DataSources.FileSystem;
 using Hackaton_DW_2024.Data.Dto.Achievements;
 using Hackaton_DW_2024.Internal.Converters;
@@ -11,17 +13,21 @@ public class AchievementsRepository
 {
     IConverter<Achievement, AchievementDto> _converter;
     IAchievementsDataSource _achievementsDataSource;
+    ICustomAchievementDataSource _customAchievementDataSource;
+    IAchievementsAndEventsDataSource _achievementsAndEventsDataSource;
     IFileSystem _fileSystem;
     const string PathString = "/app/achievements";
 
     public AchievementsRepository(
         IAchievementsDataSource achievementsDataSource,
         IFileSystem fileSystem, 
-        IConverter<Achievement, AchievementDto> converter)
+        IConverter<Achievement, AchievementDto> converter, 
+        IAchievementsAndEventsDataSource achievementsAndEventsDataSource)
     {
         _achievementsDataSource = achievementsDataSource;
         _fileSystem = fileSystem;
         _converter = converter;
+        _achievementsAndEventsDataSource = achievementsAndEventsDataSource;
 
         Directory.CreateDirectory(PathString);
     }
@@ -55,17 +61,31 @@ public class AchievementsRepository
             Stream = fileStream,
             Path = path
         });
-        _achievementsDataSource.UpdateById(id, dto => dto.FileName = path);
+        _achievementsDataSource.UpdateById(id, dto => dto.FilePath = path);
         achievement.Id = id;
         achievement.FilePath = path;
     }
 
-    public void ConfirmAchievement(Achievement achievement)
+    public void AttachToEvent(Achievement achievement, int eventId)
+    {
+        _achievementsAndEventsDataSource.Insert(new AchievementsAndEventsDto
+        {
+            AchievementId = achievement.Id,
+            EventId = eventId
+        });
+    }
+    
+    public void UpdateAchievement(Achievement achievement)
     {
         _achievementsDataSource.UpdateById(achievement.Id, dto =>
         {
             dto.WithTeam = achievement.WithTeam;
             dto.ResultId = achievement.ResultId;
         });
+    }
+
+    public void AddCustom(Achievement achievement, AddCustomAchievementRequest request)
+    {
+        
     }
 }

@@ -1,5 +1,6 @@
-using Hackaton_DW_2024.Api.Student;
+using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Internal.UseCases;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hackaton_DW_2024.Api;
@@ -22,10 +23,11 @@ public class StudentRequestController: ControllerBase
         return Ok();
     }
 
-    [HttpPost("/achievements/confirm")]
-    public ActionResult ConfirmAchievement([FromBody] AddCustomAchievementRequest request)
+   
+    [HttpGet("/student")]
+    [Authorize]
+    public ActionResult<StudentBasicDataResponse> GetStudent()
     {
-        _useCase.ConfirmAchievement(request, this.UserId());
-        return Ok();
+        return _useCase.GetStudent(this.UserId());
     }
 }
