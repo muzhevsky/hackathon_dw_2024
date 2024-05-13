@@ -2,6 +2,7 @@ import { useState } from "react";
 import Add from "../../shared/assets/icon_create.svg";
 import Portal from "../../shared/ui/portal/Portal";
 import FormLoadAchievements from "../formLoadAchievements/FormLoadAchievements";
+import styles from "./AddAchievement.module.css";
 
 
 const AddAchievement: React.FC = () => {
@@ -25,9 +26,9 @@ const AddAchievement: React.FC = () => {
                 : null
             }
 
-            <div onClick={openHandler}>
+            <div className={styles.WrapAdd} onClick={openHandler}>
                 <img src={Add} alt={"добавить"}/>
-                <p>Добавить достижение</p>
+                <p className={styles.AddTitle}>Добавить достижение</p>
             </div>
         </>
     )

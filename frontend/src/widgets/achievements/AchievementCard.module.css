@@ -1,44 +1,43 @@
 .cardViev{
-    width: 13vw;
-    height: 21vh;
+    width: 280px;
+    height: 220px;
     background-color: rgba(124,124,124,0.13);
-    border-radius: 20px;
-    margin: 2vh;
+    border-radius: 30px;
+    background-color: #fff;
+    overflow: hidden;
 }
 
 .title{
-    height: 1vh;
     padding-left: 1vw;
     font-family: Inter, serif;
     font-size: 19px;
     font-weight: bolder;
     color: #02006B;
+    margin: 0;
 }
 
 .subtitle{
     display: flex;
     justify-content: start;
-    /*width: 5vw;*/
-    height: 1vh;
     padding-left: 1vw;
     font-family: Inter, serif;
-    font-size: 19px;
+    font-size: 14px;
     font-weight: normal;
     color: #02006B;
+    margin: 0;
 }
 
 .img{
-    display: flex;
-    justify-content: center;
-    height: 7vh;
-    padding-top: 2vh;
+    height: 120px;
+    overflow: hidden;
 }
 
 .date{
     margin-top: 3vh;
     padding-left: 1vw;
     font-family: Inter, serif;
-    font-size: 17px;
+    font-size: 14px;
+    margin: 0;
 }
 
 .container {
@@ -52,4 +51,19 @@
     margin-top: 3vh;
     padding: 2vh;
     color: #02006B;
+    cursor: pointer;
+}
+
+.WrapList{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.wrapInfo{
+    height: 100px;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
