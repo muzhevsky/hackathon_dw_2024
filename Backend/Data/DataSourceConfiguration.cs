@@ -2,6 +2,8 @@
 using Hackaton_DW_2024.Data.DataSources.Achievements;
 using Hackaton_DW_2024.Data.DataSources.Departments;
 using Hackaton_DW_2024.Data.DataSources.Events;
+using Hackaton_DW_2024.Data.DataSources.Events.Results;
+using Hackaton_DW_2024.Data.DataSources.Events.Statuses;
 using Hackaton_DW_2024.Data.DataSources.FileSystem;
 using Hackaton_DW_2024.Data.DataSources.Groups;
 using Hackaton_DW_2024.Data.DataSources.Institutes;
@@ -27,6 +29,8 @@ public static class DataSourceConfiguration
         services.AddSingleton<INewsDataSource, EfNewsDataSource>();
         services.AddSingleton<IAchievementsDataSource, EfAchievementsDataSource>();
         services.AddSingleton<IFileSystem, DefaultFileSystem>();
+        services.AddSingleton<IEventStatusesDataSource, EfEventStatusesDataSource>();
+        services.AddSingleton<IEventResultsDataSource, EfEventResultDataSource>();
 
         // institute structure
         services.AddSingleton<ISpecialitiesDataSource, EfSpecialitiesDataSource>();

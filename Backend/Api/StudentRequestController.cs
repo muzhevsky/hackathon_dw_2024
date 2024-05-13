@@ -1,3 +1,4 @@
+using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Internal.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,14 @@ public class StudentRequestController: ControllerBase
     [HttpPost("/request")]
     public ActionResult GenerateDoc()
     {
-        _useCase.SendRequest(int.Parse(User.Claims.First(c => c.Type=="id").Value));
+        _useCase.SendRequest(this.UserId());
+        return Ok();
+    }
+
+    [HttpPost("/achievements/confirm")]
+    public ActionResult ConfirmAchievement([FromBody] AddCustomAchievementRequest request)
+    {
+        _useCase.ConfirmAchievement(request, this.UserId());
         return Ok();
     }
 }

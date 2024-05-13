@@ -34,6 +34,7 @@ public class ApplicationContext : DbContext
     public DbSet<NewsDto> News { get; set; }
     public DbSet<TeacherDto> Teachers { get; set; }
     public DbSet<EventStatusDto> EventStatuses { get; set; }
+    public DbSet<EventResultDto> EventResults { get; set; }
     public DbSet<UsersAndEventsDto> UsersAndEvents { get; set; }
     
     public ApplicationContext(DatabaseConnectionConfig config)

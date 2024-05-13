@@ -20,22 +20,6 @@ create table users
 alter table users
     owner to postgres;
 
-create table achievements
-(
-    id        serial
-        constraint achievements_id
-            primary key,
-    user_id   integer not null
-        constraint achievements_users_fk
-            references users,
-    file_name varchar(256),
-    score     integer not null,
-    with_team boolean default false
-);
-
-alter table achievements
-    owner to postgres;
-
 create table customization_items
 (
     id        serial
@@ -88,19 +72,6 @@ create table rejections
 alter table rejections
     owner to postgres;
 
-create table requests_and_achievements
-(
-    request_id     integer not null
-        constraint requests_and_achievements_requests_fk
-            references requests,
-    achievement_id integer not null
-        constraint requests_and_achievements_achievements_fk
-            references achievements
-);
-
-alter table requests_and_achievements
-    owner to postgres;
-
 create table news
 (
     id               serial
@@ -116,10 +87,11 @@ alter table news
 
 create table event_statuses
 (
-    id    serial
+    id               serial
         constraint event_statuses_pk
             primary key,
-    title varchar(64) not null
+    title            varchar(64) not null,
+    score_percentage integer     not null
 );
 
 alter table event_statuses
@@ -142,19 +114,6 @@ create table events
 );
 
 alter table events
-    owner to postgres;
-
-create table achievements_and_events
-(
-    achievement_id integer not null
-        constraint achievements_and_events_achievements_fk
-            references achievements,
-    event_id       integer not null
-        constraint achievements_and_events_events_fk
-            references events
-);
-
-alter table achievements_and_events
     owner to postgres;
 
 create table pinned_news
@@ -244,8 +203,8 @@ create table specialities
     id         serial
         constraint specialities_pk
             primary key,
-    full_title varchar(64)                                            not null,
-    title      varchar(16)                                            not null
+    full_title varchar(64) not null,
+    title      varchar(16) not null
 );
 
 alter table specialities
@@ -287,6 +246,81 @@ create table students
 alter table students
     owner to postgres;
 
+create table event_results
+(
+    id    serial
+        constraint event_results_pk
+            primary key,
+    title varchar(32) not null,
+    score integer
+);
+
+alter table event_results
+    owner to postgres;
+
+create table achievements
+(
+    id        serial
+        constraint achievements_id
+            primary key,
+    user_id   integer not null
+        constraint achievements_users_fk
+            references users,
+    file_name varchar(256),
+    score     integer not null,
+    with_team boolean default false,
+    result_id integer not null
+        constraint achievements_results_fk
+            references event_results
+);
+
+alter table achievements
+    owner to postgres;
+
+create table requests_and_achievements
+(
+    request_id     integer not null
+        constraint requests_and_achievements_requests_fk
+            references requests,
+    achievement_id integer not null
+        constraint requests_and_achievements_achievements_fk
+            references achievements
+);
+
+alter table requests_and_achievements
+    owner to postgres;
+
+create table achievements_and_events
+(
+    achievement_id integer not null
+        constraint achievements_and_events_achievements_fk
+            references achievements,
+    event_id       integer not null
+        constraint achievements_and_events_events_fk
+            references events
+);
+
+alter table achievements_and_events
+    owner to postgres;
+
+create table custom_achievements
+(
+    id             serial
+        constraint custom_achievements_pk
+            primary key,
+    achievement_id integer      not null
+        constraint custom_achievements_achievements_fk
+            references achievements,
+    title          varchar(128) not null,
+    date           date         not null,
+    status_id      integer      not null
+        constraint custom_achievements_event_statuses_fk
+            references event_statuses
+);
+
+alter table custom_achievements
+    owner to postgres;
+
 
 
 
@@ -294,3 +328,9 @@ insert into institutes(title, full_title) values('ИнПИТ', 'Институт
 insert into departments(institute_id, title, full_title) values (1, 'ПИТ', 'Прикладные информационные технологии');
 insert into specialities(full_title, title) values ('Информационные системы и технологии', 'ИФСТ');
 insert into groups(department_id, title, speciality_id) values (1, 'б1-ИФСТ-31', 1);
+
+insert into event_results(title, score)
+values ('победитель', 100), ('призер', 50), ('участник', 25);
+
+insert into event_statuses(title, score_percentage)
+values ('международный', 100), ('всероссийский', 50), ('региональный', 25), ('внутривузовский', 10);

@@ -23,6 +23,8 @@ public class AchievementDto: Dto
     [Column("with_team")]
     public bool WithTeam { get; set; }
     
+    [Column("result_id")]
+    public int ResultId { get; set; }
     
     public List<EventDto> Events { get; set; }
     public List<AchievementsAndEventsDto> AchievementsAndEvents { get; set; }

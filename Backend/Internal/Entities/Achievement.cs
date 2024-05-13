@@ -7,4 +7,5 @@ public class Achievement
     public bool WithTeam {get; set; }
     public int UserId { get; set; }
     public string FilePath { get; set; }
+    public int ResultId { get; set; }
 }

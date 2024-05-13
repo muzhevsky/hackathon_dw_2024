@@ -31,7 +31,7 @@ public class StudentAchievementsUseCase
         _gigaChatRepository = gigaChatRepository;
     }
 
-    public async Task<AddAchievementResponse> AddAchievement(AddAchievementRequest request, int userId)
+    public async Task<AddAchievementFileResponse> AddAchievement(AddAchievementFileRequest fileRequest, int userId)
     {
         var student = _studentRepository.GetStudentByUserId(userId);
         if (student == null)
@@ -44,10 +44,10 @@ public class StudentAchievementsUseCase
         {
             UserId = userId,
             Score = 0,
-            FilePath = request.File.FileName
+            FilePath = fileRequest.File.FileName
         };
 
-        _achievementsRepository.AddAchievement(achievement, request.File.OpenReadStream());
+        _achievementsRepository.AddAchievement(achievement, fileRequest.File.OpenReadStream());
         var res = await _recognitionRepository.Recognize(achievement.FilePath);
         await _gigaChatRepository.Authorize();
         // return "тут должен быть ответ от гигачата (я пока выключил)";
@@ -62,7 +62,9 @@ public class StudentAchievementsUseCase
             $"Текст: {res}");
         try
         {
-            return JsonConvert.DeserializeObject<AddAchievementResponse>(response);
+            var converted = JsonConvert.DeserializeObject<AddAchievementFileResponse>(response);
+            converted.Id = achievement.Id;
+            return converted;
         }
         catch (Exception ex)
         {

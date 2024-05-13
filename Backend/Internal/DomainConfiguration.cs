@@ -1,10 +1,12 @@
-﻿using Hackaton_DW_2024.Data.Dto.Users;
+﻿using Hackaton_DW_2024.Data.Dto.Achievements;
+using Hackaton_DW_2024.Data.Dto.Users;
 using Hackaton_DW_2024.Data.Dto.Users.Hierarchy;
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Hash;
 using Hackaton_DW_2024.Infrastructure.Repositories.Api;
 using Hackaton_DW_2024.Infrastructure.Repositories.Database;
 using Hackaton_DW_2024.Internal.Converters;
+using Hackaton_DW_2024.Internal.Converters.Achievements;
 using Hackaton_DW_2024.Internal.Converters.InstituteStructure;
 using Hackaton_DW_2024.Internal.Converters.Students;
 using Hackaton_DW_2024.Internal.Converters.User;
@@ -24,6 +26,7 @@ public static class DomainConfiguration
         services.AddSingleton<IConverter<Institute, InstituteDto>, InstituteDtoConverter>();
         services.AddSingleton<IConverter<Department, DepartmentDto>, DepartmentDtoConverter>();
         services.AddSingleton<IConverter<Speciality, SpecialityDto>, SpecialityDtoConverter>();
+        services.AddSingleton<IConverter<Achievement, AchievementDto>, AchievementDtoConverter>();
 
         services.AddSingleton<GigaChatEnvironment>();
         services.AddSingleton<GigaChatApiConfiguration>();
@@ -40,6 +43,7 @@ public static class DomainConfiguration
         services.AddSingleton<StudentRepository>();
         services.AddSingleton<AchievementsRepository>();
         services.AddSingleton<InstituteStructureRepository>();
+        services.AddSingleton<EventsRepository>();
         services.AddSingleton<StudentRepository>();
         services.AddSingleton<RecognizeTextApiRepository>();
         services.AddSingleton<GigaChatRepository>();

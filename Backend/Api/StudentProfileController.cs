@@ -20,9 +20,9 @@ public class StudentProfileController : ControllerBase
 
     [HttpPost("/achievements")]
     [Authorize]
-    public async Task<IActionResult> AddAchievement([FromForm] AddAchievementRequest request)
+    public async Task<IActionResult> AddAchievementFile([FromForm] AddAchievementFileRequest fileRequest)
     {
-        var res = await _achievementsUseCase.AddAchievement(request, this.UserId());
+        var res = await _achievementsUseCase.AddAchievement(fileRequest, this.UserId());
         return Ok(res);
     }
 
