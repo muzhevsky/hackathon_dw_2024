@@ -1,12 +1,10 @@
-using System.Xml;
-using Hackaton_DW_2024.Data.DataSources.Achievements;
 using Hackaton_DW_2024.Data.Dto.Users.Hierarchy;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Specialities;
 
-public class EfSpecialitiesDataSource: EfAchievementsDataSource, ISpecialitiesDataSource
+public class EfSpecialitiesDataSource: EntityFrameworkDataSource, ISpecialitiesDataSource
 {
     DbSet<SpecialityDto> _specialities;   
     public EfSpecialitiesDataSource(ApplicationContext context) : base(context)
@@ -14,12 +12,12 @@ public class EfSpecialitiesDataSource: EfAchievementsDataSource, ISpecialitiesDa
         _specialities = context.Specialities;
     }
     
-    public SpecialityDto? GetById(int id)
+    public SpecialityDto? SelectById(int id)
     {
         return _specialities.FirstOrDefault(dto => dto.Id == id);
     }
 
-    public IEnumerable<SpecialityDto> GetAll()
+    public IEnumerable<SpecialityDto> SelectAll()
     {
         return _specialities.ToList();
     }

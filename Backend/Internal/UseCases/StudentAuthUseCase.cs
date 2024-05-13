@@ -1,9 +1,8 @@
 ﻿using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Hash;
+using Hackaton_DW_2024.Infrastructure.Repositories.Database;
 using Hackaton_DW_2024.Internal.Entities.Users;
-using Hackaton_DW_2024.Internal.Repositories;
-using Hackaton_DW_2024.Internal.Repositories.Database;
 using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 
 namespace Hackaton_DW_2024.Internal.UseCases;

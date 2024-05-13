@@ -15,18 +15,16 @@ public class AchievementDto: Dto
     
     [Column("file_name")]
     [MaxLength(256)]
-    public string? FileName { get; set; }
+    public string? FilePath { get; set; }
     
     [Column("score")]
     public int Score { get; set; }
     
-    [Column("team_size")]
-    public int TeamSize { get; set; }
+    [Column("with_team")]
+    public bool WithTeam { get; set; }
     
-    
-    public List<EventDto> Events { get; set; }
-    public List<AchievementsAndEventsDto> AchievementsAndEvents { get; set; }
-    public List<RequestDto> Requests { get; set; }
+    [Column("result_id")]
+    public int ResultId { get; set; }
 
     
     static string _structureName = "achievements";

@@ -10,4 +10,6 @@ public class SpecialityDto
     
     [Column("title")]
     public string Title { get; set; }
+    [Column("full_title")]
+    public string FullTitle { get; set; }
 }

@@ -4,7 +4,7 @@ namespace Hackaton_DW_2024.Data.DataSources.Specialities;
 
 public interface ISpecialitiesDataSource
 {
-    SpecialityDto? GetById(int id);
-    IEnumerable<SpecialityDto> GetAll();
+    SpecialityDto? SelectById(int id);
+    IEnumerable<SpecialityDto> SelectAll();
     void Insert(SpecialityDto speciality);
 }
