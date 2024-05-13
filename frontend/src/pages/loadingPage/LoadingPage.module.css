@@ -1,0 +1,12 @@
+.centreElem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 35vh;
+}
+
+.flex{
+    display: flex;
+    margin: auto;
+    padding: 5vh;
+}
