@@ -6,6 +6,7 @@ import { createContext } from 'react';
 import UserStore from './store/UserStore';
 import AchievementsStore from './store/Achievements';
 import EventsStore from './store/EventsStore';
+import { ConfigProvider } from 'antd';
 
 interface State {
 	userStore: UserStore,
@@ -27,11 +28,24 @@ const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 );
 root.render(
-	<Context.Provider value={{
-		userStore,
-		achievements,
-		eventsStore
-	}}>
-		<RouterProvider router={Router} />
-	</Context.Provider>
+	<ConfigProvider 
+		theme={{
+			components:{
+				Button: {
+					lineHeight: 150
+				}
+			},
+			token: {
+				colorPrimary:"#02006B",
+				borderRadius: 5
+			}
+		}}>
+		<Context.Provider value={{
+			userStore,
+			achievements,
+			eventsStore
+		}}>
+			<RouterProvider router={Router} />
+		</Context.Provider>
+	</ConfigProvider>
 );
