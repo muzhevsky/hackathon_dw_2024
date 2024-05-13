@@ -21,10 +21,11 @@ public class EfAchievementsDataSource : EntityFrameworkDataSource, IAchievements
         return _achievements.FirstOrDefault(dto => dto.Id == id);
     }
 
-    public void Insert(AchievementDto achievement)
+    public int Insert(AchievementDto achievement)
     {
         _achievements.Add(achievement);
         Context.SaveChanges();
+        return achievement.Id;
     }
 
     public void UpdateById(int id, Action<AchievementDto> updateFunc)

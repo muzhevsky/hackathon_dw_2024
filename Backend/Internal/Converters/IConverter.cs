@@ -1,4 +1,4 @@
-﻿namespace Hackaton_DW_2024.Internal.UseCases.Converters;
+﻿namespace Hackaton_DW_2024.Internal.Converters;
 
 public interface IConverter<T1,T2>
 {

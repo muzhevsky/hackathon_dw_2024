@@ -1,8 +1,7 @@
 using Hackaton_DW_2024.Data.Dto.Achievements;
 using Hackaton_DW_2024.Internal.Entities;
-using File = Hackaton_DW_2024.Internal.Entities.File;
 
-namespace Hackaton_DW_2024.Internal.UseCases.Converters.Achievements;
+namespace Hackaton_DW_2024.Internal.Converters.Achievements;
 
 public class AchievementFromDtoConverter: IConverter<AchievementDto, Achievement>
 {

@@ -1,9 +1,9 @@
-﻿namespace Hackaton_DW_2024.Api.Requests;
+﻿namespace Hackaton_DW_2024.Api.Student;
 
 public class AddAchievementRequest
 {
-    public int? EventId;
-    public int? StatusId;
-    public int TeamSize;
-    public byte[] File;
+    public int? EventId { get; set; }
+    public int? StatusId { get; set; }
+    public int TeamSize { get; set; }
+    public IFormFile? File { get; set; }
 }

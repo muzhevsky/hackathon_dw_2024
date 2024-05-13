@@ -6,5 +6,5 @@ public class Achievement
     public int Score { get; set; }
     public int TeamSize {get; set; }
     public int UserId { get; set; }
-    // public File File { get; set; }
+    public string FilePath { get; set; }
 }

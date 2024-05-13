@@ -15,7 +15,7 @@ public class AchievementDto: Dto
     
     [Column("file_name")]
     [MaxLength(256)]
-    public string FileName { get; set; }
+    public string? FileName { get; set; }
     
     [Column("score")]
     public int Score { get; set; }

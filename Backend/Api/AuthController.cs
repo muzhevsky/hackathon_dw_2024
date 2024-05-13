@@ -1,5 +1,4 @@
-﻿using Hackaton_DW_2024.Api.Requests;
-using Hackaton_DW_2024.Api.Responses;
+﻿using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Data.DataSources.Events;
 using Hackaton_DW_2024.Data.DataSources.Users;
 using Hackaton_DW_2024.Internal.UseCases;
@@ -25,7 +24,7 @@ public class AuthController : ControllerBase
     [HttpPost("/signup")]
     public ActionResult<StudentSignUpResponse> SignUp([FromBody] StudentSignUpRequest request)
     {
-        return Ok(_authUseCase.SignUp(request));
+        return Ok(_authUseCase.SignUpStudent(request));
     }
 
     [HttpPost("/signin")]
@@ -38,7 +37,6 @@ public class AuthController : ControllerBase
     public IActionResult AddEvent([FromQuery] int userId, [FromQuery] int eventId)
     {
         var test = _usersDataSource.SelectById(userId);
-        Console.WriteLine(test.Id);
         return Ok(test);
     }
 }

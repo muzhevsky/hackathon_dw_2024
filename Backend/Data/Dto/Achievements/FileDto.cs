@@ -2,6 +2,6 @@
 
 public class FileDto: Dto
 {
-    public string Name { get; set; }
-    public byte[] Content { get; set; }
+    public string Path { get; set; }
+    public Stream Stream { get; set; }
 }

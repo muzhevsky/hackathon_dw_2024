@@ -1,17 +1,10 @@
 ﻿using Hackaton_DW_2024.Data.Dto.Users;
-using Hackaton_DW_2024.Internal.Entities;
+using Hackaton_DW_2024.Internal.Entities.Users;
 
-namespace Hackaton_DW_2024.Internal.UseCases.Converters.Students;
+namespace Hackaton_DW_2024.Internal.Converters.Students;
 
 public class StudentToDtoConverter: IConverter<Student, StudentDto>
 {
-    IConverter<Entities.User, UserDto> _userConverter;
-
-    public StudentToDtoConverter(IConverter<Entities.User, UserDto> userConverter)
-    {
-        _userConverter = userConverter;
-    }
-
     public StudentDto Convert(Student convertable)
     {
         return new StudentDto

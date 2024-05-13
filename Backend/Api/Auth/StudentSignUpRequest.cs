@@ -1,4 +1,4 @@
-﻿namespace Hackaton_DW_2024.Api.Requests;
+﻿namespace Hackaton_DW_2024.Api.Auth;
 
 public class StudentSignUpRequest
 {

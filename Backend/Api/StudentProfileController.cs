@@ -1,4 +1,4 @@
-using Hackaton_DW_2024.Api.Requests;
+using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Internal.Entities;
 using Hackaton_DW_2024.Internal.UseCases;
 using Microsoft.AspNetCore.Authorization;
@@ -18,8 +18,10 @@ public class StudentProfileController : ControllerBase
     }
 
     [HttpPost("/achievements")]
-    public IActionResult AddAchievement([FromBody] AddAchievementRequest request)
+    [Authorize]
+    public IActionResult AddAchievement([FromForm] AddAchievementRequest request)
     {
+        Console.WriteLine(int.Parse(User.Claims.First(claim => claim.Type == "id").Value));
         _useCase.AddAchievement(request, int.Parse(User.Claims.First(claim => claim.Type == "id").Value));
         return Ok();
     }

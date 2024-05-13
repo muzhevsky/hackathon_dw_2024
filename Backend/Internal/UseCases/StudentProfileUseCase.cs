@@ -1,9 +1,9 @@
-using Hackaton_DW_2024.Api.Requests;
-using Hackaton_DW_2024.Infrastructure.Auth;
+using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Internal.Entities;
 using Hackaton_DW_2024.Internal.Repositories;
-using Entities_File = Hackaton_DW_2024.Internal.Entities.File;
-using Logging_ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
+using Hackaton_DW_2024.Internal.Repositories.Api;
+using Hackaton_DW_2024.Internal.Repositories.Database;
+using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
 namespace Hackaton_DW_2024.Internal.UseCases;
 
@@ -11,22 +11,23 @@ public class StudentProfileUseCase
 {
     StudentRepository _studentRepository;
     AchievementsRepository _achievementsRepository;
-    ITokenProvider _tokenProvider;
-    Logging_ILogger _logger;
+    RecognizeTextApiRepository _recognitionRepository;
+    GigaChatRepository _gigaChatRepository;
+    ILogger _logger;
 
     public StudentProfileUseCase(
         AchievementsRepository achievementsRepository, 
         StudentRepository studentRepository, 
-        Logging_ILogger logger, 
-        ITokenProvider tokenProvider)
+        ILogger logger, RecognizeTextApiRepository recognitionRepository, GigaChatRepository gigaChatRepository)
     {
         _achievementsRepository = achievementsRepository;
         _studentRepository = studentRepository;
         _logger = logger;
-        _tokenProvider = tokenProvider;
+        _recognitionRepository = recognitionRepository;
+        _gigaChatRepository = gigaChatRepository;
     }
 
-    public void AddAchievement(AddAchievementRequest request, int userId)
+    public async void AddAchievement(AddAchievementRequest request, int userId)
     {
         var student = _studentRepository.GetStudentByUserId(userId);
         if (student == null)
@@ -39,15 +40,18 @@ public class StudentProfileUseCase
         {
             UserId = userId,
             TeamSize = request.TeamSize,
-            Score = 0
+            Score = 0,
+            FilePath = request.File.FileName
         };
         
-        _achievementsRepository.AddAchievement(achievement);
+        _achievementsRepository.AddAchievement(achievement, request.File.OpenReadStream());
+         _recognitionRepository.Test(achievement.FilePath);
+        await _gigaChatRepository.Authorize();
+        await _gigaChatRepository.SendMessage("Привет, Гигачат!");
     }
 
     public List<Achievement> GetAchievements(int userId)
     {
-        Console.WriteLine(userId);
         var student = _studentRepository.GetStudentByUserId(userId);
         if (student == null)
         {

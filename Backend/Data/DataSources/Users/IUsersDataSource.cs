@@ -1,5 +1,4 @@
-﻿using Hackaton_DW_2024.Data.Dto.Achievements;
-using Hackaton_DW_2024.Data.Dto.Users;
+﻿using Hackaton_DW_2024.Data.Dto.Users;
 
 namespace Hackaton_DW_2024.Data.DataSources.Users;
 

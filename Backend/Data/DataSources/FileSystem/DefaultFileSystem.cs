@@ -4,18 +4,29 @@ namespace Hackaton_DW_2024.Data.DataSources.FileSystem;
 
 public class DefaultFileSystem : IFileSystem
 {
-    public void Write(FileDto file)
+    readonly IWebHostEnvironment _webHostEnvironment;
+
+    public DefaultFileSystem(IWebHostEnvironment webHostEnvironment)
     {
-        File.WriteAllBytes(file.Name, file.Content);
+        _webHostEnvironment = webHostEnvironment;
     }
 
-    public FileDto Read(string fileName)
+    public void Write(FileDto file)
     {
-        var content = File.ReadAllBytes(fileName);
+        Console.WriteLine(file.Path);
+        using (var fileStream = new FileStream(_webHostEnvironment.WebRootPath + "/" + file.Path, FileMode.Create))
+        {
+            file.Stream.CopyTo(fileStream);
+        }
+    }
+
+    public FileDto Read(string path, string name)
+    {
+        var content = File.Open(path + "/" + name, FileMode.Open);
         return new FileDto
         {
-            Name = fileName,
-            Content = content
+            Path = path,
+            Stream = content
         };
     }
 }
