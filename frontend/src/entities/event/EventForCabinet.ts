@@ -1,4 +1,5 @@
 export interface EventForCabinet{
+    type: "event";
     id: number | string;
     title: string;
     startDate: Date;

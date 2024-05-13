@@ -6,11 +6,12 @@ interface PrimaryButtonProps{
     content: string;
     clickHandler: () => void;
     size: SizeType;
+    disabled?: boolean;
 }
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({content, size, clickHandler}) => {
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({content, size, clickHandler, disabled}) => {
     return(
-        <Button type="primary" className={"ButtonLog"} size={size} onClick={clickHandler}>{content}</Button>
+        <Button type="primary" disabled={disabled} className={"ButtonLog"} size={size} onClick={clickHandler}>{content}</Button>
     )
 }
 

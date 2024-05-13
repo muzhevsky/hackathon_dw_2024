@@ -11,11 +11,15 @@ const Events: React.FC = observer(() => {
     const { eventsStore } = useContext(Context);
 
     useEffect(() => {
-        const response = EventsService.getEvents();
-        response.then(response => {
-            eventsStore.events = response;
-            setIsLoading(true);
-        })
+        console.log(eventsStore.events);
+        if(eventsStore.events.length === 0){
+            const response = EventsService.getEvents();
+            response.then(response => {
+                eventsStore.events = response;
+                setIsLoading(true);
+            })
+        }
+        setIsLoading(true);
     }, [])
 
     return(

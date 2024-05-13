@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./Requests.module.css"
+import styles from "./RequestsCard.module.css"
 import Img from "../../shared/assets/sad.svg";
 
 interface EventCardProps {
@@ -11,7 +11,7 @@ interface EventCardProps {
     description: string;
 }
 
-const EventCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, statusId, description}) => {
+const RequestCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, statusId, description}) => {
     const displayDate = startDate !== undefined ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}` : "Подробнее";
 
     return (
@@ -41,4 +41,4 @@ const EventCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, sta
     );
 };
 
-export default EventCard;
+export default RequestCard;
