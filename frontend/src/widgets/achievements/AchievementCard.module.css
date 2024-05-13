@@ -1,0 +1,55 @@
+.cardViev{
+    width: 13vw;
+    height: 21vh;
+    background-color: rgba(124,124,124,0.13);
+    border-radius: 20px;
+    margin: 2vh;
+}
+
+.title{
+    height: 1vh;
+    padding-left: 1vw;
+    font-family: Inter, serif;
+    font-size: 19px;
+    font-weight: bolder;
+    color: #02006B;
+}
+
+.subtitle{
+    display: flex;
+    justify-content: start;
+    /*width: 5vw;*/
+    height: 1vh;
+    padding-left: 1vw;
+    font-family: Inter, serif;
+    font-size: 19px;
+    font-weight: normal;
+    color: #02006B;
+}
+
+.img{
+    display: flex;
+    justify-content: center;
+    height: 7vh;
+    padding-top: 2vh;
+}
+
+.date{
+    margin-top: 3vh;
+    padding-left: 1vw;
+    font-family: Inter, serif;
+    font-size: 17px;
+}
+
+.container {
+    height: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.additions{
+    margin-top: 3vh;
+    padding: 2vh;
+    color: #02006B;
+}
