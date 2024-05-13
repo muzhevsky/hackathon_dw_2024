@@ -185,10 +185,11 @@ alter table news_and_events
 
 create table institutes
 (
-    id    serial
+    id         serial
         constraint institutes_pk
             primary key,
-    title varchar(16) not null
+    title      varchar(16) not null,
+    full_title varchar(64) not null
 );
 
 alter table institutes
@@ -202,43 +203,11 @@ create table departments
     institute_id integer     not null
         constraint departments_institutes_fk
             references institutes,
-    title        varchar(16) not null
+    title        varchar(16) not null,
+    full_title   varchar(64) not null
 );
 
 alter table departments
-    owner to postgres;
-
-create table groups
-(
-    id            serial
-        constraint groups_pk
-            primary key,
-    department_id integer     not null
-        constraint groups_departments_fk
-            references groups,
-    title         varchar(16) not null
-);
-
-alter table groups
-    owner to postgres;
-
-create table students
-(
-    id           serial
-        constraint students_pk
-            primary key,
-    student_id   varchar(16) not null,
-    group_id     integer     not null
-        constraint students_groups_fk
-            references groups,
-    telegram_id  varchar(64),
-    user_id      integer     not null
-        constraint students_users_fk
-            references users,
-    phone_number varchar(16)
-);
-
-alter table students
     owner to postgres;
 
 create table teachers
@@ -270,10 +239,56 @@ create table users_and_events
 alter table users_and_events
     owner to postgres;
 
+create table speciality
+(
+    id         serial
+        constraint speciality_pk
+            primary key,
+    full_title varchar(64) not null,
+    title      varchar(16) not null
+);
+
+alter table speciality
+    owner to postgres;
+
+create table groups
+(
+    id            serial
+        constraint groups_pk
+            primary key,
+    department_id integer     not null
+        constraint groups_departments_fk
+            references groups,
+    title         varchar(16) not null,
+    speciality_id integer     not null
+        constraint groups_specialities_fk
+            references speciality
+);
+
+alter table groups
+    owner to postgres;
+
+create table students
+(
+    id           serial
+        constraint students_pk
+            primary key,
+    student_id   varchar(16) not null,
+    group_id     integer     not null
+        constraint students_groups_fk
+            references groups,
+    telegram_id  varchar(64),
+    user_id      integer     not null
+        constraint students_users_fk
+            references users,
+    phone_number varchar(16)
+);
+
+alter table students
+    owner to postgres;
 
 
-
-
-insert into institutes(title) values('ИнПИТ');
-insert into departments(institute_id, title) values (1, 'ПИТ');
-insert into groups(department_id, title) values (1, 'б1-ИФСТ-31');
+insert into institutes(title, full_title) values('ИнПИТ', 'Институт прикладных информационных технологий и коммуникаций');
+insert into departments(institute_id, title, full_title) values (1, 'ПИТ', 'Прикладные информационные технологии');
+insert into speciality(full_title, title) values ('Информационные системы и технологии', 'ИФСТ');
+insert into groups(department_id, title, speciality_id) values (1, 'б1-ИФСТ-31', 1);

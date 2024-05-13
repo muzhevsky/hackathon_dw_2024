@@ -1,6 +1,6 @@
 ﻿namespace Hackaton_DW_2024.Api.Auth;
 
-public class StudentSignUpRequest
+public class SignUpRequest
 {
     public string StudentId { get; set; }
     public string Password { get; set; }

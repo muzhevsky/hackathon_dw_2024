@@ -9,7 +9,10 @@ public class InstituteDto
     [Column("id")] 
     public int Id { get; set; }
     
-    [Column("title")] 
     [MaxLength(16)] 
+    [Column("title")] 
     public string Title { get; set; }
+    
+    [Column("full_title")]
+    public string FullTitle { get; set; }
 }

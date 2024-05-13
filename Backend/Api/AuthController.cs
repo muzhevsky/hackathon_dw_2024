@@ -2,6 +2,7 @@
 using Hackaton_DW_2024.Data.DataSources.Events;
 using Hackaton_DW_2024.Data.DataSources.Users;
 using Hackaton_DW_2024.Internal.UseCases;
+using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hackaton_DW_2024.Api;
@@ -11,31 +12,43 @@ namespace Hackaton_DW_2024.Api;
 public class AuthController : ControllerBase
 {
     AuthUseCase _authUseCase;
-    IUsersDataSource _usersDataSource;
-    IEventsDataSource _eventsDataSource;
 
-    public AuthController(AuthUseCase authUseCase, IUsersDataSource usersDataSource, IEventsDataSource eventsDataSource)
+    public AuthController(AuthUseCase authUseCase)
     {
         _authUseCase = authUseCase;
-        _usersDataSource = usersDataSource;
-        _eventsDataSource = eventsDataSource;
     }
 
     [HttpPost("/signup")]
-    public ActionResult<StudentSignUpResponse> SignUp([FromBody] StudentSignUpRequest request)
+    public ActionResult<SignUpResponse> SignUp([FromBody] SignUpRequest request)
     {
-        return Ok(_authUseCase.SignUpStudent(request));
+        try
+        {
+            return Ok(_authUseCase.SignUpStudent(request));
+        }
+        catch (AuthException ex)
+        {
+            return Unauthorized(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500);
+        }
     }
 
     [HttpPost("/signin")]
     public ActionResult<SignInResponse> SignIn([FromBody] SignInRequest request)
     {
-        return Ok(_authUseCase.SignIn(request));
-    }
-
-    [HttpPost("/event")]
-    public IActionResult AddEvent([FromQuery] int userId, [FromQuery] int eventId)
-    {
-        return Ok(_usersDataSource.SelectById(userId));
+        try
+        {
+            return Ok(_authUseCase.SignIn(request));
+        }
+        catch (AuthException ex)
+        {
+            return Unauthorized(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500);
+        }
     }
 }

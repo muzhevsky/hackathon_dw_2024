@@ -4,6 +4,7 @@ using Hackaton_DW_2024.Infrastructure.Hash;
 using Hackaton_DW_2024.Internal.Entities.Users;
 using Hackaton_DW_2024.Internal.Repositories;
 using Hackaton_DW_2024.Internal.Repositories.Database;
+using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 
 namespace Hackaton_DW_2024.Internal.UseCases;
 
@@ -29,7 +30,7 @@ public class AuthUseCase
         _userRepository = userRepository;
     }
 
-    public StudentSignUpResponse SignUpStudent(StudentSignUpRequest request)
+    public SignUpResponse SignUpStudent(SignUpRequest request)
     {
         var login = request.StudentId;
 
@@ -42,17 +43,17 @@ public class AuthUseCase
             Patronymic = request.Patronymic
         };
 
-        if (_userRepository.GetUser(login) != null)
-            throw new Exception("user already exists");
+        if (_userRepository.GetUser(user.Login) != null) throw new AuthException("user already exist");
         
         var student = new Student
         {
             GroupId = request.GroupId,
             StudentId = request.StudentId,
         };
-        
-        user.Salt = _saltProvider.GetSalt(8);
-        user.Password = _hashProvider.Hash(user.Password + user.Salt);
+
+        var salt = _saltProvider.GetSalt(8);
+        var hashed = _hashProvider.Hash(user.Password + salt);
+        user.SetHashedPassword(hashed, salt);
 
         _userRepository.CreateUser(user);
         student.UserId = user.Id;
@@ -67,22 +68,17 @@ public class AuthUseCase
             Role = (int)Role.Student
         };
 
-        return new StudentSignUpResponse(
-            userResponse,
-            _tokenRepository.ProvideToken(new Dictionary<string, string>
-            {
-                { "id", user.Id.ToString() }
-            }));
+        return new SignUpResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id)));
     }
 
     public SignInResponse SignIn(SignInRequest request)
     {
         var user = _userRepository.GetUser(request.Login);
-        if (user == null) throw new Exception("user not found");
+        if (user == null) throw new AuthException("user not found");
 
         var hashedPassword = _hashProvider.Hash(request.Password + user.Salt);
 
-        if (!user.PasswordMatches(hashedPassword)) throw new Exception("password doesn't match");
+        if (!user.PasswordMatches(hashedPassword)) throw new AuthException("wrong password");
 
         var role = Role.Student;
         //if (_studentRepository.GetStudentByUserId(user.Id) != null)  todo проверять на препода / админа  / деканат 
@@ -96,11 +92,6 @@ public class AuthUseCase
             Role = (int)role
         };
 
-        return new SignInResponse(
-            userResponse,
-            _tokenRepository.ProvideToken(new Dictionary<string, string>()
-            {
-                { "id", user.Id.ToString() }
-            }));
+        return new SignInResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id)));
     }
 }
