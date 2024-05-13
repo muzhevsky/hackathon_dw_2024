@@ -1,14 +1,17 @@
 .FormWrap {
     width: 23vw;
-    height: 45vh;
     align-items: center;
     border-radius: 26px;
     background-color: white;
-    margin-top: 15vh;
+    margin: 0 auto;
+    margin-top: 20%;
     -moz-box-shadow: 0 0 3px #ccc;
     -webkit-box-shadow: 0 0 3px #ccc;
     box-shadow: 0 0 3px #ccc;
-    margin-left: 5vh;
+    padding: 35px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .InputWrap {
@@ -22,7 +25,9 @@
 
 .InpEnter {
     width: 23vw;;
-
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .ButtonWrap {
@@ -37,9 +42,9 @@
     display: flex;
     /*justify-content: center;*/
     justify-content: center;
-    padding-top: 15%;
     font-family: Inknut, sans-serif;
     font-weight: bold;
+    margin: 0;
 }
 
 .LableText {
