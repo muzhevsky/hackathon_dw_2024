@@ -1,0 +1,13 @@
+.error{
+    display: flex;
+    color: #842828;
+    width: 50%;
+    height: 150px;
+}
+
+.textStyle{
+    font-family: Inknut, serif;
+    font-size: 70px;
+    text-align: center;
+    padding-top: 35vh;
+}
