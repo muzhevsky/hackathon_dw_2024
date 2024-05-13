@@ -36,7 +36,6 @@ public class AuthController : ControllerBase
     [HttpPost("/event")]
     public IActionResult AddEvent([FromQuery] int userId, [FromQuery] int eventId)
     {
-        var test = _usersDataSource.SelectById(userId);
-        return Ok(test);
+        return Ok(_usersDataSource.SelectById(userId));
     }
 }

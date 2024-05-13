@@ -1,4 +1,5 @@
 ﻿using Hackaton_DW_2024.Data.Dto.Events;
+using Hackaton_DW_2024.Data.Dto.Users;
 using Hackaton_DW_2024.Data.Package;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,8 +8,11 @@ namespace Hackaton_DW_2024.Data.DataSources.Events;
 public class EfEventsDataSource : EntityFrameworkDataSource, IEventsDataSource
 {
     DbSet<EventDto> _events;
+    DbSet<UsersAndEventsDto> _usersAndEvents;
+
     public EfEventsDataSource(ApplicationContext context) : base(context)
     {
+        _usersAndEvents = context.UsersAndEvents;
         _events = context.Events;
     }
 
@@ -27,7 +31,14 @@ public class EfEventsDataSource : EntityFrameworkDataSource, IEventsDataSource
 
     public IEnumerable<EventDto> SelectByUserId(int userId)
     {
-        return _events.Where(dto => dto.Users.Any(u => u.Id == userId));
+        var usersAndEvents = _usersAndEvents.Where(dto => dto.UserId == userId);
+        var result = new List<EventDto>();
+        foreach (var ue in usersAndEvents)
+        {
+            result.AddRange(_events.Where(dto => dto.Id == ue.EventId));
+        }
+
+        return result;
     }
 
     public int InsertOne(EventDto dto)
@@ -50,6 +61,4 @@ public class EfEventsDataSource : EntityFrameworkDataSource, IEventsDataSource
         _events.Remove(deleteTarget);
         Context.SaveChanges();
     }
-    
-    
 }

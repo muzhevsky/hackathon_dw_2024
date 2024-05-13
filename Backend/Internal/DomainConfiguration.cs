@@ -20,6 +20,8 @@ public static class DomainConfiguration
 
         services.AddSingleton<GigaChatEnvironment>();
         services.AddSingleton<GigaChatApiConfiguration>();
+        services.AddSingleton<OcrEnvironment>();
+        services.AddSingleton<OcrConfiguration>();
         
         services.AddSingleton<UserRepository, UserRepository>();
         services.AddSingleton<StudentRepository, StudentRepository>();

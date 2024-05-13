@@ -13,5 +13,4 @@ public class TeacherDto
 
     [Column("department_id")] 
     public int DepartmentId { get; set; }
-    public DepartmentDto Department { get; set; }
 }

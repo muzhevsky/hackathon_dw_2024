@@ -23,18 +23,10 @@ public class EventDto: Dto
     
     [Column("status_id")]
     public int StatusId { get; set; }
-    public EventStatusDto Status { get; set; }
     
     [Column("description")]
     public string Description { get; set; }
 
-
-    public List<UserDto> Users { get; set; } = [];
-    public List<UsersAndEventsDto> UsersAndEvents { get; set; } = [];
-    public List<NewsDto> News { get; set; } = [];
-    public List<NewsAndEventsDto> NewsAndEvents { get; set; } = [];
-    public List<AchievementDto> Achievements { get; set; } = [];
-    public List<AchievementsAndEventsDto> AchievementsAndEvents { get; set; } = [];
 
     static string _structureName = "events";
     public static string StructureName => _structureName;

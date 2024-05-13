@@ -16,8 +16,8 @@ public class StudentProfileUseCase
     ILogger _logger;
 
     public StudentProfileUseCase(
-        AchievementsRepository achievementsRepository, 
-        StudentRepository studentRepository, 
+        AchievementsRepository achievementsRepository,
+        StudentRepository studentRepository,
         ILogger logger, RecognizeTextApiRepository recognitionRepository, GigaChatRepository gigaChatRepository)
     {
         _achievementsRepository = achievementsRepository;
@@ -27,15 +27,15 @@ public class StudentProfileUseCase
         _gigaChatRepository = gigaChatRepository;
     }
 
-    public async void AddAchievement(AddAchievementRequest request, int userId)
+    public async Task<string> AddAchievement(AddAchievementRequest request, int userId)
     {
         var student = _studentRepository.GetStudentByUserId(userId);
         if (student == null)
         {
             _logger.Warn("user not found");
-            return;
+            return "";
         }
-        
+
         var achievement = new Achievement
         {
             UserId = userId,
@@ -43,11 +43,17 @@ public class StudentProfileUseCase
             Score = 0,
             FilePath = request.File.FileName
         };
-        
+
         _achievementsRepository.AddAchievement(achievement, request.File.OpenReadStream());
-         _recognitionRepository.Test(achievement.FilePath);
+        var res = await _recognitionRepository.Recognize(achievement.FilePath);
         await _gigaChatRepository.Authorize();
-        await _gigaChatRepository.SendMessage("Привет, Гигачат!");
+        return await _gigaChatRepository.SendMessage($"Распознай в представленном тексте данные в формате:" +
+                                                     "Название конкурса: \n" +
+                                                     "Имя участника: \n" +
+                                                     "Дата проведения: \n" +
+                                                     "Статус (региональный, международный и т.д): \n" +
+                                                     "Занятое на конкурсе место:\n " +
+                                                     $"Вот текст: {res}");
     }
 
     public List<Achievement> GetAchievements(int userId)
@@ -58,6 +64,7 @@ public class StudentProfileUseCase
             _logger.Warn("user not found");
             return new List<Achievement>();
         }
+
         return _achievementsRepository.AchievementsOfStudent(student);
     }
 }

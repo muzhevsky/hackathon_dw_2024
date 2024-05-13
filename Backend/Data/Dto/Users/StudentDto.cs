@@ -10,15 +10,12 @@ public class StudentDto
     public int Id { get; set; }
     [Column("user_id")]
     public int UserId { get; set; }
-    public UserDto User { get; set; }
 
     [Column("student_id")] 
     public string StudentId { get; set; }
     
     [Column("group_id")]
     public int GroupId { get; set; }
-
-    public GroupDto Group { get; set; }
 
     [Column("telegram_id")]
     public string? Telegram { get; set; }

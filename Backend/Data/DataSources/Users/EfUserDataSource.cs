@@ -20,7 +20,6 @@ public class EfUserDataSource : EntityFrameworkDataSource, IUsersDataSource
     {
         Users.Add(item);
         Context.SaveChanges();
-
         return item.Id;
     }
 

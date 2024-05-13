@@ -22,34 +22,30 @@ public class StudentRepository
         _userToDtoConverter = userToDtoConverter;
     }
 
-    public void CreateStudent(Student student, User user)
+    public void CreateStudent(Student student)
     {
-        var userDto = _userToDtoConverter.Convert(user);
         var id = _studentsDataSource.Insert(
             new StudentDto
             {
-                User = userDto,
+                UserId = student.UserId,
                 StudentId = student.StudentId,
                 GroupId = student.GroupId,
             });
 
         student.Id = id;
-        student.UserId = _studentsDataSource.SelectById(id).UserId;
     }
 
     public Student? GetStudent(int id)
     {
         var dto = _studentsDataSource.SelectById(id);
         if (dto == null) return null;
-        var userDto = _usersDataSource.SelectById(dto.UserId);
         var student = new Student()
         {
+            Id = dto.Id,
             UserId = dto.UserId,
             StudentId = dto.StudentId,
             GroupId = dto.GroupId,
-            Surname = userDto.Surname,
-            Name = userDto.Name,
-            Patronymic = userDto.Patronymic
+            Telegram = dto.Telegram
         };
         return student;
     }
@@ -58,15 +54,12 @@ public class StudentRepository
     {
         var dto = _studentsDataSource.SelectByUserId(userId);
         if (dto == null) return null;
-        var userDto = _usersDataSource.SelectById(dto.UserId);
         var student = new Student
         {
-            UserId = userId,
+            Id = dto.Id,
+            UserId = dto.UserId,
             StudentId = dto.StudentId,
             GroupId = dto.GroupId,
-            Surname = userDto.Surname,
-            Name = userDto.Name,
-            Patronymic = userDto.Patronymic
         };
         return student;
     }

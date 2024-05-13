@@ -9,9 +9,8 @@ namespace Hackaton_DW_2024.Internal.UseCases;
 
 public class AuthUseCase
 {
-    InstituteStructureRepository _instituteStructureRepository;
-    StudentRepository _studentRepository;
     UserRepository _userRepository;
+    StudentRepository _studentRepository;
     ITokenProvider _tokenRepository;
     IHashProvider _hashProvider;
     ISaltProvider _saltProvider;
@@ -21,13 +20,11 @@ public class AuthUseCase
         StudentRepository studentRepository,
         UserRepository userRepository,
         IHashProvider hashProvider,
-        InstituteStructureRepository instituteStructureRepository,
         ISaltProvider saltProvider)
     {
         _tokenRepository = tokenRepository;
         _studentRepository = studentRepository;
         _hashProvider = hashProvider;
-        _instituteStructureRepository = instituteStructureRepository;
         _saltProvider = saltProvider;
         _userRepository = userRepository;
     }
@@ -53,12 +50,13 @@ public class AuthUseCase
             GroupId = request.GroupId,
             StudentId = request.StudentId,
         };
-
+        
         user.Salt = _saltProvider.GetSalt(8);
         user.Password = _hashProvider.Hash(user.Password + user.Salt);
 
-        _studentRepository.CreateStudent(student, user);
-        user.Id = _studentRepository.GetStudent(student.Id).UserId;
+        _userRepository.CreateUser(user);
+        student.UserId = user.Id;
+        _studentRepository.CreateStudent(student);
         
         var userResponse = new UserResponse()
         {
@@ -79,8 +77,7 @@ public class AuthUseCase
     public SignInResponse SignIn(SignInRequest request)
     {
         var user = _userRepository.GetUser(request.Login);
-        if (user == null)
-            throw new Exception("user not found");
+        if (user == null) throw new Exception("user not found");
 
         var hashedPassword = _hashProvider.Hash(request.Password + user.Salt);
 

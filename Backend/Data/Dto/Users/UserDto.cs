@@ -35,10 +35,6 @@ public class UserDto: Dto
     [MaxLength(128)] 
     public string Salt { get; set; }
 
-    public List<EventDto> Events { get; set; } = [];
-    public List<UsersAndEventsDto> UsersAndEvents { get; set; } = [];
-
-    public List<AchievementDto> Achievements { get; set; } = [];
 
     static string _structureName = "users";
     public static string StructureName => _structureName;

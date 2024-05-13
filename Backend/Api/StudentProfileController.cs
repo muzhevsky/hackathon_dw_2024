@@ -19,11 +19,10 @@ public class StudentProfileController : ControllerBase
 
     [HttpPost("/achievements")]
     [Authorize]
-    public IActionResult AddAchievement([FromForm] AddAchievementRequest request)
+    public async Task<IActionResult> AddAchievement([FromForm] AddAchievementRequest request)
     {
-        Console.WriteLine(int.Parse(User.Claims.First(claim => claim.Type == "id").Value));
-        _useCase.AddAchievement(request, int.Parse(User.Claims.First(claim => claim.Type == "id").Value));
-        return Ok();
+        var res = await _useCase.AddAchievement(request, int.Parse(User.Claims.First(claim => claim.Type == "id").Value));
+        return Ok(res);
     }
 
     [HttpGet("/achievements")]

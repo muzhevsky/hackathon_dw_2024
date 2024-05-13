@@ -5,25 +5,24 @@ namespace Hackaton_DW_2024.Internal.Repositories.Api;
 public class RecognizeTextApiRepository
 {
     HttpClient _httpClient;
-
-    public RecognizeTextApiRepository()
+    OcrConfiguration _config;
+    public RecognizeTextApiRepository(OcrConfiguration config)
     {
+        _config = config;
         _httpClient = new HttpClient();
-        _httpClient.Timeout = new TimeSpan(0, 1, 0);
+        _httpClient.Timeout = new TimeSpan(0, 0, 60);
     }
 
-    public async Task<string> Test(string imagePath)
+    public async Task<string> Recognize(string imagePath)
     {
         string result = "";
         try
         {
             var form = new MultipartFormDataContent();
-            form.Add(new StringContent("helloworld"), "apikey"); //Added api key in form data
             form.Add(new StringContent("eng"), "language");
-
-            form.Add(new StringContent("2"), "ocrengine");
-            form.Add(new StringContent("true"), "scale");
-            form.Add(new StringContent("true"), "istable");
+            form.Add(new StringContent(_config.ApiKey), "apikey");
+            form.Add(new StringContent(_config.Engine.ToString()), "ocrengine");
+            form.Add(new StringContent(_config.Scale.ToString()), "scale");
 
             if (string.IsNullOrEmpty(imagePath) == false)
             {
@@ -36,7 +35,7 @@ public class RecognizeTextApiRepository
             //     form.Add(new ByteArrayContent(imageData, 0, imageData.Length), "PDF", "pdf.pdf");
             // }
 
-            var response = await _httpClient.PostAsync("https://api.ocr.space/Parse/Image", form);
+            var response = await _httpClient.PostAsync(_config.Url, form);
 
             var strContent = await response.Content.ReadAsStringAsync();
 
