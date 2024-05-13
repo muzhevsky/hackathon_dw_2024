@@ -31,28 +31,31 @@ const LoginForm: React.FC = observer(() => {
     return (
         <div className={styles.FormWrap}>
             <h1 className={styles.loginHeader}>Авторизация</h1>
-            <label className={styles.LableText}>Логин</label>
-            <Input
-                size="large"
-                placeholder="Ваш логин..."
-                onChange={login.onChange}
-                className={styles.InputWrap}
-            />
-            <label className={styles.LableText}>Пароль</label>
-            <Input.Password
-                size="large"
-                className={styles.InputWrap}
-                placeholder="Введите пароль..."
-                onChange={password.onChange}
-                iconRender={(visible) => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
-            />
-            <div className={styles.ButtonWrap}>
-                <PrimaryButton
-                    content={"Войти"}
-                    clickHandler={authHandler}
-                    size={"large"}
+            <div className={styles.InpEnter}>
+                <label className={styles.LableText}>Логин</label>
+                <Input
+                    size="large"
+                    placeholder="Ваш логин..."
+                    onChange={login.onChange}
+                    className={styles.InputWrap}
                 />
+                <label className={styles.LableText}>Пароль</label>
+                <Input.Password
+                    size="large"
+                    className={styles.InputWrap}
+                    placeholder="Введите пароль..."
+                    onChange={password.onChange}
+                    iconRender={(visible) => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
+                />
+                <div className={styles.ButtonWrap}>
+                    <PrimaryButton
+                        content={"Войти"}
+                        clickHandler={authHandler}
+                        size={"large"}
+                    />
+                </div>
             </div>
+
         </div>
     )
 })

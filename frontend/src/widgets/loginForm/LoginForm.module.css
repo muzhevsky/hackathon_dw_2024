@@ -1,6 +1,6 @@
 .FormWrap {
-    width: 430px;
-    height: 524px;
+    width: 23vw;
+    height: 55vh;
     align-items: center;
     border-radius: 26px;
     background-color: white;
@@ -14,31 +14,41 @@
 .InputWrap {
     /*margin-top: 79px;*/
     /*margin-top: 20%;*/
-    margin-left: 8vh;
-    width: 35vh;
+    display: flex;
+    width: 15vw;
     border: 1px solid gray;
+    margin: auto;
 }
 
-.ButtonWrap{
+.InpEnter {
+    width: 23vw;;
+
+}
+
+.ButtonWrap {
     width: 100%;
     display: flex;
     margin-top: 3vh;
     /*justify-content: space-between;*/
-    margin-left: 20vh;
+    justify-content: center;
 }
 
-.loginHeader{
+.loginHeader {
     display: flex;
     /*justify-content: center;*/
     justify-content: center;
     padding-top: 15%;
+    font-family: Inknut, sans-serif;
+    font-weight: bold;
 }
 
-.LableText{
-   display: flex;
+.LableText {
+    display: flex;
     justify-content: center;
     padding-top: 15%;
     padding-bottom: 1.3%;
     font-size: 22px;
     color: gray;
+    font-family: Inknut, sans-serif;
+    font-weight: normal;
 }

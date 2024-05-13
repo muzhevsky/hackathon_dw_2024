@@ -10,7 +10,7 @@
 }
 
 .rightSide{
-    width: 40vh;
+    width: 49vh;
     height: 25vh;
     margin-left: 125vh;
     margin-top: 15vh;
@@ -21,11 +21,14 @@
     font-size: 14vh;
     font-weight: bolder;
     margin-top: auto;
-    text-align: start;
+    text-align: center;
+    font-family: 'Inknut', sans-serif;
+
 }
 
 .subTitle{
     font-size: 7vh;
     font-weight: bold;
     text-align: end;
+    font-family: 'Jost', sans-serif;
 }
