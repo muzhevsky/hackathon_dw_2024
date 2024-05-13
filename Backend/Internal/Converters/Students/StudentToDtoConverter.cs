@@ -12,6 +12,7 @@ public class StudentToDtoConverter: IConverter<Student, StudentDto>
             GroupId = convertable.GroupId,
             StudentId = convertable.StudentId,
             Telegram = convertable.Telegram,
+            PhoneNumber =convertable.PhoneNumber,
             UserId = convertable.UserId
         };
     }

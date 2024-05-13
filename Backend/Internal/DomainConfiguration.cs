@@ -2,6 +2,7 @@
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Hash;
 using Hackaton_DW_2024.Internal.Converters;
+using Hackaton_DW_2024.Internal.Converters.Students;
 using Hackaton_DW_2024.Internal.Converters.User;
 using Hackaton_DW_2024.Internal.Entities.Users;
 using Hackaton_DW_2024.Internal.Repositories;
@@ -17,6 +18,8 @@ public static class DomainConfiguration
     {
         services.AddSingleton<IConverter<User, UserDto>, UserToDtoConverter>();
         services.AddSingleton<IConverter<UserDto, User>, UserFromDtoConverter>();
+        services.AddSingleton<IConverter<StudentDto, Student>, StudentFromDtoConverter>();
+        services.AddSingleton<IConverter<Student, StudentDto>, StudentToDtoConverter>();
 
         services.AddSingleton<GigaChatEnvironment>();
         services.AddSingleton<GigaChatApiConfiguration>();

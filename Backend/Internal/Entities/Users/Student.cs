@@ -7,4 +7,5 @@ public class Student
     public string Telegram { get; set; }
     public int UserId { get; set; }
     public int GroupId { get; set; }
+    public string PhoneNumber { get; set; }
 }

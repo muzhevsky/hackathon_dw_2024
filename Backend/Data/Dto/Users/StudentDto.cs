@@ -19,4 +19,7 @@ public class StudentDto
 
     [Column("telegram_id")]
     public string? Telegram { get; set; }
+    
+    [Column("phone_number")]
+    public string? PhoneNumber { get; set; }
 }

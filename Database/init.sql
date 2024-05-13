@@ -1,6 +1,6 @@
 create database lk;
 
-\c lk;    
+\c lk;
 
 create table users
 (
@@ -25,12 +25,12 @@ create table achievements
     id        serial
         constraint achievements_id
             primary key,
-    user_id   integer      not null
+    user_id   integer not null
         constraint achievements_users_fk
             references users,
     file_name varchar(256),
-    score     integer      not null,
-    team_size integer      not null
+    score     integer not null,
+    team_size integer not null
 );
 
 alter table achievements
@@ -224,17 +224,18 @@ alter table groups
 
 create table students
 (
-    id          serial
+    id           serial
         constraint students_pk
             primary key,
-    student_id  varchar(16) not null,
-    group_id    integer     not null
+    student_id   varchar(16) not null,
+    group_id     integer     not null
         constraint students_groups_fk
             references groups,
-    telegram_id varchar(64),
-    user_id     integer     not null
+    telegram_id  varchar(64),
+    user_id      integer     not null
         constraint students_users_fk
-            references users
+            references users,
+    phone_number varchar(16)
 );
 
 alter table students
@@ -268,6 +269,8 @@ create table users_and_events
 
 alter table users_and_events
     owner to postgres;
+
+
 
 
 
