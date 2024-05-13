@@ -6,6 +6,7 @@ import { itemsNavigateStudent } from "../../entities/role/RoleTabsStudent";
 import { itemsNavigateTeacher } from "../../entities/role/RoleTabsTeacher";
 import { HOME_PATH } from "../../routing/RouterConstants";
 import NavigateTabs from "../../shared/ui/tabs/NavigateTabs";
+import ProfileInfo from "../../widgets/profileInfo/ProfileInfo";
 
 const HomePage: React.FC = () => {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const HomePage: React.FC = () => {
 
     return(
         <>
-            <h1>Домашняя страница</h1>
+            <ProfileInfo/>
             <NavigateTabs/>
             <Outlet></Outlet>
         </>

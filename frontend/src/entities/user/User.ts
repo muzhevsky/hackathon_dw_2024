@@ -7,3 +7,13 @@ export interface User{
     password_hash: string;
     role_id: number;
 }
+
+export const testUser: User = {
+    id: "1",
+    login: "katya_yuneva@mail.ru",
+    surname: "Юнева",
+    name: "Екатерина",
+    pathronomyc: "Петровна",
+    password_hash: "123456",
+    role_id: 4
+}
