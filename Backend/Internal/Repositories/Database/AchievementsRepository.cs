@@ -10,6 +10,7 @@ public class AchievementsRepository
 {
     IAchievementsDataSource _achievementsDataSource;
     IFileSystem _fileSystem;
+    const string PathString = "/app/achievements";
 
     public AchievementsRepository(
         IAchievementsDataSource achievementsDataSource,
@@ -18,7 +19,7 @@ public class AchievementsRepository
         _achievementsDataSource = achievementsDataSource;
         _fileSystem = fileSystem;
 
-        Directory.CreateDirectory("/app/achievements");
+        Directory.CreateDirectory(PathString);
     }
 
     public List<Achievement> AchievementsOfStudent(Student student)
@@ -51,7 +52,7 @@ public class AchievementsRepository
                 Score = achievement.Score
             });
         var fileName = id + "." + extension;
-        var path = "/app/achievements/" + fileName;
+        var path = PathString + fileName;
         _fileSystem.Write(new FileDto
         {
             Stream = fileStream,

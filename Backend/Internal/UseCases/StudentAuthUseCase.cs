@@ -60,6 +60,7 @@ public class AuthUseCase
         
         var userResponse = new UserResponse()
         {
+            Id = user.Id,
             Surname = user.Surname,
             Name = user.Name,
             Patronymic = user.Patronymic,
@@ -88,6 +89,7 @@ public class AuthUseCase
 
         var userResponse = new UserResponse()
         {
+            Id = user.Id,
             Surname = user.Surname,
             Name = user.Name,
             Patronymic = user.Patronymic,
