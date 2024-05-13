@@ -1,4 +1,4 @@
-import { InboxOutlined } from "@ant-design/icons";
+import {CloseOutlined, InboxOutlined} from "@ant-design/icons";
 import { Upload } from "antd";
 import { RcFile } from "antd/es/upload";
 import { useState } from "react";
@@ -25,38 +25,40 @@ const FormLoadAchievements: React.FC<FormLoadAchievementsProps> = ({ closeHandle
     });
 
     //@ts-ignore
-    const dummyRequest = async ({ file, onSuccess }) => { 
-        const response = await AchievementService.create({File: file});   
-        console.log(response);
-        onSuccess("ok");
-        // setTimeout(() => {
-        //    onSuccess("ok");
-        // }, 0);
-      }
+    const dummyRequest = async ({ file, onSuccess }) => {
+        setTimeout(() => {
+            onSuccess("ok");
+        }, 0);
+    }
 
     return (
-        <div className={styles.DivForm}>
-            <button onClick={closeHandler}>Закрыть</button>
-            <Dragger 
-                name="file" 
-                multiple={false}
-                listType="picture"
-                //@ts-ignore
-                customRequest={dummyRequest}
-                beforeUpload={(file) => setFile(file)}>
-                <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
-                </p>
-                <p className="ant-upload-text">Нажмите или перенесите файл для загрузки</p>
-            </Dragger>
-            {
-                isLoading
-                ? <FormForAchievement 
-                    data={data} closeHandler={closeHandler}/>
-                : <LoadingPage/>
-            }
+        <div className={styles.overlay}>
+            <div className={styles.container}>
+                <div>
+                    <CloseOutlined className={styles.closeElement} onClick={closeHandler}/>
+                    <Dragger
+                        name="file"
+                        multiple={false}
+                        listType="picture"
+                        //@ts-ignore
+                        customRequest={dummyRequest}
+                        beforeUpload={(file) => setFile(file)}>
+                        <p className="ant-upload-drag-icon">
+                            <InboxOutlined/>
+                        </p>
+                        <p className="ant-upload-text">Нажмите или перенесите файл для загрузки</p>
+                    </Dragger>
+                    {
+                        isLoading
+                            ? <FormForAchievement
+                                data={data} closeHandler={closeHandler}/>
+                            : <LoadingPage/>
+                    }
+                </div>
+            </div>
         </div>
     )
 }
+
 
 export default FormLoadAchievements;
