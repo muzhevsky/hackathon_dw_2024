@@ -1,8 +1,8 @@
 namespace Hackaton_DW_2024.Api.Auth;
 
-public class StudentSignUpResponse
+public class SignUpResponse
 {
-    public StudentSignUpResponse(UserResponse user, string token)
+    public SignUpResponse(UserResponse user, string token)
     {
         Token = token;
         User = user;

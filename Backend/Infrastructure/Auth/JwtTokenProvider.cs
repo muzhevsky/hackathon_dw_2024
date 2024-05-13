@@ -18,18 +18,18 @@ public class JwtTokenProvider : ITokenProvider
         _handler = new JwtSecurityTokenHandler();
     }
     
-    public string ProvideToken(Dictionary<string, string> claims)
+    public string ProvideToken(TokenClaims claims)
     {
-        claims.Remove("iss", out var issue);
-        claims.Remove("aud", out var audience);
-
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_signingKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken
-        (issue,
-            audience,
-            claims.Select(kv => new Claim(kv.Key, kv.Value)),
+        (null,
+            null,
+            new []
+            {
+                new Claim("id", claims.UserId.ToString()),
+            },
             expires: DateTime.Now.AddMinutes(_tokenLifetime),
             signingCredentials: credentials
         );

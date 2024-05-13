@@ -21,9 +21,12 @@ public class ApplicationContext : DbContext
     DatabaseConnectionConfig _config;
     public DbSet<AchievementDto> Achievements { get; set; }
     public DbSet<EventDto> Events { get; set; }
+    
     public DbSet<DepartmentDto> Departments { get; set; }
     public DbSet<GroupDto> Groups { get; set; }
     public DbSet<InstituteDto> Institutes { get; set; }
+    public DbSet<SpecialityDto> Specialities { get; set; }
+    
     public DbSet<UserDto> Users { get; set; }
     public DbSet<StudentDto> Students { get; set; }
     public DbSet<RejectionDto> Rejections { get; set; }
