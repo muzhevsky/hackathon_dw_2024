@@ -8,6 +8,7 @@ import { ItemsEventLevel, ItemsTypeEvent } from "../../entities/event/TypeEvent"
 import useInput from "../../hooks/UseInput";
 import PrimaryButton from "../../shared/ui/button/PrimaryButton";
 import CustomizeSelect from "../../shared/ui/select/CustomizeSelect";
+import styles from './FormForAchievement.module.css'
 
 interface FormForAchievementProps{
     data: FormAchievement;
@@ -64,8 +65,10 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
                 <p>Статус участия/результат</p>
                 <Input placeholder="Личное/командное мероприятие" value={place} onChange={placeState.onChange}/>
             </div>
+            <div className={styles.buttonPos}>
+                <PrimaryButton content={"Всё верно. Отправить"} clickHandler={clickHandler} size={"large"}/>
+            </div>
 
-            <PrimaryButton content={"Всё верно. Отправить"} clickHandler={clickHandler} size={"large"}/>
         </div>
     )
 })

@@ -1,0 +1,17 @@
+.pad{
+    display: flex;
+    margin: 0.25vh 1vw;
+    font-family: Inter, serif;
+    font-size: 19px;
+    font-weight: normal;
+    color: #02006B;
+    padding-bottom: 0.25vh;
+}
+
+.container{
+    display: block;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin-bottom: 0.5vh;
+}

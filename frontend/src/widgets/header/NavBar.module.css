@@ -1,0 +1,13 @@
+.menu {
+    /*display: flex;*/
+    background-image: url("../../shared/assets/Uzor.svg");
+    /*background: black;*/
+    background-color: #02006B;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.padLayout{
+    padding-left: 2vw;
+}

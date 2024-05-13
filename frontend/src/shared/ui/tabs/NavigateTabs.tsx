@@ -7,6 +7,7 @@ import { itemsDepartament, itemsNavigateDepartament } from "../../../entities/ro
 import { itemsNavigateStudent, itemsStudent } from "../../../entities/role/RoleTabsStudent";
 import { itemsNavigateTeacher, itemsTeacher } from "../../../entities/role/RoleTabsTeacher";
 import { HOME_PATH } from "../../../routing/RouterConstants";
+import styles from './NavigateTabs.module.css'
 
 
 const NavigateTabs: React.FC = observer(() => {
@@ -42,7 +43,7 @@ const NavigateTabs: React.FC = observer(() => {
       };
 
     return(
-        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+        <Tabs defaultActiveKey="1" items={items} type={"card"} onChange={onChange} />
     )
 })
 

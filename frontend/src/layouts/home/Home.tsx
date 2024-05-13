@@ -7,6 +7,7 @@ import DepartamentService from "../../servises/DepartamentService";
 import RoleService from "../../servises/RoleService";
 import StudentService from "../../servises/StudentService";
 import TeacherService from "../../servises/TeacherService";
+import NavBar from "../../widgets/header/NavBar";
 
 const Home: React.FC = observer(() => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -41,7 +42,8 @@ const Home: React.FC = observer(() => {
             {
                 isLoading
                     ? <div>
-                        <Outlet></Outlet>
+                        <NavBar children={<Outlet></Outlet>}/>
+
                     </div>
                     : <LoadingPage />
             }
