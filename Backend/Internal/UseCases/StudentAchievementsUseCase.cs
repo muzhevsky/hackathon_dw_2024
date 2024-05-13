@@ -43,7 +43,6 @@ public class StudentAchievementsUseCase
         var achievement = new Achievement
         {
             UserId = userId,
-            TeamSize = request.TeamSize,
             Score = 0,
             FilePath = request.File.FileName
         };

@@ -20,8 +20,8 @@ public class AchievementDto: Dto
     [Column("score")]
     public int Score { get; set; }
     
-    [Column("team_size")]
-    public int TeamSize { get; set; }
+    [Column("with_team")]
+    public bool WithTeam { get; set; }
     
     
     public List<EventDto> Events { get; set; }

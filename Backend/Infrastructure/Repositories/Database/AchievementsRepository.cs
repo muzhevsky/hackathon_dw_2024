@@ -31,7 +31,7 @@ public class AchievementsRepository
             {
                 Id = achievement.Id,
                 UserId = achievement.UserId,
-                TeamSize = achievement.TeamSize,
+                WithTeam = achievement.WithTeam,
                 FilePath = achievement.FileName
             });
         }
@@ -48,7 +48,7 @@ public class AchievementsRepository
             new AchievementDto
             {
                 UserId = achievement.UserId,
-                TeamSize = achievement.TeamSize,
+                WithTeam = achievement.WithTeam,
                 Score = achievement.Score
             });
         var fileName = id + "." + extension;

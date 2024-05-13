@@ -11,7 +11,7 @@ public class AchievementDtoConverter: IConverter<Achievement, AchievementDto>
         {
             Score = convertable.Score,
             UserId = convertable.UserId,
-            TeamSize = convertable.TeamSize,
+            WithTeam = convertable.WithTeam,
         };
     }
 
@@ -21,7 +21,7 @@ public class AchievementDtoConverter: IConverter<Achievement, AchievementDto>
         {
             Id = convertable.Id,
             Score = convertable.Score,
-            TeamSize = convertable.TeamSize,
+            WithTeam = convertable.WithTeam,
             UserId = convertable.UserId
         };
     }

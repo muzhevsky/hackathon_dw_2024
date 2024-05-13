@@ -30,7 +30,7 @@ create table achievements
             references users,
     file_name varchar(256),
     score     integer not null,
-    team_size integer not null
+    with_team boolean default false
 );
 
 alter table achievements
@@ -239,16 +239,16 @@ create table users_and_events
 alter table users_and_events
     owner to postgres;
 
-create table speciality
+create table specialities
 (
     id         serial
-        constraint speciality_pk
+        constraint specialities_pk
             primary key,
-    full_title varchar(64) not null,
-    title      varchar(16) not null
+    full_title varchar(64)                                            not null,
+    title      varchar(16)                                            not null
 );
 
-alter table speciality
+alter table specialities
     owner to postgres;
 
 create table groups
@@ -262,7 +262,7 @@ create table groups
     title         varchar(16) not null,
     speciality_id integer     not null
         constraint groups_specialities_fk
-            references speciality
+            references specialities
 );
 
 alter table groups
@@ -288,7 +288,9 @@ alter table students
     owner to postgres;
 
 
+
+
 insert into institutes(title, full_title) values('ИнПИТ', 'Институт прикладных информационных технологий и коммуникаций');
 insert into departments(institute_id, title, full_title) values (1, 'ПИТ', 'Прикладные информационные технологии');
-insert into speciality(full_title, title) values ('Информационные системы и технологии', 'ИФСТ');
+insert into specialities(full_title, title) values ('Информационные системы и технологии', 'ИФСТ');
 insert into groups(department_id, title, speciality_id) values (1, 'б1-ИФСТ-31', 1);

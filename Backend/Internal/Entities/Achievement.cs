@@ -4,7 +4,7 @@ public class Achievement
 {
     public int Id { get; set; }
     public int Score { get; set; }
-    public int TeamSize {get; set; }
+    public bool WithTeam {get; set; }
     public int UserId { get; set; }
     public string FilePath { get; set; }
 }
