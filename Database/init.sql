@@ -106,9 +106,7 @@ create table news
     id               serial
         constraint news_pk
             primary key,
-    title            varchar(256)                   not null
-        constraint requests_and_achievements_achievements_fk
-            references ??? (),
+    title            varchar(256)                   not null,
     publication_date timestamp default CURRENT_DATE not null,
     content          text                           not null
 );
