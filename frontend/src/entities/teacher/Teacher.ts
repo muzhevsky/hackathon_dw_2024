@@ -3,3 +3,9 @@ export interface Teacher{
     userId: number | string;
     departamentId: number | string;
 }
+
+export const testTeacher: Teacher = {
+    type: "teacher",
+    userId: "1",
+    departamentId: "1"
+}
