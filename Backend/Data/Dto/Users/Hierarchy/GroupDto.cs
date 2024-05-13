@@ -12,9 +12,10 @@ public class GroupDto
     [Column("department_id")]
     public int DepartmentId { get; set; }
     
-    [Column("title")] 
     [MaxLength(16)] 
+    [Column("title")] 
     public string Title { get; set; }
     
-    public DepartmentDto Department { get; set; }
+    [Column("speciality_id")]
+    public int SpecialityId { get; set; }
 }

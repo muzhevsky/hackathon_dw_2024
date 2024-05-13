@@ -15,4 +15,10 @@ public class User
     {
         return Password == password;
     }
+
+    public void SetHashedPassword(string hash, string salt)
+    {
+        Password = hash;
+        Salt = salt;
+    }
 }
