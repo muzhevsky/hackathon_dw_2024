@@ -36,4 +36,18 @@ public class JwtTokenProvider : ITokenProvider
 
         return _handler.WriteToken(token);
     }
+
+    public Dictionary<string, string> GetClaims(string token)
+    {
+        var jwtSecurityToken = _handler.ReadJwtToken(token);
+        var claims = jwtSecurityToken.Claims.Select(claim => (claim.Type, claim.Value)).ToList();
+
+        var result = new Dictionary<string, string>();
+        foreach (var claim in claims)
+        {
+            result.Add(claim.Type, claim.Value);
+        }
+
+        return result;
+    }
 }

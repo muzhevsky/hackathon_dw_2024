@@ -1,7 +1,8 @@
+using Hackaton_DW_2024.Data;
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Logging;
-using Hackaton_DW_2024.Internal.Data;
-using Hackaton_DW_2024.Internal.UseCases;
+using Hackaton_DW_2024.Internal;
+using Microsoft.Extensions.FileProviders;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +39,12 @@ app.UseCors(policy =>
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath)),
+    RequestPath = "/static"
+});
 
 app.MapControllers();
 app.Run();
