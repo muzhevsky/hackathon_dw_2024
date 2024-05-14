@@ -54,6 +54,11 @@ public class InstituteStructureRepository
         return _departmentDtoConverter.ConvertBack(dto);
     }
 
+    public List<Group> GetGroups()
+    {
+        return _groupsDataSource.SelectAll().Select(dto => _groupDtoConverter.ConvertBack(dto)).ToList();
+    }
+    
     public Group? GetGroupById(int id)
     {
         var dto = _groupsDataSource.SelectById(id);
