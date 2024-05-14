@@ -1,7 +1,9 @@
+import { FormAddRequest } from "../../widgets/formAddRequest/presentation/FormAddRequest";
+
 const ShopPage: React.FC = () => {
     return(
         <div>
-            <h1>Магазин</h1>
+            <FormAddRequest />
         </div>
     )
 }

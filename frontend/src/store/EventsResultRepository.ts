@@ -1,14 +1,14 @@
 import { computed, makeObservable } from "mobx";
-import { Group } from "../entities/group/Group";
 import { BaseApiCollection } from "../shared/utils/baseApiCollection";
 import { ICollection } from "../shared/utils/iCollection";
-import { GroupDto, InstituteStructureService } from "../api-generated";
+import { EventResultDto, EventsService} from "../api-generated";
+import { EventResult } from "../entities/event/EventResult";
 
 
 
-export class GroupRepository implements ICollection<Group> {
+export class EventResultRepository implements ICollection<EventResult> {
 
-    private _baseCollection: BaseApiCollection<Group, GroupDto> = new BaseApiCollection();
+    private _baseCollection: BaseApiCollection<EventResult, EventResultDto> = new BaseApiCollection();
 
 
     constructor() {
@@ -32,26 +32,22 @@ export class GroupRepository implements ICollection<Group> {
     }
 
     load = async () => {
-        await this._baseCollection.load(async () => InstituteStructureService.getGroups(), async (dto) => ({
-            id: dto.id ?? -1, 
-            departamentId: dto.departmentId ?? -1,
-            title: dto.title ?? '',
-        }))
+        await this._baseCollection.load(async () => EventsService.getEventResults(), async (dto) => ({id: dto.id ?? -1, title: dto.title ?? '', score: dto.score ?? 0}))
     }
 
-    getById = (id: string | number): Group | null => {
+    getById = (id: number): EventResult | null => {
         return this._baseCollection.getById(id);
     }
-    where = (predicate: (v: Group) => boolean): Group[]=> {
+    where = (predicate: (v: EventResult) => boolean): EventResult[]=> {
         return this._baseCollection.where(predicate);
     }
-    setMany = (values: Group[]): void => {
+    setMany = (values: EventResult[]): void => {
         return this._baseCollection.setMany(values);
     }
-    addMany = (values: Group[]): void => {
+    addMany = (values: EventResult[]): void => {
         return this._baseCollection.addMany(values);
     }
-    deleteMany = (values: Pick<Group, "id">[]): void => {
+    deleteMany = (values: Pick<EventResult, "id">[]): void => {
         return this._baseCollection.deleteMany(values);
     }
     

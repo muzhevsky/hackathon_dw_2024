@@ -2,7 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { DepartmentDto } from '../models/DepartmentDto';
 import type { GroupDto } from '../models/GroupDto';
+import type { InstituteDto } from '../models/InstituteDto';
+import type { SpecialityDto } from '../models/SpecialityDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -11,37 +14,37 @@ export class InstituteStructureService {
      * @returns GroupDto Success
      * @throws ApiError
      */
-    public static getGroups(): CancelablePromise<GroupDto> {
+    public static getGroups(): CancelablePromise<Array<GroupDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/groups',
         });
     }
     /**
-     * @returns GroupDto Success
+     * @returns DepartmentDto Success
      * @throws ApiError
      */
-    public static getDepartments(): CancelablePromise<GroupDto> {
+    public static getDepartments(): CancelablePromise<Array<DepartmentDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/departments',
         });
     }
     /**
-     * @returns GroupDto Success
+     * @returns InstituteDto Success
      * @throws ApiError
      */
-    public static getInstitutes(): CancelablePromise<GroupDto> {
+    public static getInstitutes(): CancelablePromise<Array<InstituteDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/institutes',
         });
     }
     /**
-     * @returns GroupDto Success
+     * @returns SpecialityDto Success
      * @throws ApiError
      */
-    public static getSpecialities(): CancelablePromise<GroupDto> {
+    public static getSpecialities(): CancelablePromise<Array<SpecialityDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/specialities',

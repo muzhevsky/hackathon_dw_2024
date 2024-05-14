@@ -2,7 +2,7 @@ import { action, computed, makeAutoObservable, observable, runInAction } from "m
 import { ALL_SELECT, BaseCollection } from "./baseCollection";
 import { WithId, ICollection } from "./iCollection";
 import { RequestStatus } from "./RequestStatus";
-import { CancelablePromise } from "../../../api-generated";
+import { CancelablePromise } from "../../api-generated";
 
 export class BaseApiCollection<T extends WithId, TRespose> extends BaseCollection<T> {
 

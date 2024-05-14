@@ -12,14 +12,17 @@ export type { AchievementSetRequest } from './models/AchievementSetRequest';
 export type { AddConnectedAchievementRequest } from './models/AddConnectedAchievementRequest';
 export type { AddCustomAchievementRequest } from './models/AddCustomAchievementRequest';
 export type { CreateQuestRequest } from './models/CreateQuestRequest';
+export type { DepartmentDto } from './models/DepartmentDto';
 export type { EventDto } from './models/EventDto';
 export type { EventResultDto } from './models/EventResultDto';
 export type { EventStatusDto } from './models/EventStatusDto';
 export type { GroupDto } from './models/GroupDto';
+export type { InstituteDto } from './models/InstituteDto';
 export type { SignInRequest } from './models/SignInRequest';
 export type { SignInResponse } from './models/SignInResponse';
 export type { SignUpRequest } from './models/SignUpRequest';
 export type { SignUpResponse } from './models/SignUpResponse';
+export type { SpecialityDto } from './models/SpecialityDto';
 export type { StudentBasicDataResponse } from './models/StudentBasicDataResponse';
 export type { UserResponse } from './models/UserResponse';
 
