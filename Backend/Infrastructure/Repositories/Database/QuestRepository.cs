@@ -1,8 +1,8 @@
 using Hackaton_DW_2024.Api.Teacher;
-using Hackaton_DW_2024.Data.DataSources.Groups;
 using Hackaton_DW_2024.Data.DataSources.Quests;
 using Hackaton_DW_2024.Data.DataSources.Teachers;
 using Hackaton_DW_2024.Data.Dto;
+using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 
 namespace Hackaton_DW_2024.Infrastructure.Repositories.Database;
 
@@ -22,15 +22,20 @@ public class QuestRepository
     public List<QuestDto> GetByEventId(int eventId) => _questDataSource.SelectByEventId(eventId).ToList();
     public List<QuestDto> GetByGroupId(int groupId) => _questDataSource.SelectByGroupId(groupId).ToList();
 
-    public void Create(CreateQuestRequest request, int userId)
+    public QuestDto Create(CreateQuestRequest request, int userId)
     {
-        _questDataSource.Insert(new QuestDto
+        var teacher = _teacherDataSource.SelectByUserId(userId);
+        if (teacher == null) 
+            throw new AuthException("unauthorized");
+        var dto = new QuestDto
         {
             Description = request.Description,
             EventId = request.EventId,
             GroupId = request.GroupId,
             ResultId = request.ResultId,
-            TeacherId = _teacherDataSource.SelectByUserId(userId).Id
-        });
+            TeacherId = teacher.Id
+        };
+        _questDataSource.Insert(dto);
+        return dto;
     }
 }
