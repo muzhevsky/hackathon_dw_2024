@@ -12,6 +12,7 @@ using Hackaton_DW_2024.Data.DataSources.News;
 using Hackaton_DW_2024.Data.DataSources.Specialities;
 using Hackaton_DW_2024.Data.DataSources.Students;
 using Hackaton_DW_2024.Data.DataSources.Users;
+using Hackaton_DW_2024.Data.DataSources.UsersAndEvents;
 using Hackaton_DW_2024.Data.Package;
 
 namespace Hackaton_DW_2024.Data;
@@ -34,6 +35,7 @@ public static class DataSourceConfiguration
         services.AddSingleton<IEventResultsDataSource, EfEventResultDataSource>();
         services.AddSingleton<ICustomAchievementDataSource, EfCustomAchievementDataSource>();
         services.AddSingleton<IAchievementsAndEventsDataSource, EfAchievementsAndEventsDataSource>();
+        services.AddSingleton<IUsersAndEventsDataSource, EfUsersAndEventsDataSource>();
         
 
         // institute structure
