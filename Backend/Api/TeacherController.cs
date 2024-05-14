@@ -1,7 +1,6 @@
 using Hackaton_DW_2024.Api.Teacher;
 using Hackaton_DW_2024.Data.Dto;
 using Hackaton_DW_2024.Infrastructure.Repositories.Database;
-using Hackaton_DW_2024.Internal.Entities.Users;
 using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +25,6 @@ public class TeacherController : ControllerBase
     public ActionResult CreateQuest([FromBody] CreateQuestRequest request)
     {
         var userId = this.UserId() ?? throw new AuthException("unauthorized");
-        // if (_userRepository.GetRole(userId) != Role.Teacher) throw new AuthException("no permissions");
 
         _questRepository.Create(request, userId);
         return Ok();

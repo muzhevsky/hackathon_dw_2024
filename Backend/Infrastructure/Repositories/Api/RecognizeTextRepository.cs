@@ -29,18 +29,10 @@ public class RecognizeTextApiRepository
                 var imageData = File.ReadAllBytes(imagePath);
                 form.Add(new ByteArrayContent(imageData, 0, imageData.Length), "image", "image.jpg");
             }
-            // else if (string.IsNullOrEmpty(PdfPath) == false)
-            // {
-            //     byte[] imageData = File.ReadAllBytes(PdfPath);
-            //     form.Add(new ByteArrayContent(imageData, 0, imageData.Length), "PDF", "pdf.pdf");
-            // }
 
             var response = await _httpClient.PostAsync(_config.Url, form);
-
             var strContent = await response.Content.ReadAsStringAsync();
-
             var ocrResult = JsonConvert.DeserializeObject<Rootobject>(strContent);
-
 
             if (ocrResult.OcrExitCode == 1)
             {

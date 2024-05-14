@@ -48,6 +48,7 @@ public class EventsController: ControllerBase
         return Ok(_eventsRepository.GetAll());
     }
     
+    [Authorize]
     [HttpGet("/myEvents")]
     public ActionResult<List<EventDto>> GetSubscribedEvents()
     {

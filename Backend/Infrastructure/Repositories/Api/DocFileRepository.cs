@@ -1,4 +1,3 @@
-using System.Drawing;
 using Hackaton_DW_2024.Data.Config;
 using Hackaton_DW_2024.Data.DataSources.Requests;
 using Hackaton_DW_2024.Data.Dto.Achievements;
@@ -7,7 +6,6 @@ using Hackaton_DW_2024.Internal.Entities.Users;
 using Spire.Doc;
 using Spire.Doc.Documents;
 using Spire.Doc.Fields;
-using File = System.IO.File;
 
 namespace Hackaton_DW_2024.Infrastructure.Repositories.Api;
 
