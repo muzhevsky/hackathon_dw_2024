@@ -20,7 +20,7 @@ public class AchievementsRepository
     IEventResultsDataSource _eventResultsDataSource;
     IEventStatusesDataSource _eventStatusesDataSource;
     IFileSystem _fileSystem;
-    const string PathString = "/app/achievements";
+    const string PathString = "/app/static/achievements/";
 
     public AchievementsRepository(
         IAchievementsDataSource achievementsDataSource,

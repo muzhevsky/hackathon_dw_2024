@@ -13,6 +13,7 @@ namespace Hackaton_DW_2024.Infrastructure.Repositories.Api;
 public class DocFileRepository
 {
     IRequestDataSource _requestDataSource;
+    const string PathString = "/app/static/requests/";
 
     public DocFileRepository(IRequestDataSource requestDataSource)
     {
@@ -98,7 +99,7 @@ public class DocFileRepository
         var filePath = dto.Id + ".docx";
         _requestDataSource.UpdateById(dto.Id, requestDto => requestDto.FilePath = filePath);
         
-        document.SaveToFile("./Requests/"+filePath, FileFormat.Docx);
+        document.SaveToFile(Path.Combine(PathString,filePath), FileFormat.Docx);
         document.Close();
     }
 }
