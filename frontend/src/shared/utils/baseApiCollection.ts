@@ -2,6 +2,7 @@ import { action, computed, makeAutoObservable, observable, runInAction } from "m
 import { ALL_SELECT, BaseCollection } from "./baseCollection";
 import { WithId, ICollection } from "./iCollection";
 import { RequestStatus } from "./RequestStatus";
+import { CancelablePromise } from "../../../api-generated";
 
 export class BaseApiCollection<T extends WithId, TRespose> extends BaseCollection<T> {
 
@@ -26,7 +27,7 @@ export class BaseApiCollection<T extends WithId, TRespose> extends BaseCollectio
 
 
     @action
-    load = async (request: () => Promise<Array<TRespose>>, adapter: (res: TRespose) => Promise<T>): Promise<T[]> => {
+    load = async (request: () => Promise<Array<TRespose>> | CancelablePromise<Array<TRespose>>, adapter: (res: TRespose) => Promise<T>): Promise<T[]> => {
         if (this._requestStatus == RequestStatus.NEVER || this.error) {
             this._requestStatus = RequestStatus.LOADING;
             try {

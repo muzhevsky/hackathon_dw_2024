@@ -3,7 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Achievement } from '../models/Achievement';
+import type { AchievementSetRequest } from '../models/AchievementSetRequest';
 import type { AddConnectedAchievementRequest } from '../models/AddConnectedAchievementRequest';
+import type { AddCustomAchievementRequest } from '../models/AddCustomAchievementRequest';
 import type { StudentBasicDataResponse } from '../models/StudentBasicDataResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -42,6 +44,21 @@ export class StudentService {
         });
     }
     /**
+     * @param requestBody
+     * @returns any Success
+     * @throws ApiError
+     */
+    public static postAchievementCustom(
+        requestBody?: AddCustomAchievementRequest,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/achievement/custom',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
      * @returns Achievement Success
      * @throws ApiError
      */
@@ -52,13 +69,18 @@ export class StudentService {
         });
     }
     /**
+     * @param requestBody
      * @returns any Success
      * @throws ApiError
      */
-    public static postRequest(): CancelablePromise<any> {
+    public static postRequest(
+        requestBody?: AchievementSetRequest,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/request',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
     /**
