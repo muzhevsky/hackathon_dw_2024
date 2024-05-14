@@ -1,51 +1,59 @@
 .cardViev{
-    width: fit-content;
-    height: fit-content;
-    background-color: rgba(124,124,124,0.13);
-    border-radius: 20px;
-    margin: 2vh;
+    width: 35vw;
+    height: 220px;
+    background-color: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    position: relative;
 }
 
-.container__image{
+.ImgWrap{
+    width: 35%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.WrapContent{
+    width: 65%;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    width: 15vw;
-    height: 15vh;
-    justify-content: center;
+    gap: 15px;
 }
 
 .imgSize{
-    width: 15vw;
-    height: 15vh;
+    /* width: 100%; */
+    height: 220px;
 }
 
 .title{
-    font-size: 1.5vw;
+    font-size: 25px;
     font-weight: bold;
     font-family: Inter, sans-serif;
     color: black;
-    margin: 1vw;
-    width: 9vh;
-    height: fit-content;
+    margin: 0;
 }
 .buttonWrap{
-    width: 15vw;
+    position: absolute;
     display: flex;
     justify-content: center;
-    padding: 1vh;
+    bottom: 25px;
+    right: 25px;
 }
 .description{
-    font-size: 1vw;
+    font-size: 16px;
     font-weight: normal;
     font-family: Inter, sans-serif;
-    margin: 0.75vh 1vw;
-    padding-bottom: 1vh;
+    margin: 0;
 }
 
 .row{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .date{

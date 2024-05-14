@@ -11,6 +11,7 @@ import { GroupRepository } from './store/GroupRepository';
 import { EventRepository } from './store/EventsRepository';
 import { EventResultRepository } from './store/EventsResultRepository';
 import { QuestRepository } from './store/QuestRepository';
+import ScholarshipStore from './store/ScholarshipStore';
 
 interface State {
 	userStore: UserStore,
@@ -19,7 +20,8 @@ interface State {
 	groupRepository: GroupRepository,
 	eventRepository: EventRepository,
 	eventResiltRepository: EventResultRepository,
-	questRepository: QuestRepository
+	questRepository: QuestRepository,
+	scholarshipStore: ScholarshipStore
 }
 
 export const userStore = new UserStore();
@@ -29,6 +31,7 @@ export const groupRepository = new GroupRepository();
 export const eventRepository = new EventRepository();
 export const eventResiltRepository = new EventResultRepository();
 export const questRepository = new QuestRepository();
+export const scholarshipStore = new ScholarshipStore();
 
 export const Context = createContext<State>({
 	userStore,
@@ -37,7 +40,8 @@ export const Context = createContext<State>({
 	groupRepository,
 	eventRepository,
 	eventResiltRepository,
-	questRepository
+	questRepository,
+	scholarshipStore
 })
 
 const root = ReactDOM.createRoot(
@@ -63,7 +67,8 @@ root.render(
 			groupRepository,
 			eventRepository,
 			eventResiltRepository,
-			questRepository
+			questRepository,
+			scholarshipStore
 		}}>
 			<RouterProvider router={Router} />
 		</Context.Provider>

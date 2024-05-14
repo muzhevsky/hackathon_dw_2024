@@ -5,16 +5,24 @@ interface RequestCardProps {
     id: number;
     userId: number;
     rejected: boolean;
+    // clickHandler: () => void;
 }
 
-const RequestCard: React.FC<RequestCardProps> = ({id, userId, rejected}) => {
+const ScholarshipCard: React.FC<RequestCardProps> = ({ id, userId, rejected }) => {
     return (
-        <div className={styles.requestCard}>
-            <p className={styles.title}>Заявка</p>
-            <p className={styles.subtitle}>{id}</p>
-            <p className={styles.date}>{userId}</p>
-        </div>
+        <a
+            href={`http://localhost:8080/static/requests/${id}.docx`}
+            download="Example-PDF-document"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <div className={styles.requestCard}>
+                <p className={styles.title}>Заявка</p>
+                <p className={styles.subtitle}>{id}</p>
+                <p className={styles.date}>{userId}</p>
+            </div>
+        </a>
     );
 };
 
-export default RequestCard;
+export default ScholarshipCard;
