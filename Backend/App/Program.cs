@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using Hackaton_DW_2024.Api;
 using Hackaton_DW_2024.App;
 using Hackaton_DW_2024.Data;
 using Hackaton_DW_2024.Data.Config;
@@ -14,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.AddSingleton<ILogger>(new ConsoleLogger(builder.Environment.IsDevelopment()));
+services.AddSingleton<IExceptionHandler,ExceptionHandler>();
 services.AddSingleton<StaticFileConfig>();
 
 services.AddDataSources();
@@ -80,4 +82,6 @@ app.UseExceptionHandler(exceptionHandlerApp =>
 });
 
 app.MapControllers();
+
+app.UseExceptionHandler(applicationBuilder => applicationBuilder.ApplicationServices.GetService<IExceptionHandler>());
 app.Run();

@@ -329,12 +329,14 @@ create table quests
     teacher_id  integer not null
         constraint quests_teachers_fk
             references teachers,
-    description text
+    description text,
+    group_id    integer not null
+        constraint quests_groups_fk
+            references groups
 );
 
 alter table quests
     owner to postgres;
-
 
 
 

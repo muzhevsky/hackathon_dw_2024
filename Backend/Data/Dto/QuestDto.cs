@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hackaton_DW_2024.Data.Dto;
 
+[Table("quests")]
 public class QuestDto
 {
     [Column("id")]

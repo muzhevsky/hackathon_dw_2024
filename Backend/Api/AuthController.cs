@@ -16,21 +16,16 @@ public class AuthController : ControllerBase
         _authUseCase = authUseCase;
     }
 
-    [HttpPost("/signup")]
-    public ActionResult<SignUpResponse> SignUp([FromBody] SignUpRequest request)
+    [HttpPost("/signup/student")]
+    public ActionResult<SignUpResponse> SignUp([FromBody] StudentSignUpRequest request)
     {
-        try
-        {
-            return Ok(_authUseCase.SignUpStudent(request));
-        }
-        catch (AuthException ex)
-        {
-            return Unauthorized(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500);
-        }
+        return Ok(_authUseCase.SignUpStudent(request));
+    }
+    
+    [HttpPost("/signup/teacher")]
+    public ActionResult<SignUpResponse> SignUp([FromBody] TeacherSignUpRequest request)
+    {
+        return Ok(_authUseCase.SignUpTeacher(request));
     }
 
     [HttpPost("/signin")]
