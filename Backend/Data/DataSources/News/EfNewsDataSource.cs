@@ -4,52 +4,54 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.News;
 
-public class EfNewsDataSource : EntityFrameworkDataSource, INewsDataSource
+public class EfNewsDataSource :  INewsDataSource
 {
-    DbSet<NewsDto> News { get; set; }
-    DbSet<PinnedNewsDto> Pinned { get; set; }
-
-    public EfNewsDataSource(ApplicationContext context) : base(context)
+    IDbContextFactory<ApplicationContext> _factory;
+    public EfNewsDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        News = context.News;
-        
+        _factory = context;
     }
 
-    public NewsDto? SelectById(int id) => News.FirstOrDefault(news => news.Id == id);
-
-    public IEnumerable<NewsDto> SelectAll() => News.ToList();
-
-    public IEnumerable<NewsDto> SelectPinned()
+    public NewsDto? SelectById(int id)
     {
-        return News
-            .Where(news => Pinned
-                .Any(p => p.NewsId == news.Id));
+        using var context = _factory.CreateDbContext();
+        return context.News.FirstOrDefault(news => news.Id == id);
+    }
+
+    public IEnumerable<NewsDto> SelectAll()
+    {
+        using var context = _factory.CreateDbContext();
+        return context.News.ToList();
     }
 
     public IEnumerable<NewsDto> SelectRangeWithOffsetByDate(int range, int offset, bool ascending = true)
     {
+        using var context = _factory.CreateDbContext();
         return ascending
-            ? News.OrderBy(news => news.PublicationDate).Skip(offset).Take(range)
-            : News.OrderByDescending(news => news.PublicationDate).Skip(offset).Take(range);
+            ? context.News.OrderBy(news => news.PublicationDate).Skip(offset).Take(range)
+            : context.News.OrderByDescending(news => news.PublicationDate).Skip(offset).Take(range);
     }
 
     public void Insert(NewsDto dto)
     {
-        News.Add(dto);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.News.Add(dto);
+        context.SaveChanges();
     }
 
     public void UpdateById(int id, Action<NewsDto> updateFunc)
     {
+        using var context = _factory.CreateDbContext();
         var updateTarget = SelectById(id);
         updateFunc(updateTarget);
-        Context.SaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteById(int id)
     {
+        using var context = _factory.CreateDbContext();
         var deleteTarget = SelectById(id);
-        News.Remove(deleteTarget);
-        Context.SaveChanges();
+        context.News.Remove(deleteTarget);
+        context.SaveChanges();
     }
 }

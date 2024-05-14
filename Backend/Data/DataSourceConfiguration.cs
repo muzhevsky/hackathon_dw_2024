@@ -16,6 +16,7 @@ using Hackaton_DW_2024.Data.DataSources.Teachers;
 using Hackaton_DW_2024.Data.DataSources.Users;
 using Hackaton_DW_2024.Data.DataSources.UsersAndEvents;
 using Hackaton_DW_2024.Data.Package;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data;
 
@@ -26,7 +27,7 @@ public static class DataSourceConfiguration
         // configuration
         services.AddSingleton<DatabaseEnvironment, PostgresDatabaseEnvironment>();
         services.AddSingleton<DatabaseConnectionConfig, DatabaseConnectionConfig>();
-        services.AddTransient<ApplicationContext, ApplicationContext>();
+        services.AddDbContextFactory<ApplicationContext>();
         
         //news and events
         services.AddSingleton<IEventsDataSource, EfEventsDataSource>();

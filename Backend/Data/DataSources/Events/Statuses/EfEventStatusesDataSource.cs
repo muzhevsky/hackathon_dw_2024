@@ -4,16 +4,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Events.Statuses;
 
-public class EfEventStatusesDataSource : EntityFrameworkDataSource, IEventStatusesDataSource
+public class EfEventStatusesDataSource :  IEventStatusesDataSource
 {
-    DbSet<EventStatusDto> _statuses { get; set; }
+    IDbContextFactory<ApplicationContext> _factory;
 
-    public EfEventStatusesDataSource(ApplicationContext context) : base(context)
+    public EfEventStatusesDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        _statuses = context.EventStatuses;
+        _factory = context;
     }
 
-    public IEnumerable<EventStatusDto> SelectAll() => _statuses.ToList();
+    public IEnumerable<EventStatusDto> SelectAll()
+    {
+        using var context = _factory.CreateDbContext();
+        return context.EventStatuses.ToList();
+    }
 
-    public EventStatusDto? SelectById(int id) => _statuses.FirstOrDefault(dto => dto.Id == id);
+    public EventStatusDto? SelectById(int id)
+    {
+        using var context = _factory.CreateDbContext();
+        return context.EventStatuses.FirstOrDefault(dto => dto.Id == id);
+    }
 }
