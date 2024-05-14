@@ -38,12 +38,12 @@ public class StudentController : ControllerBase
         return Ok();
     }
 
-    // [HttpPost("/achievement/custom")]
-    // public ActionResult AddCustomAchievement([FromBody] AddCustomAchievementRequest request)
-    // {
-    //     _achievementsUseCase.AddCustom(request);
-    //     return Ok();
-    // }
+    [HttpPost("/achievement/custom")]
+    public ActionResult AddCustomAchievement([FromBody] AddCustomAchievementRequest request)
+    {
+        _achievementsUseCase.AddCustom(request);
+        return Ok();
+    }
 
     [HttpGet("/achievements")]
     [Authorize]
@@ -53,9 +53,9 @@ public class StudentController : ControllerBase
     }
     
     [HttpPost("/request")]
-    public ActionResult GenerateDoc()
+    public ActionResult GenerateDoc([FromBody] AchievementSetRequest request)
     {
-        _requestUseCase.SendRequest(this.UserId());
+        _requestUseCase.SendRequest(request, this.UserId());
         return Ok();
     }
    

@@ -37,7 +37,6 @@ public class ApplicationContext : DbContext
     public DbSet<EventStatusDto> EventStatuses { get; set; }
     public DbSet<EventResultDto> EventResults { get; set; }
     public DbSet<UsersAndEventsDto> UsersAndEvents { get; set; }
-    public DbSet<AchievementsAndEventsDto> AchievementsAndEvents { get; set; }
     
     public ApplicationContext(DatabaseConnectionConfig config)
     {

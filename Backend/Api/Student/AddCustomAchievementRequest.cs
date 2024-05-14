@@ -6,6 +6,6 @@ public class AddCustomAchievementRequest
     public string Title { get; set; }
     public string Date { get; set;}
     public int StatusId { get; set; }
-    public string Result { get; set; }
+    public int ResultId { get; set; }
     public bool WithTeam { get; set; }
 }

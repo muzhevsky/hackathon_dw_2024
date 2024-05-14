@@ -15,7 +15,7 @@ public class CustomAchievementDto
     public string Title { get; set; }
     
     [Column("date")]
-    public DateTime Date { get; set; }
+    public string Date { get; set; }
     
     [Column("status_id")]
     public int StatusId { get; set; }

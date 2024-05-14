@@ -27,4 +27,12 @@ public class EfCustomAchievementDataSource: EntityFrameworkDataSource, ICustomAc
         _customAchievements.Add(dto);
         Context.SaveChanges();
     }
+
+    public void RemoveById(int id)
+    {
+        var deleteTarget = SelectById(id);
+        if (deleteTarget == null) return;
+        _customAchievements.Remove(deleteTarget);
+        Context.SaveChanges();
+    }
 }
