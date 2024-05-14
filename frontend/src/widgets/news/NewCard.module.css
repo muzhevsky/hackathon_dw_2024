@@ -19,6 +19,7 @@
 }
 
 .imgSize{
+    display: block;
     width: 12vw;
     height: 10vh;
     margin: 1vh;
@@ -52,4 +53,7 @@
     padding-bottom: 1vh;
     width: 15vw;
     height: fit-content;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

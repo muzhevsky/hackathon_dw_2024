@@ -1,0 +1,28 @@
+.balanceWrap{
+    position: fixed;
+    top: 2%;
+    left: 90%;
+    width: fit-content;
+    height: 3vh;
+    background: rgba(202, 202, 202, 0.53);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textWrap{
+    text-align: center;
+    font-size: 1.9vh;
+    font-weight: normal;
+    font-family: Inter, sans-serif;
+    padding-left: 0.5vw;
+    color: black;
+}
+
+.iconWrap{
+    height: 2vh;
+    padding-right: 0.5vw;
+    padding-left: 0.5vw;
+}
