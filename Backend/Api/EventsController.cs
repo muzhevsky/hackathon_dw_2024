@@ -35,7 +35,6 @@ public class EventsController: ControllerBase
         return Ok(_eventsRepository.GetAllResults());
     }
 
-    [Authorize()]
     [HttpGet("/event_result")]
     public ActionResult<EventStatusDto> GetResult([FromQuery] int id)
     {
@@ -48,7 +47,6 @@ public class EventsController: ControllerBase
         return Ok(_eventsRepository.GetAll());
     }
     
-    [Authorize]
     [HttpGet("/myEvents")]
     public ActionResult<List<EventDto>> GetSubscribedEvents()
     {

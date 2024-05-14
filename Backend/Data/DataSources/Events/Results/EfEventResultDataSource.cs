@@ -4,21 +4,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Events.Results;
 
-public class EfEventResultDataSource: EntityFrameworkDataSource, IEventResultsDataSource
+public class EfEventResultDataSource:  IEventResultsDataSource
 {
-    DbSet<EventResultDto> _eventResults;
-    public EfEventResultDataSource(ApplicationContext context) : base(context)
+    IDbContextFactory<ApplicationContext> _factory;
+    public EfEventResultDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        _eventResults = context.EventResults;
+        _factory = context;
     }
 
     public EventResultDto? SelectById(int id)
     {
-        return _eventResults.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.EventResults.FirstOrDefault(dto => dto.Id == id);
     }
 
     public IEnumerable<EventResultDto> SelectAll()
     {
-        return _eventResults.ToList();
+        using var context = _factory.CreateDbContext();
+        return context.EventResults.ToList();
     }
 }

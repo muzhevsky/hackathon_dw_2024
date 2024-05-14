@@ -25,7 +25,7 @@ public class StudentRequestUseCase
         _achievementsRepository = achievementsRepository;
     }
 
-    public void SendRequest(AchievementSetRequest request, int userId)
+    public int SendRequest(AchievementSetRequest request, int userId)
     {
         var studentDetails = _studentRepository.GetStudentDetailsByUserId(userId);
         var groupDetails = _instituteStructureRepository.GetGroupDetails(studentDetails.Group.Id);
@@ -37,7 +37,7 @@ public class StudentRequestUseCase
             achievements.Add(_achievementsRepository.GetAchievementForRequestById(id));
         }
         
-        _docFileRepository.GenerateDoc(studentDetails, groupDetails, achievements
+        return _docFileRepository.GenerateDoc(studentDetails, groupDetails, achievements
             .Select(a => a.ToArray())
             .ToList());
     }

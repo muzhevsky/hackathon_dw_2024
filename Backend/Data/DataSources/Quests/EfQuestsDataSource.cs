@@ -4,37 +4,42 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Quests;
 
-public class EfQuestsDataSource: EntityFrameworkDataSource, IQuestsDataSource
+public class EfQuestsDataSource:  IQuestsDataSource
 {
-    DbSet<QuestDto> _quests;
-    public EfQuestsDataSource(ApplicationContext context) : base(context)
+    IDbContextFactory<ApplicationContext> _factory;
+    public EfQuestsDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        _quests = context.Quests;
+        _factory = context;
     }
 
     public QuestDto? SelectById(int id)
     {
-        return _quests.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.Quests.FirstOrDefault(dto => dto.Id == id);
     }
 
     public IEnumerable<QuestDto> SelectByEventId(int eventId)
     {
-        return _quests.Where(dto => dto.EventId == eventId);
+        using var context = _factory.CreateDbContext();
+        return context.Quests.Where(dto => dto.EventId == eventId);
     }
 
     public IEnumerable<QuestDto> SelectByTeacherId(int teacherId)
     {
-        return _quests.Where(dto => dto.TeacherId == teacherId);
+        using var context = _factory.CreateDbContext();
+        return context.Quests.Where(dto => dto.TeacherId == teacherId);
     }
 
     public IEnumerable<QuestDto> SelectByGroupId(int groupId)
     {
-        return _quests.Where(dto => dto.GroupId == groupId);
+        using var context = _factory.CreateDbContext();
+        return context.Quests.Where(dto => dto.GroupId == groupId);
     }
 
     public void Insert(QuestDto quest)
     {
-        _quests.Add(quest);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.Quests.Add(quest);
+        context.SaveChanges();
     }
 }

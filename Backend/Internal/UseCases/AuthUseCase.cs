@@ -83,6 +83,7 @@ public class AuthUseCase
 
     public SignUpResponse SignUpTeacher(TeacherSignUpRequest request)
     {
+        Console.WriteLine(request.DepartmentId);
         var user = CreateUser(request.Login, request.Password, request.Surname, request.Name, request.Patronymic);
         var teacher = new TeacherDto
         {

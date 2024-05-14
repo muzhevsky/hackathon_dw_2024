@@ -4,27 +4,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Specialities;
 
-public class EfSpecialitiesDataSource: EntityFrameworkDataSource, ISpecialitiesDataSource
+public class EfSpecialitiesDataSource:  ISpecialitiesDataSource
 {
-    DbSet<SpecialityDto> _specialities;   
-    public EfSpecialitiesDataSource(ApplicationContext context) : base(context)
+    IDbContextFactory<ApplicationContext> _factory;
+    public EfSpecialitiesDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        _specialities = context.Specialities;
+        _factory = context;
     }
     
     public SpecialityDto? SelectById(int id)
     {
-        return _specialities.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.Specialities.FirstOrDefault(dto => dto.Id == id);
     }
 
     public IEnumerable<SpecialityDto> SelectAll()
     {
-        return _specialities.ToList();
+        using var context = _factory.CreateDbContext();
+        return context.Specialities.ToList();
     }
 
     public void Insert(SpecialityDto speciality)
     {
-        _specialities.Add(speciality);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.Specialities.Add(speciality);
+        context.SaveChanges();
     }
 }

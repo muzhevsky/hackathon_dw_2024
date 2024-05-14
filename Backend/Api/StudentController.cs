@@ -25,7 +25,6 @@ public class StudentController : ControllerBase
         _eventsRepository = eventsRepository;
     }
 
-    [Authorize]
     [HttpPost("/achievement/attach")]
     public async Task<IActionResult> AttachAchievementFile([FromForm] AddAchievementFileRequest fileRequest)
     {
@@ -54,19 +53,17 @@ public class StudentController : ControllerBase
         return Ok(_achievementsUseCase.GetAchievement(achievementId));
     }
 
-    [Authorize]
     [HttpGet("/achievements")]
     public ActionResult<List<Achievement>> GetAchievements()
     {
         return Ok(_achievementsUseCase.GetAchievements(this.UserId() ?? throw new AuthException("unauthorized")));
     }
 
-    [Authorize]
     [HttpPost("/request")]
     public ActionResult GenerateDoc([FromBody] AchievementSetRequest request)
     {
-        _requestUseCase.SendRequest(request, this.UserId() ?? throw new AuthException("unauthorized"));
-        return Ok("done");
+        return Ok(_requestUseCase.SendRequest(request, this.UserId() ??
+                                                       throw new AuthException("unauthorized")));
     }
 
     [HttpGet("/student")]
@@ -75,7 +72,6 @@ public class StudentController : ControllerBase
         return _requestUseCase.GetStudent(id);
     }
 
-    [Authorize]
     [HttpPost("/event/subscribe")]
     public ActionResult SubscribeOnEvent([FromQuery] int eventId)
     {
@@ -83,7 +79,6 @@ public class StudentController : ControllerBase
         return Ok("done");
     }
 
-    [Authorize]
     [HttpPost("/event/unsubscribe")]
     public ActionResult Unsubscribe([FromQuery] int eventId)
     {
