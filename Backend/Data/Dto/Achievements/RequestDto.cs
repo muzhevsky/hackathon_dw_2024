@@ -11,8 +11,11 @@ public class RequestDto: Dto
     [Column("user_id")]
     public int UserId { get; set; }
     
-    [Column("rejected")]
-    public bool Rejected { get; set; }
+    [Column("confirmed")]
+    public bool Confirmed { get; set; }
+    
+    [Column("file_path")]
+    public string? FilePath { get; set; }
     
     
     static string _structureName = "requests";

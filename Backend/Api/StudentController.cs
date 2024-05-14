@@ -24,7 +24,6 @@ public class StudentController : ControllerBase
     }
 
     [HttpPost("/achievement/attach")]
-    [Authorize]
     public async Task<IActionResult> AttachAchievementFile([FromForm] AddAchievementFileRequest fileRequest)
     {
         var res = await _achievementsUseCase.AddAchievement(fileRequest, this.UserId());
@@ -38,29 +37,27 @@ public class StudentController : ControllerBase
         return Ok();
     }
 
-    // [HttpPost("/achievement/custom")]
-    // public ActionResult AddCustomAchievement([FromBody] AddCustomAchievementRequest request)
-    // {
-    //     _achievementsUseCase.AddCustom(request);
-    //     return Ok();
-    // }
+    [HttpPost("/achievement/custom")]
+    public ActionResult AddCustomAchievement([FromBody] AddCustomAchievementRequest request)
+    {
+        _achievementsUseCase.AddCustom(request);
+        return Ok();
+    }
 
     [HttpGet("/achievements")]
-    [Authorize]
     public ActionResult<List<Achievement>> GetAchievements()
     {
         return Ok(_achievementsUseCase.GetAchievements(this.UserId()));
     }
     
     [HttpPost("/request")]
-    public ActionResult GenerateDoc()
+    public ActionResult GenerateDoc([FromBody] AchievementSetRequest request)
     {
-        _requestUseCase.SendRequest(this.UserId());
+        _requestUseCase.SendRequest(request, this.UserId());
         return Ok();
     }
    
     [HttpGet("/student")]
-    [Authorize]
     public ActionResult<StudentBasicDataResponse> GetStudent()
     {
         return _requestUseCase.GetStudent(this.UserId());
