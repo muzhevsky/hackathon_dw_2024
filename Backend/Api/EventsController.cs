@@ -1,5 +1,6 @@
 using Hackaton_DW_2024.Data.Dto.Events;
 using Hackaton_DW_2024.Infrastructure.Repositories.Database;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hackaton_DW_2024.Api;
@@ -33,6 +34,7 @@ public class EventsController: ControllerBase
         return Ok(_eventsRepository.GetAllResults());
     }
 
+    [Authorize()]
     [HttpGet("/event_result")]
     public ActionResult<EventStatusDto> GetResult([FromQuery] int id)
     {

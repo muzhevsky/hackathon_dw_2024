@@ -7,21 +7,33 @@ import UserStore from './store/UserStore';
 import AchievementsStore from './store/Achievements';
 import EventsStore from './store/EventsStore';
 import { ConfigProvider } from 'antd';
+import { GroupRepository } from './store/GroupRepository';
+import { EventRepository } from './store/EventsRepository';
+import { EventResultRepository } from './store/EventsResultRepository';
 
 interface State {
 	userStore: UserStore,
 	achievements: AchievementsStore,
-	eventsStore: EventsStore
+	eventsStore: EventsStore,
+	groupRepository: GroupRepository,
+	eventRepository: EventRepository,
+	eventResiltRepository: EventResultRepository
 }
 
 export const userStore = new UserStore();
 export const achievements = new AchievementsStore();
 export const eventsStore = new EventsStore();
+export const groupRepository = new GroupRepository();
+export const eventRepository = new EventRepository();
+export const eventResiltRepository = new EventResultRepository();
 
 export const Context = createContext<State>({
 	userStore,
 	achievements,
-	eventsStore
+	eventsStore,
+	groupRepository,
+	eventRepository,
+	eventResiltRepository
 })
 
 const root = ReactDOM.createRoot(
@@ -43,7 +55,10 @@ root.render(
 		<Context.Provider value={{
 			userStore,
 			achievements,
-			eventsStore
+			eventsStore,
+			groupRepository,
+			eventRepository,
+			eventResiltRepository
 		}}>
 			<RouterProvider router={Router} />
 		</Context.Provider>

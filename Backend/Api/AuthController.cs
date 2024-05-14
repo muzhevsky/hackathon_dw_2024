@@ -36,17 +36,6 @@ public class AuthController : ControllerBase
     [HttpPost("/signin")]
     public ActionResult<SignInResponse> SignIn([FromBody] SignInRequest request)
     {
-        try
-        {
-            return Ok(_authUseCase.SignIn(request));
-        }
-        catch (AuthException ex)
-        {
-            return Unauthorized(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500);
-        }
+        return Ok(_authUseCase.SignIn(request));
     }
 }

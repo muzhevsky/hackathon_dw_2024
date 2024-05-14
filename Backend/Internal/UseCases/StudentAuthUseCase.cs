@@ -67,7 +67,7 @@ public class AuthUseCase
             Role = (int)Role.Student
         };
 
-        return new SignUpResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id)));
+        return new SignUpResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id, Role.Student)));
     }
 
     public SignInResponse SignIn(SignInRequest request)
@@ -91,6 +91,6 @@ public class AuthUseCase
             Role = (int)role
         };
 
-        return new SignInResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id)));
+        return new SignInResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id, role)));
     }
 }
