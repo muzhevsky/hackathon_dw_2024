@@ -47,39 +47,6 @@ app.UseCors(policy =>
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFileServer(new StaticFileConfig());
-app.UseExceptionHandler(exceptionHandlerApp =>
-{
-    exceptionHandlerApp.Run(async context =>
-    {
-        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-        context.Response.ContentType = MediaTypeNames.Text.Plain;
-
-        await context.Response.WriteAsync("Internal server error.");
-
-        
-        var exceptionHandlerPathFeature =
-            context.Features.Get<IExceptionHandlerPathFeature>();
-        var exception = exceptionHandlerPathFeature?.Error;
-        if (exceptionHandlerPathFeature == null) return; 
-        
-        if (exception is EntityNotFoundException)
-            await context.Response.WriteAsync("NoSuchEntity");
-        
-        else if (exception is AuthException)
-        {
-            await context.Response.WriteAsync("Unauthorized");
-            await context.Response.WriteAsync(exception.ToString());
-            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-        }
-        
-        else if (exception is DuplicateEntityException)
-        {
-            await context.Response.WriteAsync("DuplicateEntity");
-            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-        }
-    });
-});
-
 app.MapControllers();
 
 app.UseExceptionHandler(applicationBuilder => applicationBuilder.ApplicationServices.GetService<IExceptionHandler>());

@@ -11,7 +11,10 @@ class ExceptionHandler : IExceptionHandler
         context.Response.ContentType = MediaTypeNames.Text.Plain;
 
         if (exception is EntityNotFoundException)
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
             await context.Response.WriteAsync(exception.Message);
+        }
 
         else if (exception is AuthException)
         {
