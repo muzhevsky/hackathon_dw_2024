@@ -34,7 +34,7 @@ const ProfileInfo: React.FC = observer(() => {
                         <div className={styles.nsp}>
                             <p className={styles.nsp}>{`Фамилия: ${userStore.user?.surname}`}</p>
                             <p className={styles.nsp}>{`Имя: ${userStore.user?.name}`}</p>
-                            <p className={styles.nsp}>{`Отчество: ${userStore.user?.pathronomyc}`}</p>
+                            <p className={styles.nsp}>{`Отчество: ${userStore.user?.patronomyc}`}</p>
                         </div>
 
 

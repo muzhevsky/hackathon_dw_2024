@@ -26,7 +26,7 @@ const Achievements: React.FC = observer(() => {
                 setIsLoading(true);
             })
         });
-    }, [achievements.achievements])
+    }, [])
 
     return(
         <div className={styles.WrapList}>

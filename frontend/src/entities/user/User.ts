@@ -3,7 +3,7 @@ export interface User{
     login: string;
     surname: string;
     name: string;
-    pathronomyc: string | null;
+    patronomyc: string | null;
     password_hash: string;
     role_id: number;
 }
@@ -13,7 +13,7 @@ export const testUser: User = {
     login: "katya_yuneva@mail.ru",
     surname: "Юнева",
     name: "Екатерина",
-    pathronomyc: "Петровна",
+    patronomyc: "Петровна",
     password_hash: "123456",
     role_id: 4
 }
