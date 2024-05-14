@@ -161,6 +161,15 @@ class EventsService{
 
                 "Так же молодежным министрам были вручены удостоверения. И срок исполнения их обязанностей установлен на два года.",
                 imageUrl:'cs.jpg'
+            },
+            {
+                type: "event",
+                id: 5,
+                title: "Event4",
+                startDate: new Date(),
+                endDate: new Date(),
+                statusId: "Международный",
+                description: "Какое-то описание..."
             }
         ]
     }

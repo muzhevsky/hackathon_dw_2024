@@ -111,7 +111,7 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
 
             <div>
                 <p>Дата проведения</p>
-                <Input placeholder="Дата проведения" value={date} onChange={dateEventState.onChange}/>
+                <Input placeholder="Дата проведения" defaultValue={date} onChange={dateEventState.onChange}/>
             </div>
 
             <div>
@@ -126,7 +126,7 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
 
             <div>
                 <p>Статус участия/результат</p>
-                <Input placeholder="Личное/командное мероприятие" value={result} onChange={placeState.onChange}/>
+                <Input placeholder="Личное/командное мероприятие" defaultValue={result} onChange={placeState.onChange}/>
             </div>
             <div className={styles.buttonPos}>
                 <PrimaryButton content={"Всё верно. Отправить"} clickHandler={clickHandler} size={"large"}/>
