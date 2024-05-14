@@ -6,6 +6,7 @@ import EventsService from "../../servises/EventsService";
 import EventCard from "./EventCard";
 import GoToEvents from "./GoToEvents";
 import styles from "./EventCard.module.css";
+import { EventForCabinet } from "../../entities/event/EventForCabinet";
 
 const Events: React.FC = observer(() => {
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
@@ -30,7 +31,7 @@ const Events: React.FC = observer(() => {
             ?   <div className={styles.WrapEvents}>
                     <GoToEvents/>
                     {
-                        eventsStore.events.map((item, index) => {
+                        eventsStore.events.map((item: EventForCabinet, index: number) => {
                             return <EventCard 
                                         key={index}
                                         id={Number(item.id)} 
