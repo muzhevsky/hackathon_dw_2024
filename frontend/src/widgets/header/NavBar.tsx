@@ -58,12 +58,12 @@ const NavBar: React.FC<NavBarProps> = ({children}) => {
     useEffect(() => {
         console.log(locate.pathname);
         if(locate.pathname === GLOBAL_EVENTS_PATH) {
-            console.warn(locate.pathname === GLOBAL_EVENTS_PATH);
+            console.warn('PATH IS GLOBAL EVENTS');
             setDefaultKey(["2"]);
             return;
         }
         if(locate.pathname === RATING_PATH) {
-            console.warn(locate.pathname === GLOBAL_EVENTS_PATH);
+            console.warn('PATH IS GLOBAL RATINg');
             setDefaultKey(["3"]);
             return;
         }
@@ -82,7 +82,7 @@ const NavBar: React.FC<NavBarProps> = ({children}) => {
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                 <div className="demo-logo-vertical">
                 </div>
-                <Menu className={styles.menu} theme="dark" defaultSelectedKeys={defaultKey} mode="inline" items={items} />
+                <Menu className={styles.menu} theme="dark" selectedKeys={defaultKey} mode="inline" items={items} />
             </Sider>
             <Layout className={styles.padLayout}>
                 {children}
