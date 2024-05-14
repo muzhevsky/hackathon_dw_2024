@@ -15,7 +15,7 @@ export class TeacherService {
      */
     public static postQuest(
         requestBody?: CreateQuestRequest,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<QuestDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/quest',

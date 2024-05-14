@@ -32,6 +32,7 @@ export class QuestRepository {
     create = async (quest: CreateQuestRequest) => {
         try {
             const res = await TeacherService.postQuest(quest);
+            this._quests.set(res.id ?? -1, res);
             // this._quests.set();
             //  TODO добавление здесь в quest
         }
