@@ -35,7 +35,7 @@ public class AuthUseCase
 
     public SignUpResponse SignUpStudent(StudentSignUpRequest request)
     {
-        var login = request.StudentId;
+        var login = "sstuedudom/"+request.StudentId;
         var user = CreateUser(login, request.Password, request.Surname, request.Name, request.Patronymic);
         var student = new Student
         {
