@@ -67,7 +67,7 @@ export const FormAddRequest: React.FC = observer(() => {
             handleSubmit((from) => addRequestFormModel.createQuest({
                 resultId: +(from.resultId as unknown as LabeledValue).value,
                 groupId: +(from.groupId as unknown as LabeledValue).value,
-                desctiption: from.description,
+                description: from.description,
                 eventId: +(from.eventId as unknown as LabeledValue).value
             }))
         }>

@@ -18,12 +18,14 @@ export type { EventResultDto } from './models/EventResultDto';
 export type { EventStatusDto } from './models/EventStatusDto';
 export type { GroupDto } from './models/GroupDto';
 export type { InstituteDto } from './models/InstituteDto';
+export type { QuestDto } from './models/QuestDto';
 export type { SignInRequest } from './models/SignInRequest';
 export type { SignInResponse } from './models/SignInResponse';
-export type { SignUpRequest } from './models/SignUpRequest';
 export type { SignUpResponse } from './models/SignUpResponse';
 export type { SpecialityDto } from './models/SpecialityDto';
 export type { StudentBasicDataResponse } from './models/StudentBasicDataResponse';
+export type { StudentSignUpRequest } from './models/StudentSignUpRequest';
+export type { TeacherSignUpRequest } from './models/TeacherSignUpRequest';
 export type { UserResponse } from './models/UserResponse';
 
 export { AuthService } from './services/AuthService';
