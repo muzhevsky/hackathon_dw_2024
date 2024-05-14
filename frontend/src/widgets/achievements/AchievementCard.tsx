@@ -16,7 +16,7 @@ const AchievementCard: React.FC<AchievementsProps> = ({ id, userId, fileName, sc
     return (
         <div className={styles.cardViev}>
             <div className={styles.img}>
-                <img style={{ width: "100%" }} src={`${API_URL}/static/${fileName.slice(fileName.lastIndexOf("/") + 1)}`} alt="" />
+                <img style={{ width: "100%" }} src={`${API_URL}/static/achievement/${fileName.slice(fileName.lastIndexOf("/") + 1)}`} alt="" />
             </div>
             <div className={styles.wrapInfo}>
                 <p className={styles.title}>{withTeam ? "Командное" : "Личное"}</p>
