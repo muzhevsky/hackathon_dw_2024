@@ -2,7 +2,7 @@ import {CloseOutlined, InboxOutlined} from "@ant-design/icons";
 import { Upload } from "antd";
 import { RcFile } from "antd/es/upload";
 import { useState } from "react";
-import { FormAchievement } from "../../entities/achievement/FormAchievement";
+import { DataAchievementFromBack, FormAchievement } from "../../entities/achievement/FormAchievement";
 import LoadingPage from "../../pages/loadingPage/LoadingPage";
 import AchievementService from "../../servises/AchievementService";
 import FormForAchievement from "../formAchievement/FormForAchievement";
@@ -16,19 +16,17 @@ interface FormLoadAchievementsProps {
 
 const FormLoadAchievements: React.FC<FormLoadAchievementsProps> = ({ closeHandler }) => {
     const [file, setFile ] = useState<RcFile | null>();
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [data, setData] = useState<FormAchievement>({
-        nameEvent: "тест",
-        participant: "Юнева Катя",
-        dateEvent: "15.02.2023",
-        place: "3 место"
-    });
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [data, setData] = useState<DataAchievementFromBack>();
 
     //@ts-ignore
     const dummyRequest = async ({ file, onSuccess }) => {
-        setTimeout(() => {
-            onSuccess("ok");
-        }, 0);
+        const response = await AchievementService.create({File: file});
+        if(response !== undefined){
+            setData(response);
+        }
+        setIsLoading(true);
+        onSuccess("ok");
     }
 
     return (
@@ -49,10 +47,10 @@ const FormLoadAchievements: React.FC<FormLoadAchievementsProps> = ({ closeHandle
                         <p className="ant-upload-text">Нажмите или перенесите файл для загрузки</p>
                     </Dragger>
                     {
-                        isLoading
+                        isLoading && (data !== undefined)
                             ? <FormForAchievement
                                 data={data} closeHandler={closeHandler}/>
-                            : <LoadingPage/>
+                            : null
                     }
                 </div>
             </div>

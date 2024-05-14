@@ -11,7 +11,7 @@ interface StudentInfoProps{
 const StudentInfo: React.FC<StudentInfoProps> = ({departamentTitle, groupInfo}) => {
     return(
         <div className={styles.container}>
-            <p className={styles.pad}>{`Инфтситут: ${departamentTitle}`}</p>
+            <p className={styles.pad}>{`Инстситут: ${departamentTitle}`}</p>
             <p className={styles.pad}>{`Группа: ${groupInfo.title}, курс: ${GroupAdapter.GetCourse(groupInfo.title)}`}</p>
         </div>
     )

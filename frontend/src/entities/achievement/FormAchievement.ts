@@ -4,3 +4,11 @@ export interface FormAchievement{
     dateEvent: string;
     place: string;
 }
+
+export interface DataAchievementFromBack{
+    date: string;
+    id: number | string;
+    result: string;
+    status: string;
+    title: string;
+}
