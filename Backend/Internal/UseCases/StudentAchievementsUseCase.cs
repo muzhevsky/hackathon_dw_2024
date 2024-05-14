@@ -49,7 +49,7 @@ public class StudentAchievementsUseCase
         _achievementsRepository.AddAchievement(achievement, fileRequest.File.OpenReadStream());
         var res = await _recognitionRepository.Recognize(achievement.FilePath);
         await _gigaChatRepository.Authorize();
-        // return "тут должен быть ответ от гигачата (я пока выключил)";
+        
         var response = await _gigaChatRepository.SendMessage(
             "Распознай в тексте данные в формате:" +
             "{" +

@@ -22,6 +22,11 @@ public class EfQuestsDataSource: EntityFrameworkDataSource, IQuestsDataSource
         return _quests.Where(dto => dto.EventId == eventId);
     }
 
+    public IEnumerable<QuestDto> SelectByTeacherId(int teacherId)
+    {
+        return _quests.Where(dto => dto.TeacherId == teacherId);
+    }
+
     public IEnumerable<QuestDto> SelectByGroupId(int groupId)
     {
         return _quests.Where(dto => dto.GroupId == groupId);

@@ -8,6 +8,7 @@ using Hackaton_DW_2024.Data.DataSources.FileSystem;
 using Hackaton_DW_2024.Data.DataSources.Groups;
 using Hackaton_DW_2024.Data.DataSources.Institutes;
 using Hackaton_DW_2024.Data.DataSources.News;
+using Hackaton_DW_2024.Data.DataSources.Quests;
 using Hackaton_DW_2024.Data.DataSources.Requests;
 using Hackaton_DW_2024.Data.DataSources.Specialities;
 using Hackaton_DW_2024.Data.DataSources.Students;
@@ -25,7 +26,7 @@ public static class DataSourceConfiguration
         // configuration
         services.AddSingleton<DatabaseEnvironment, PostgresDatabaseEnvironment>();
         services.AddSingleton<DatabaseConnectionConfig, DatabaseConnectionConfig>();
-        services.AddSingleton<ApplicationContext, ApplicationContext>();
+        services.AddTransient<ApplicationContext, ApplicationContext>();
         
         //news and events
         services.AddSingleton<IEventsDataSource, EfEventsDataSource>();
@@ -37,6 +38,8 @@ public static class DataSourceConfiguration
         services.AddSingleton<ICustomAchievementDataSource, EfCustomAchievementDataSource>();
         services.AddSingleton<IUsersAndEventsDataSource, EfUsersAndEventsDataSource>();
         services.AddSingleton<IRequestDataSource, EfRequestDataSource>();
+        services.AddSingleton<IQuestsDataSource, EfQuestsDataSource>();
+        services.AddSingleton<ITeacherDataSource, EfTeacherDataSource>();
         
 
         // institute structure
