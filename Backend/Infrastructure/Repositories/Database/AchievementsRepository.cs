@@ -1,4 +1,5 @@
 using Hackaton_DW_2024.Api.Student;
+using Hackaton_DW_2024.Data.Config;
 using Hackaton_DW_2024.Data.DataSources.Achievements;
 using Hackaton_DW_2024.Data.DataSources.Events;
 using Hackaton_DW_2024.Data.DataSources.Events.Results;
@@ -20,7 +21,8 @@ public class AchievementsRepository
     IEventResultsDataSource _eventResultsDataSource;
     IEventStatusesDataSource _eventStatusesDataSource;
     IFileSystem _fileSystem;
-    const string PathString = "/app/static/achievements/";
+
+    readonly string _pathString;
 
     public AchievementsRepository(
         IAchievementsDataSource achievementsDataSource,
@@ -29,7 +31,8 @@ public class AchievementsRepository
         ICustomAchievementDataSource customAchievementDataSource, 
         IEventsDataSource eventsDataSource, 
         IEventResultsDataSource eventResultsDataSource, 
-        IEventStatusesDataSource eventStatusesDataSource)
+        IEventStatusesDataSource eventStatusesDataSource, 
+        StaticFileConfig fileConfig)
     {
         _achievementsDataSource = achievementsDataSource;
         _fileSystem = fileSystem;
@@ -38,8 +41,7 @@ public class AchievementsRepository
         _eventsDataSource = eventsDataSource;
         _eventResultsDataSource = eventResultsDataSource;
         _eventStatusesDataSource = eventStatusesDataSource;
-
-        Directory.CreateDirectory(PathString);
+        _pathString = Path.Combine(fileConfig.StaticPath, "/achievements");
     }
 
     public Achievement? GetById(int id)
@@ -99,7 +101,7 @@ public class AchievementsRepository
         var extension = split[count - 1];
         var id = _achievementsDataSource.Insert(_converter.Convert(achievement));
         var fileName = id + "." + extension;
-        var path = PathString + fileName;
+        var path = _pathString + fileName;
         _fileSystem.Write(new FileDto
         {
             Stream = fileStream,
