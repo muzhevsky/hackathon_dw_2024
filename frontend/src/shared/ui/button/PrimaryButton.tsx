@@ -10,9 +10,19 @@ type PrimaryButtonProps = {
     disabled?: boolean;
 } & Parameters<typeof Button>['0'];
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({content, size, clickHandler, disabled}) => {
-    return(
-        <Button type="primary" disabled={disabled} className={"ButtonLog"} size={size} onClick={clickHandler}>{content}</Button>
+const PrimaryButton: React.FC<PrimaryButtonProps> = (props) => {
+
+    const { content, size, clickHandler, disabled } = props;
+
+    return (
+        <Button
+            {...props}
+            type="primary"
+            disabled={disabled}
+            className={"ButtonLog"}
+            onClick={clickHandler}
+        >{content}
+        </Button>
     )
 }
 

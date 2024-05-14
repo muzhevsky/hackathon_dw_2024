@@ -65,10 +65,10 @@ export const FormAddRequest: React.FC = observer(() => {
     return (
         <Form onFinish={
             handleSubmit((from) => addRequestFormModel.createQuest({
-                resultId: from.resultId,
-                groupId: from.groupId,
+                resultId: +(from.resultId as unknown as LabeledValue).value,
+                groupId: +(from.groupId as unknown as LabeledValue).value,
                 desctiption: from.description,
-                eventId: from.eventId
+                eventId: +(from.eventId as unknown as LabeledValue).value
             }))
         }>
             <Space size={10} direction='vertical'>
