@@ -2,7 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type CreateQuestRequest = {
+export type QuestDto = {
+    id?: number;
+    teacherId?: number;
     eventId?: number;
     resultId?: number;
     groupId?: number;

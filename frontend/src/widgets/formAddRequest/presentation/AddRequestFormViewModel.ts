@@ -1,6 +1,7 @@
 import { makeObservable, observable, reaction, runInAction } from "mobx";
 import { RequestStatus } from "../../../shared/utils/RequestStatus";
 import { CreateQuestRequest, StudentService, TeacherService } from "../../../api-generated";
+import { QuestRepository } from "../../../store/QuestRepository";
 
 export class AddRequestFormViewModel {
  
@@ -9,7 +10,10 @@ export class AddRequestFormViewModel {
     @observable
     error?: string;
 
-    constructor() {
+    questRepository: QuestRepository;
+
+    constructor(questRepository: QuestRepository) {
+        this.questRepository = questRepository;
         makeObservable(this);
     }
 
@@ -23,7 +27,7 @@ export class AddRequestFormViewModel {
     createQuest = async (request: CreateQuestRequest) => {
         this.createStatus = RequestStatus.LOADING;
         try {
-            await TeacherService.postQuest(request);
+            await this.questRepository.create(request);
             this.createStatus = RequestStatus.SUCCESSFUL;   
         }
         catch(e) {

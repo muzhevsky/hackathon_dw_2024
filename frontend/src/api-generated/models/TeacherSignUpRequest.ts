@@ -2,12 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type SignUpRequest = {
-    studentId?: string | null;
+export type TeacherSignUpRequest = {
+    login?: string | null;
     password?: string | null;
     surname?: string | null;
     name?: string | null;
     patronymic?: string | null;
-    groupId?: number;
+    departmentId?: number;
 };
 

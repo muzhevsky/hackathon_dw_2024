@@ -84,13 +84,19 @@ export class StudentService {
         });
     }
     /**
+     * @param id
      * @returns StudentBasicDataResponse Success
      * @throws ApiError
      */
-    public static getStudent(): CancelablePromise<StudentBasicDataResponse> {
+    public static getStudent(
+        id?: number,
+    ): CancelablePromise<StudentBasicDataResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/student',
+            query: {
+                'id': id,
+            },
         });
     }
     /**

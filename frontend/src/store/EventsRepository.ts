@@ -2,8 +2,6 @@ import { computed, makeObservable } from "mobx";
 import { BaseApiCollection } from "../shared/utils/baseApiCollection";
 import { ICollection } from "../shared/utils/iCollection";
 import { EventDto, EventResultDto, EventsService, GroupDto, InstituteStructureService } from "../api-generated";
-import { EventResult } from "../entities/event/EventResult";
-import { Event } from "../entities/event/Event";
 import { EventForCabinet } from "../entities/event/EventForCabinet";
 
 
