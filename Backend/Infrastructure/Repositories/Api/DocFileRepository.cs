@@ -14,12 +14,14 @@ namespace Hackaton_DW_2024.Infrastructure.Repositories.Api;
 public class DocFileRepository
 {
     IRequestDataSource _requestDataSource;
-    readonly string _filePath;
+    readonly string _pathString;
 
     public DocFileRepository(IRequestDataSource requestDataSource, StaticFileConfig fileConfig)
     {
         _requestDataSource = requestDataSource;
-        _filePath = Path.Combine(fileConfig.StaticPath, "requests");
+        var combined = Path.Combine(fileConfig.StaticPath, "requests");
+        Directory.CreateDirectory(combined);
+        _pathString = combined+"/";
     }
 
     public void GenerateDoc(StudentDetails student, GroupDetails group, List<string[]> achievements)
@@ -101,7 +103,7 @@ public class DocFileRepository
         var fileName = dto.Id + ".docx";
         _requestDataSource.UpdateById(dto.Id, requestDto => requestDto.FilePath = fileName);
 
-        document.SaveToFile(Path.Combine(_filePath, fileName), FileFormat.Docx);
+        document.SaveToFile(Path.Combine(_pathString, fileName), FileFormat.Docx);
         document.Close();
     }
 }
