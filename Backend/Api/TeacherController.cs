@@ -34,18 +34,18 @@ public class TeacherController : ControllerBase
         return Ok( _questRepository.GetById(id));
     }
     
-    [HttpGet("/group/quest")]
+    [HttpGet("/group/quests")]
     public ActionResult<List<QuestDto>> GetQuestByGroup([FromQuery] int groupId)
     {
         return Ok( _questRepository.GetByGroupId(groupId));
     }
     
-    [HttpGet("/event/quest")]
+    [HttpGet("/event/quests")]
     public ActionResult<List<QuestDto>> GetQuestByEvent([FromQuery] int eventId)
     {
         return Ok( _questRepository.GetByEventId(eventId));
     }
-    [HttpGet("/teacher/quest")]
+    [HttpGet("/teacher/quests")]
     public ActionResult<List<QuestDto>> GetQuestByTeacher([FromQuery] int teacherId)
     {
         return Ok( _questRepository.GetByTeacherId(teacherId));

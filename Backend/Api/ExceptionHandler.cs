@@ -6,12 +6,8 @@ namespace Hackaton_DW_2024.Api;
 
 class ExceptionHandler : IExceptionHandler
 {
-    public async ValueTask<bool> TryHandleAsync(
-        HttpContext context,
-        Exception exception,
-        CancellationToken cancellation)
+    public async ValueTask<bool> TryHandleAsync(HttpContext context, Exception exception, CancellationToken cancellation)
     {
-        Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAaa");
         context.Response.ContentType = MediaTypeNames.Text.Plain;
 
         if (exception is EntityNotFoundException)
