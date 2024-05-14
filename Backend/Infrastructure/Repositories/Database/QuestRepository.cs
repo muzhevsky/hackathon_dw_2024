@@ -22,7 +22,7 @@ public class QuestRepository
     public List<QuestDto> GetByEventId(int eventId) => _questDataSource.SelectByEventId(eventId).ToList();
     public List<QuestDto> GetByGroupId(int groupId) => _questDataSource.SelectByGroupId(groupId).ToList();
 
-    public int Create(CreateQuestRequest request, int userId)
+    public QuestDto Create(CreateQuestRequest request, int userId)
     {
         var teacher = _teacherDataSource.SelectByUserId(userId);
         if (teacher == null) 
@@ -36,6 +36,6 @@ public class QuestRepository
             TeacherId = teacher.Id
         };
         _questDataSource.Insert(dto);
-        return dto.Id;
+        return dto;
     }
 }
