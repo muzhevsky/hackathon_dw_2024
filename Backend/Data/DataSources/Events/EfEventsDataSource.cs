@@ -29,24 +29,24 @@ public class EfEventsDataSource : IEventsDataSource
     public IEnumerable<EventDto> SelectActive()
     {
         using var context = _factory.CreateDbContext();
-        return context.Events.Where(dto => dto.StartDate < DateTime.Now && dto.EndDate > DateTime.Now);
+        return context.Events.Where(dto => dto.StartDate < DateTime.Now && dto.EndDate > DateTime.Now).ToList();
     }
 
     public IEnumerable<EventDto> SelectByStatusId(int statusId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Events.Where(dto => dto.StatusId == statusId);
+        return context.Events.Where(dto => dto.StatusId == statusId).ToList();
         
     }
 
     public IEnumerable<EventDto> SelectByUserId(int userId)
     {
         using var context = _factory.CreateDbContext();
-        var usersAndEvents = context.UsersAndEvents.Where(dto => dto.UserId == userId);
+        var usersAndEvents = context.UsersAndEvents.Where(dto => dto.UserId == userId).ToList();
         var result = new List<EventDto>();
         foreach (var ue in usersAndEvents)
         {
-            result.AddRange(context.Events.Where(dto => dto.Id == ue.EventId));
+            result.AddRange(context.Events.Where(dto => dto.Id == ue.EventId).ToList());
         }
 
         return result;

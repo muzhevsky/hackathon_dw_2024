@@ -27,7 +27,7 @@ public class EfGroupsDataSource:  IGroupsDataSource
     public IEnumerable<GroupDto> SelectByDepartmentId(int departmentId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Groups.Where(dto => dto.DepartmentId == departmentId);
+        return context.Groups.Where(dto => dto.DepartmentId == departmentId).ToList();
     }
 
     public void Insert(GroupDto dto)

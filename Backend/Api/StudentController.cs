@@ -53,7 +53,7 @@ public class StudentController : ControllerBase
         return Ok(_achievementsUseCase.GetAchievement(achievementId));
     }
 
-    [HttpGet("/achievements")]
+    [HttpGet("/student/achievements")]
     public ActionResult<List<Achievement>> GetAchievements()
     {
         return Ok(_achievementsUseCase.GetAchievements(this.UserId() ?? throw new AuthException("unauthorized")));

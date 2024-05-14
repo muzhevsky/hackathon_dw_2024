@@ -21,7 +21,7 @@ public class EfRejectionDataSource:  IRejectionsDataSource
     public IEnumerable<RejectionDto> SelectByRequestId(int requestId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Rejections.Where(dto => dto.RequestId == requestId);
+        return context.Rejections.Where(dto => dto.RequestId == requestId).ToList();
     }
 
     public void Insert(RejectionDto dto)

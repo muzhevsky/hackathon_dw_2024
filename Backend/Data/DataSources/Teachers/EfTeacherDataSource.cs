@@ -21,7 +21,7 @@ public class EfTeacherDataSource:  ITeacherDataSource
     public IEnumerable<TeacherDto> SelectByDepartmentId(int departmentId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Teachers.Where(dto => dto.DepartmentId == departmentId);
+        return context.Teachers.Where(dto => dto.DepartmentId == departmentId).ToList();
     }
 
     public void Insert(TeacherDto teacher)

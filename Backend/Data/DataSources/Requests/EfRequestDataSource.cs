@@ -22,7 +22,7 @@ public class EfRequestDataSource :  IRequestDataSource
     public IEnumerable<RequestDto> SelectByUserId(int userId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Requests.Where(dto => dto.UserId == userId);
+        return context.Requests.Where(dto => dto.UserId == userId).ToList();
     }
 
     public void Insert(RequestDto dto)
