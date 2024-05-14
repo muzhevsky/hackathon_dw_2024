@@ -11,6 +11,7 @@ import InstituteService from "../../servises/InstituteService";
 import NavigateTabs from "../../shared/ui/tabs/NavigateTabs";
 import ProfileInfo from "../../widgets/profileInfo/ProfileInfo";
 import LoadingPage from "../loadingPage/LoadingPage";
+import BalanceCounter from "../../widgets/balance/BalanceCounter";
 
 const HomePage: React.FC = () => {
     const navigate = useNavigate();
@@ -59,8 +60,9 @@ const HomePage: React.FC = () => {
         <>
             {
                 isLoading
-                    ? <>             <ProfileInfo />
+                    ? <>             <ProfileInfo /> <BalanceCounter count={658999}/>
                         <NavigateTabs />
+
                         <Outlet></Outlet>
                     </>
                     : <LoadingPage />
