@@ -92,7 +92,6 @@ public class StudentAchievementsUseCase
         if (achievement == null) throw new EntityNotFoundException("no achievement found");
         achievement.WithTeam = request.WithTeam;
         achievement.ResultId = request.ResultId;
-        Console.WriteLine($"{request.Id}, {request.ResultId}, {request.WithTeam}, {request.EventId}");
         _achievementsRepository.AttachToEvent(achievement, request.EventId);
         _achievementsRepository.UpdateAchievement(achievement);
     }
