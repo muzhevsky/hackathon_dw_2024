@@ -4,44 +4,55 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Users;
 
-public class EfUserDataSource : EntityFrameworkDataSource, IUsersDataSource
+public class EfUserDataSource :  IUsersDataSource
 {
-    protected DbSet<UserDto> Users { get; set; }
+    IDbContextFactory<ApplicationContext> _factory;
 
-    public EfUserDataSource(ApplicationContext context) : base(context)
+    public EfUserDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        Users = context.Users;
+        _factory = context;
     }
 
-    public UserDto? SelectById(int id) => Users.FirstOrDefault(dto => dto.Id == id);
-    public UserDto? SelectByLogin(string login) => Users.FirstOrDefault(dto => dto.Login == login);
+    public UserDto? SelectById(int id)
+    {
+        using var context = _factory.CreateDbContext();
+        return context.Users.FirstOrDefault(dto => dto.Id == id);
+    }
+
+    public UserDto? SelectByLogin(string login)
+    {
+        using var context = _factory.CreateDbContext();
+        return context.Users.FirstOrDefault(dto => dto.Login == login);
+    }
 
     public int InsertOne(UserDto item)
     {
-        Users.Add(item);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.Users.Add(item);
+        context.SaveChanges();
         return item.Id;
     }
 
     public void InsertMany(IEnumerable<UserDto> items)
     {
-        Users.AddRange(items);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.Users.AddRange(items);
+        context.SaveChanges();
     }
 
     public void UpdateById(int id, Action<UserDto> updateFunc)
     {
+        using var context = _factory.CreateDbContext();
         var updateTarget = SelectById(id);
-
         updateFunc(updateTarget);
-        Context.SaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteById(int id)
     {
+        using var context = _factory.CreateDbContext();
         var deleteTarget = SelectById(id);
-
-        Users.Remove(deleteTarget);
-        Context.SaveChanges();
+        context.Users.Remove(deleteTarget);
+        context.SaveChanges();
     }
 }

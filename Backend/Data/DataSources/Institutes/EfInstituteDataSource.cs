@@ -4,22 +4,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Institutes;
 
-public class EfInstituteDataSource: EntityFrameworkDataSource, IInstituteDataSource
+public class EfInstituteDataSource:  IInstituteDataSource
 {
-    DbSet<InstituteDto> Institutes { get; set; }
+    IDbContextFactory<ApplicationContext> _factory;
     
-    public EfInstituteDataSource(ApplicationContext context) : base(context)
+    public EfInstituteDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        Institutes = context.Institutes;
+        _factory = context;
     }
 
     public IEnumerable<InstituteDto> SelectAll()
     {
-        return Institutes;
+        using var context = _factory.CreateDbContext();
+        return context.Institutes;
     }
 
     public InstituteDto? SelectById(int id)
     {
-        return Institutes.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.Institutes.FirstOrDefault(dto => dto.Id == id);
     }
 }

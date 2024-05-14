@@ -8,15 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.Package;
 
-public abstract class EntityFrameworkDataSource
-{
-    protected ApplicationContext Context;
-    public EntityFrameworkDataSource(ApplicationContext context)
-    {
-        Context = context;
-    }
-}
-
 public class ApplicationContext : DbContext
 {
     DatabaseConnectionConfig _config;

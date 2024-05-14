@@ -4,35 +4,39 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Achievements;
 
-public class EfCustomAchievementDataSource: EntityFrameworkDataSource, ICustomAchievementDataSource
+public class EfCustomAchievementDataSource:  ICustomAchievementDataSource
 {
-    DbSet<CustomAchievementDto> _customAchievements;
-    public EfCustomAchievementDataSource(ApplicationContext context) : base(context)
+    IDbContextFactory<ApplicationContext> _factory;
+    public EfCustomAchievementDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        _customAchievements = context.CustomAchievements;
+        _factory = context;
     }
 
     public CustomAchievementDto? SelectById(int id)
     {
-        return _customAchievements.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.CustomAchievements.FirstOrDefault(dto => dto.Id == id);
     }
 
     public CustomAchievementDto? SelectByAchievementId(int id)
     {
-        return _customAchievements.FirstOrDefault(dto => dto.AchievementId == id);
+        using var context = _factory.CreateDbContext();
+        return context.CustomAchievements.FirstOrDefault(dto => dto.AchievementId == id);
     }
 
     public void Insert(CustomAchievementDto dto)
     {
-        _customAchievements.Add(dto);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.CustomAchievements.Add(dto);
+        context.SaveChanges();
     }
 
     public void RemoveById(int id)
     {
+        using var context = _factory.CreateDbContext();
         var deleteTarget = SelectById(id);
         if (deleteTarget == null) return;
-        _customAchievements.Remove(deleteTarget);
-        Context.SaveChanges();
+        context.CustomAchievements.Remove(deleteTarget);
+        context.SaveChanges();
     }
 }

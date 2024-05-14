@@ -4,42 +4,46 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Students;
 
-public class EfStudentsDataSource: EntityFrameworkDataSource, IStudentsDataSource
+public class EfStudentsDataSource:  IStudentsDataSource
 {
-    DbSet<StudentDto> Students { get; set; }
-    DbSet<UserDto> Users { get; set; }
+    IDbContextFactory<ApplicationContext> _factory;
 
-    public EfStudentsDataSource(ApplicationContext context) : base(context)
+    public EfStudentsDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        Students = context.Students;
+        _factory = context;
     }
 
     public StudentDto? SelectById(int id)
     {
-        return Students.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.Students.FirstOrDefault(dto => dto.Id == id);
     }
 
     public StudentDto? SelectByUserId(int userId)
     {
-        return Students.FirstOrDefault(dto => dto.UserId == userId);
+        using var context = _factory.CreateDbContext();
+        return context.Students.FirstOrDefault(dto => dto.UserId == userId);
     }
 
     public StudentDto? SelectByStudentId(string studentId)
     {
-        return Students.FirstOrDefault(dto => dto.StudentId == studentId);
+        using var context = _factory.CreateDbContext();
+        return context.Students.FirstOrDefault(dto => dto.StudentId == studentId);
     }
 
     public int Insert(StudentDto dto)
     {
-        Students.Add(dto);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.Students.Add(dto);
+        context.SaveChanges();
         return dto.Id;
     }
 
     public void UpdateByUserId(int userId, Action<StudentDto> updateFunc)
     {
+        using var context = _factory.CreateDbContext();
         var updateTarget = SelectByUserId(userId);
         updateFunc(updateTarget);
-        Context.SaveChanges();
+        context.SaveChanges();
     }
 }

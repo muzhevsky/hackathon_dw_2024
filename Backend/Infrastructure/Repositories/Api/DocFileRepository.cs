@@ -22,7 +22,7 @@ public class DocFileRepository
         _pathString = combined+"/";
     }
 
-    public void GenerateDoc(StudentDetails student, GroupDetails group, List<string[]> achievements)
+    public int GenerateDoc(StudentDetails student, GroupDetails group, List<string[]> achievements)
     {
         var document = new Document();
         document.LoadFromFile("./template.docx");
@@ -102,5 +102,7 @@ public class DocFileRepository
 
         document.SaveToFile(Path.Combine(_pathString, fileName), FileFormat.Docx);
         document.Close();
+
+        return dto.Id;
     }
 }

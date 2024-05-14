@@ -62,8 +62,8 @@ public class StudentController : ControllerBase
     [HttpPost("/request")]
     public ActionResult GenerateDoc([FromBody] AchievementSetRequest request)
     {
-        _requestUseCase.SendRequest(request, this.UserId() ?? throw new AuthException("unauthorized"));
-        return Ok("done");
+        return Ok(_requestUseCase.SendRequest(request, this.UserId() ??
+                                                       throw new AuthException("unauthorized")));
     }
 
     [HttpGet("/student")]
