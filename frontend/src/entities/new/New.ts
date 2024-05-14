@@ -4,4 +4,5 @@ export interface New{
     title: string;
     publicationDate: Date;
     content: string;
+    imageUrl: string;
 }

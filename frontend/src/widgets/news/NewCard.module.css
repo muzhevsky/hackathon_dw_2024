@@ -11,7 +11,7 @@
 }
 
 .cardViev{
-    width: fit-content;
+    width: 35vw;
     height: fit-content;
     background-color: rgba(124,124,124,0.13);
     border-radius: 20px;
@@ -19,10 +19,10 @@
 }
 
 .imgSize{
-    display: block;
-    width: 12vw;
-    height: 10vh;
+    width: 15vw;
+    height: 18vh;
     margin: 1vh;
+    justify-content: center;
 }
 
 .date{
@@ -30,9 +30,10 @@
     font-weight: bold;
     font-family: Inter, serif;
     color: black;
-    margin: 0.5vw;
+    margin: 0;
+    padding-left: 1vw;
     width: 22vw;
-    text-align: end;
+    text-align: start;
 }
 
 .title{
@@ -41,7 +42,7 @@
     font-family: Inter, serif;
     color: black;
     margin: 1vw;
-    width: 10vw;
+    width: 20vw;
     height: fit-content;
 }
 

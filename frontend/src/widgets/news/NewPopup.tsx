@@ -14,7 +14,7 @@ const NewPopup: React.FC<NewPopupProps> = ({newInfo, isOpen, setIsOpen}) => {
     const showModal = () => {
         setIsOpen(true);
     };
-
+    let Img = require('../../shared/assets/news/' + newInfo.imageUrl);
     const handleCancel = () => {
         setIsOpen(false);
     };
@@ -24,6 +24,7 @@ const NewPopup: React.FC<NewPopupProps> = ({newInfo, isOpen, setIsOpen}) => {
             <Modal
                 title={newInfo.title}
                 centered
+                footer={null}
                 open={isOpen}
                 onCancel={() => setIsOpen(false)}
                 onOk={()=> setIsOpen(false)}

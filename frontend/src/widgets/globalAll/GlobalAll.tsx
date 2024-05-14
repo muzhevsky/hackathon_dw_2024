@@ -9,6 +9,7 @@ import EventsService from "../../servises/EventsService";
 import GlobalEventCard from "../events/GlobalEventCard";
 import NewCard from "../news/NewCard";
 import RequestCard from "../requests/RequestsCard";
+import styles from "../globalAll/GlobalAll.module.css";
 
 const GlobalAll: React.FC = observer(() => {
     const {eventsStore} = useContext(Context);
@@ -23,11 +24,19 @@ const GlobalAll: React.FC = observer(() => {
         })
     }, [eventsStore.events]);
 
+    useEffect(() => {
+        const response = EventsService.getNews();
+        response.then(response => {
+            setEvents(response);
+            setIsLoading(true);
+        })
+    }, [eventsStore.events]);
+
     return(
         <div>
             {
                 isLoading
-                ?   <>
+                ?   <div className={styles.WrapEvents}>
                     {
                         events.map((item, index) => {
                             if(item.type === "event") return <GlobalEventCard key={index} event={item}/>
@@ -35,7 +44,7 @@ const GlobalAll: React.FC = observer(() => {
                             else return <RequestCard key={index} id={Number(item.id)} title={"Что-то заполнить"} endDate={new Date()} statusId={1} description={"Что-то заполнить..."}/>
                         })
                     }
-                    </>
+                    </div>
                 : <LoadingPage/>
             }
         </div>
