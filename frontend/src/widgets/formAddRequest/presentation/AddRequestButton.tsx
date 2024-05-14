@@ -28,7 +28,7 @@ export const AddRequestButton: React.FC = () => {
 
             <div className={styles.WrapAdd} onClick={openHandler}>
                 <img src={Add} alt={"добавить"} />
-                <p className={styles.AddTitle}>Добавить задание</p>
+                <p className={styles.AddTitle}>Добавить предложение</p>
             </div>
         </>
     )
