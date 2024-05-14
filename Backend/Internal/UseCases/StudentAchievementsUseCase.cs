@@ -91,6 +91,7 @@ public class StudentAchievementsUseCase
         var achievement = _achievementsRepository.GetById(request.Id);
         achievement.WithTeam = request.WithTeam;
         achievement.ResultId = request.ResultId;
+        Console.WriteLine($"{request.Id}, {request.ResultId}, {request.WithTeam}, {request.EventId}");
         _achievementsRepository.AttachToEvent(achievement, request.EventId);
         _achievementsRepository.UpdateAchievement(achievement);
     }

@@ -45,13 +45,14 @@ alter table user_items
 
 create table requests
 (
-    id       serial
+    id        serial
         constraint requests_pk
             primary key,
-    user_id  integer not null
+    user_id   integer not null
         constraint requests_users_fk
             references users,
-    rejected boolean not null
+    rejected  boolean not null,
+    file_path varchar(64)
 );
 
 alter table requests
@@ -271,7 +272,10 @@ create table achievements
     with_team boolean default false,
     result_id integer not null
         constraint achievements_results_fk
-            references event_results
+            references event_results,
+    event_id  integer
+        constraint achievements_events_fk
+            references events
 );
 
 alter table achievements
@@ -288,22 +292,6 @@ create table requests_and_achievements
 );
 
 alter table requests_and_achievements
-    owner to postgres;
-
-create table achievements_and_events
-(
-    achievement_id integer not null
-        constraint achievements_and_events_achievements_fk
-            references achievements,
-    event_id       integer not null
-        constraint achievements_and_events_events_fk
-            references events,
-    id             serial
-        constraint achievements_and_events_pk
-            primary key
-);
-
-alter table achievements_and_events
     owner to postgres;
 
 create table custom_achievements
@@ -323,7 +311,6 @@ create table custom_achievements
 
 alter table custom_achievements
     owner to postgres;
-
 
 
 
