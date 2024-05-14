@@ -5,6 +5,7 @@ import LoadingPage from "../../pages/loadingPage/LoadingPage";
 import AchievementService from "../../servises/AchievementService";
 import AddAchievement from "../addAchievements/AddAchievement";
 import AchievementCard from "./AchievementCard";
+import styles from "./AchievementCard.module.css";
 
 const Achievements: React.FC = observer(() => {
     const {achievements} = useContext(Context);
@@ -19,7 +20,7 @@ const Achievements: React.FC = observer(() => {
     }, [])
 
     return(
-        <>
+        <div className={styles.WrapList}>
             {
                 isLoading
                 ?   <>
@@ -39,7 +40,7 @@ const Achievements: React.FC = observer(() => {
                     </>
                 :   <LoadingPage/>
             }      
-        </>
+        </div>
     )
 })
 
