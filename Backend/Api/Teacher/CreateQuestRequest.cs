@@ -5,5 +5,5 @@ public class CreateQuestRequest
     public int EventId { get; set; }
     public int ResultId { get; set; }
     public int GroupId { get; set; }
-    public string Desctiption { get; set; }
+    public string Description { get; set; }
 }
