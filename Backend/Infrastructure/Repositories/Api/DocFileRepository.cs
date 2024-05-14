@@ -48,7 +48,6 @@ public class DocFileRepository
 
         Section s = document.AddSection();
 
-
         String[] Header =
         {
             "Наименование мероприятия",

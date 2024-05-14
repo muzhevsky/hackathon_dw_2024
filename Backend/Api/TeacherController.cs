@@ -18,12 +18,10 @@ public class TeacherController : ControllerBase
     }
 
     [HttpPost("/quest")]
-    public ActionResult CreateQuest([FromBody] CreateQuestRequest request)
+    public ActionResult<int> CreateQuest([FromBody] CreateQuestRequest request)
     {
         var userId = this.UserId() ?? throw new AuthException("unauthorized");
-
-        _questRepository.Create(request, userId);
-        return Ok();
+        return Ok(_questRepository.Create(request, userId));
     }
     
     [HttpGet("/quest")]
