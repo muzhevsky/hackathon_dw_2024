@@ -51,7 +51,7 @@ create table requests
     user_id   integer not null
         constraint requests_users_fk
             references users,
-    rejected  boolean not null,
+    confirmed boolean not null,
     file_path varchar(64)
 );
 
@@ -177,7 +177,10 @@ create table teachers
             references users,
     department_id integer not null
         constraint teachers_departments_fk
-            references departments
+            references departments,
+    id            serial
+        constraint teachers_pk
+            primary key
 );
 
 alter table teachers
@@ -312,7 +315,25 @@ create table custom_achievements
 alter table custom_achievements
     owner to postgres;
 
+create table quests
+(
+    id          serial
+        constraint quests_pk
+            primary key,
+    event_id    integer not null
+        constraint quests_events_fk
+            references events,
+    result_id   integer not null
+        constraint quests_results_fk
+            references event_results,
+    teacher_id  integer not null
+        constraint quests_teachers_fk
+            references teachers,
+    description text
+);
 
+alter table quests
+    owner to postgres;
 
 
 insert into institutes(title, full_title) values('ИнПИТ', 'Институт прикладных информационных технологий и коммуникаций');

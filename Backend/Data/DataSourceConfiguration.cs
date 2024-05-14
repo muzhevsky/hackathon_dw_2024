@@ -8,8 +8,10 @@ using Hackaton_DW_2024.Data.DataSources.FileSystem;
 using Hackaton_DW_2024.Data.DataSources.Groups;
 using Hackaton_DW_2024.Data.DataSources.Institutes;
 using Hackaton_DW_2024.Data.DataSources.News;
+using Hackaton_DW_2024.Data.DataSources.Requests;
 using Hackaton_DW_2024.Data.DataSources.Specialities;
 using Hackaton_DW_2024.Data.DataSources.Students;
+using Hackaton_DW_2024.Data.DataSources.Teachers;
 using Hackaton_DW_2024.Data.DataSources.Users;
 using Hackaton_DW_2024.Data.DataSources.UsersAndEvents;
 using Hackaton_DW_2024.Data.Package;
@@ -34,6 +36,7 @@ public static class DataSourceConfiguration
         services.AddSingleton<IEventResultsDataSource, EfEventResultDataSource>();
         services.AddSingleton<ICustomAchievementDataSource, EfCustomAchievementDataSource>();
         services.AddSingleton<IUsersAndEventsDataSource, EfUsersAndEventsDataSource>();
+        services.AddSingleton<IRequestDataSource, EfRequestDataSource>();
         
 
         // institute structure
@@ -45,5 +48,6 @@ public static class DataSourceConfiguration
         // users
         services.AddSingleton<IUsersDataSource, EfUserDataSource>();
         services.AddSingleton<IStudentsDataSource, EfStudentsDataSource>();
+        services.AddSingleton<ITeacherDataSource, EfTeacherDataSource>();
     }
 }
