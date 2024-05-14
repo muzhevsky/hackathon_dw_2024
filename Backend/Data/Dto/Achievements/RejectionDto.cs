@@ -15,7 +15,7 @@ public class RejectionDto: Dto
     public string Reason { get; set; }
     
     [Column("date")]
-    public DateTime Date { get; set; } // TODO date should be UTC
+    public DateTime Date { get; set; }
     
     static string _structureName = "rejections";
     public static string StructureName => _structureName;

@@ -1,4 +1,3 @@
-using Hackaton_DW_2024.Data.DataSources.Events;
 using Hackaton_DW_2024.Data.DataSources.UsersAndEvents;
 
 namespace Hackaton_DW_2024.Internal.UseCases;
