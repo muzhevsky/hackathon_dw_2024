@@ -10,6 +10,7 @@ import { ConfigProvider } from 'antd';
 import { GroupRepository } from './store/GroupRepository';
 import { EventRepository } from './store/EventsRepository';
 import { EventResultRepository } from './store/EventsResultRepository';
+import ScholarshipStore from './store/ScholarshipStore';
 
 interface State {
 	userStore: UserStore,
@@ -17,7 +18,8 @@ interface State {
 	eventsStore: EventsStore,
 	groupRepository: GroupRepository,
 	eventRepository: EventRepository,
-	eventResiltRepository: EventResultRepository
+	eventResiltRepository: EventResultRepository,
+	scholarshipStore: ScholarshipStore
 }
 
 export const userStore = new UserStore();
@@ -26,6 +28,7 @@ export const eventsStore = new EventsStore();
 export const groupRepository = new GroupRepository();
 export const eventRepository = new EventRepository();
 export const eventResiltRepository = new EventResultRepository();
+export const scholarshipStore = new ScholarshipStore();
 
 export const Context = createContext<State>({
 	userStore,
@@ -33,7 +36,8 @@ export const Context = createContext<State>({
 	eventsStore,
 	groupRepository,
 	eventRepository,
-	eventResiltRepository
+	eventResiltRepository,
+	scholarshipStore
 })
 
 const root = ReactDOM.createRoot(
@@ -58,7 +62,8 @@ root.render(
 			eventsStore,
 			groupRepository,
 			eventRepository,
-			eventResiltRepository
+			eventResiltRepository,
+			scholarshipStore
 		}}>
 			<RouterProvider router={Router} />
 		</Context.Provider>
