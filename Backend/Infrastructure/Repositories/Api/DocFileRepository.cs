@@ -1,4 +1,5 @@
 using System.Drawing;
+using Hackaton_DW_2024.Data.Config;
 using Hackaton_DW_2024.Data.DataSources.Requests;
 using Hackaton_DW_2024.Data.Dto.Achievements;
 using Hackaton_DW_2024.Internal.Entities;
@@ -13,11 +14,12 @@ namespace Hackaton_DW_2024.Infrastructure.Repositories.Api;
 public class DocFileRepository
 {
     IRequestDataSource _requestDataSource;
-    const string PathString = "/app/static/requests/";
+    readonly string _filePath;
 
-    public DocFileRepository(IRequestDataSource requestDataSource)
+    public DocFileRepository(IRequestDataSource requestDataSource, StaticFileConfig fileConfig)
     {
         _requestDataSource = requestDataSource;
+        _filePath = Path.Combine(fileConfig.StaticPath, "requests");
     }
 
     public void GenerateDoc(StudentDetails student, GroupDetails group, List<string[]> achievements)
@@ -50,9 +52,9 @@ public class DocFileRepository
         String[] Header =
         {
             "Наименование мероприятия",
-            "Дата проведения", 
-            "Уровень мероприятия", 
-            "Личное / командное достижение", 
+            "Дата проведения",
+            "Уровень мероприятия",
+            "Личное / командное достижение",
             "Статус участия / Результат"
         };
 
@@ -96,10 +98,10 @@ public class DocFileRepository
             UserId = student.User.Id
         };
         _requestDataSource.Insert(dto);
-        var filePath = dto.Id + ".docx";
-        _requestDataSource.UpdateById(dto.Id, requestDto => requestDto.FilePath = filePath);
-        
-        document.SaveToFile(Path.Combine(PathString,filePath), FileFormat.Docx);
+        var fileName = dto.Id + ".docx";
+        _requestDataSource.UpdateById(dto.Id, requestDto => requestDto.FilePath = fileName);
+
+        document.SaveToFile(Path.Combine(_filePath, fileName), FileFormat.Docx);
         document.Close();
     }
 }
