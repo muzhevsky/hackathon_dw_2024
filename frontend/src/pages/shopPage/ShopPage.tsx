@@ -3,7 +3,7 @@ import { FormAddRequest } from "../../widgets/formAddRequest/presentation/FormAd
 const ShopPage: React.FC = () => {
     return(
         <div>
-            <FormAddRequest />
+
         </div>
     )
 }

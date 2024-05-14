@@ -1,7 +1,9 @@
+import { FormAddRequest } from "../formAddRequest/presentation/FormAddRequest";
+
 const Requests: React.FC = () => {
     return(
         <>
-            <h2>Заявки</h2>
+            <FormAddRequest />
         </>
     )
 }
