@@ -2,6 +2,7 @@
 using Hackaton_DW_2024.Data.DataSources.Groups;
 using Hackaton_DW_2024.Data.DataSources.Institutes;
 using Hackaton_DW_2024.Data.DataSources.Specialities;
+using Hackaton_DW_2024.Data.Dto;
 using Hackaton_DW_2024.Data.Dto.Users.Hierarchy;
 using Hackaton_DW_2024.Internal.Converters;
 using Hackaton_DW_2024.Internal.Entities;
@@ -54,7 +55,7 @@ public class InstituteStructureRepository
         return _departmentDtoConverter.ConvertBack(dto);
     }
 
-    public List<Group> GetGroups()
+    public List<Group> GetAllGroups()
     {
         return _groupsDataSource.SelectAll().Select(dto => _groupDtoConverter.ConvertBack(dto)).ToList();
     }
@@ -65,6 +66,13 @@ public class InstituteStructureRepository
         if (dto == null) return null;
         return _groupDtoConverter.ConvertBack(dto);
     }
+
+    public List<Department> GetAllDepartments()
+    {
+        return _departmentsDataSource.SelectAll()
+            .Select(dto => _departmentDtoConverter.ConvertBack(dto))
+            .ToList();
+    }
     
     public Speciality? GetSpecialityById(int id)
     {
@@ -73,6 +81,13 @@ public class InstituteStructureRepository
         return _specialityDtoConverter.ConvertBack(dto);
     }
 
+    public List<Speciality> GetAllSpecialities()
+    {
+        return _specialitiesDataSource.SelectAll()
+            .Select(dto => _specialityDtoConverter.ConvertBack(dto))
+            .ToList();
+    }
+    
     public GroupDetails? GetGroupDetails(int id)
     {
         var group = GetGroupById(id);
@@ -91,7 +106,7 @@ public class InstituteStructureRepository
     public List<Institute> GetAllInstitutes()
     {
         return _instituteDataSource.SelectAll()
-            .Select(dto => new Institute { Title = dto.Title })
+            .Select(dto => _insituteDtoConverter.ConvertBack(dto))
             .ToList();
     }
 }
