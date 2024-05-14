@@ -10,6 +10,7 @@ namespace Hackaton_DW_2024.Api;
 
 [ApiController]
 [Route("/")]
+[Authorize("")]
 public class StudentController : ControllerBase
 {
     StudentRequestUseCase _requestUseCase;

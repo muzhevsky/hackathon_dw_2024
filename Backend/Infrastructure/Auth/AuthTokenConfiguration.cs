@@ -6,7 +6,6 @@ public class AuthTokenConfiguration
     {
         var durationString = Environment.GetEnvironmentVariable(environment.DurationVarName) ?? throw new Exception("Necessary environment variable is not set");
         SigningKey = Environment.GetEnvironmentVariable(environment.SigningKeyVarName) ?? throw new Exception("Necessary environment variable is not set");
-
         DurationInMinutes = int.Parse(durationString);
     }
 
