@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './EventCardModal.module.css'
 import Modal from "antd/lib/modal/Modal";
-import Img from "../../shared/assets/sad.svg";
+import Img from "../../shared/assets/web.png";
 
 interface EventCardModalProps {
     id: number;
@@ -17,24 +17,23 @@ interface EventCardModalProps {
 const EventCardModal: React.FC<EventCardModalProps> = ({id,title,startDate,endDate,statusId,description, isOpen, setOpen}) => {
 
     return (
-        <Modal
-            title={title}
-            style={{ top: 20 }}
-            footer={null}
-            open={isOpen}
-            onOk={() => setOpen(false)}
-            onCancel={() => setOpen(false)}
-        >
-            <div className={styles.row}>
-                <div className={styles.imgSize}>
-                    <img className={styles.imgSize} src={Img} alt=""/>
-                </div>
-
-                <div className={styles.col}>
-                    <p className={styles.description}>{description}</p>
-                </div>
-            </div>
-        </Modal>
+        <div >
+            <Modal
+                title={title}
+                style={{ top: 20 }}
+                footer={null}
+                open={isOpen}
+                onOk={() => setOpen(false)}
+                onCancel={() => setOpen(false)}
+            >
+                    <div className={styles.cardViev}>
+                        <img className={styles.imgSize} src={Img} alt=""/>
+                    </div>
+                    <div className={styles.col}>
+                        <p className={styles.description}>{description}</p>
+                    </div>
+            </Modal>
+        </div>
     );
 };
 
