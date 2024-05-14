@@ -13,9 +13,10 @@ public class TeacherController : ControllerBase
     UserRepository _userRepository;
     QuestRepository _questRepository;
 
-    public TeacherController(UserRepository userRepository)
+    public TeacherController(UserRepository userRepository, QuestRepository questRepository)
     {
         _userRepository = userRepository;
+        _questRepository = questRepository;
     }
 
 <<<<<<< HEAD

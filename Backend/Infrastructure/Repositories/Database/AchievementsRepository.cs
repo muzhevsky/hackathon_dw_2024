@@ -58,7 +58,7 @@ public class AchievementsRepository
         {
             var custom = _customAchievementDataSource.SelectByAchievementId(id);
             title = custom.Title;
-            date = custom.Date;
+            date = custom.Date.ToString();
             status = _eventStatusesDataSource.SelectById(id).Title;
         }
         else

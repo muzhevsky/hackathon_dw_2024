@@ -306,7 +306,7 @@ create table custom_achievements
         constraint custom_achievements_achievements_fk
             references achievements,
     title          varchar(128) not null,
-    date           date         not null,
+    date           varchar(64)  not null,
     status_id      integer      not null
         constraint custom_achievements_event_statuses_fk
             references event_statuses
@@ -334,6 +334,8 @@ create table quests
 
 alter table quests
     owner to postgres;
+
+
 
 
 insert into institutes(title, full_title) values('ИнПИТ', 'Институт прикладных информационных технологий и коммуникаций');
