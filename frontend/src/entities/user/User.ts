@@ -3,9 +3,8 @@ export interface User{
     login: string;
     surname: string;
     name: string;
-    patronomyc: string | null;
-    password_hash: string;
-    role_id: number;
+    patronymic: string | null;
+    role: string;
 }
 
 export const testUser: User = {
@@ -13,7 +12,6 @@ export const testUser: User = {
     login: "katya_yuneva@mail.ru",
     surname: "Юнева",
     name: "Екатерина",
-    patronomyc: "Петровна",
-    password_hash: "123456",
-    role_id: 4
+    patronymic: "Петровна",
+    role: "student"
 }

@@ -15,6 +15,7 @@ const ProfileInfo: React.FC = observer(() => {
     const [addInfo, setAddInfo] = useState<Group>();
 
     useEffect(() => {
+        console.log(userStore.user);
         if (userStore.activeUserRole && userStore.activeUserRole.type === "student") {
             const response = GroupService.getGroupById(userStore.activeUserRole.groupId);
             response.then((response) => {
@@ -34,12 +35,12 @@ const ProfileInfo: React.FC = observer(() => {
                         <div className={styles.nsp}>
                             <p className={styles.nsp}>{`Фамилия: ${userStore.user?.surname}`}</p>
                             <p className={styles.nsp}>{`Имя: ${userStore.user?.name}`}</p>
-                            <p className={styles.nsp}>{`Отчество: ${userStore.user?.patronomyc}`}</p>
+                            <p className={styles.nsp}>{`Отчество: ${userStore.user?.patronymic}`}</p>
                         </div>
 
 
                         {
-                            userStore.activeRole?.title === "user"
+                            userStore.user?.role === "student"
                                 ? <StudentInfo departamentTitle={"Инпит"} groupInfo={addInfo ?? testGroup}/>
                                 : null
                         }

@@ -10,7 +10,7 @@ class UserStore{
     private _activeToken: string | null = null;
     private _isAuth: boolean = false;
     //TODO исправить начальное положение на null
-    private _activeRole: Role | null = {id: 4, title: "user"};
+    private _activeRole: string | null = null;
     private _user: User | null = testUser;
     private _activeUserRole: Student | Teacher | Departament | null = null;
     private _departament: Departament | null = null;
@@ -40,7 +40,7 @@ class UserStore{
         return this._activeRole;
     }
 
-    set activeRole(activeRole: Role | null){
+    set activeRole(activeRole: string | null){
         this._activeRole = activeRole;
     }
 

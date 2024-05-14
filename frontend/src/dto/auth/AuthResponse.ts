@@ -10,5 +10,5 @@ interface UserResponseAuth{
     surname: string;
     name: string;
     patronymic: string;
-    role: number | string;
+    role: string;
 }

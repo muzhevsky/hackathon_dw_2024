@@ -44,8 +44,8 @@ const HomePage: React.FC = () => {
         })
 
         if (locate.pathname === HOME_PATH) {
-            switch (userStore.activeRole?.title) {
-                case "user":
+            switch (userStore.user?.role) {
+                case "student":
                     return navigate(itemsNavigateStudent[0]);
                 case "teacher":
                     return navigate(itemsNavigateTeacher[0]);
@@ -60,9 +60,10 @@ const HomePage: React.FC = () => {
         <>
             {
                 isLoading
-                    ? <>             <ProfileInfo /> <BalanceCounter count={658999}/>
+                    ? <>             
+                        <ProfileInfo /> 
+                        <BalanceCounter count={658999}/>
                         <NavigateTabs />
-
                         <Outlet></Outlet>
                     </>
                     : <LoadingPage />
