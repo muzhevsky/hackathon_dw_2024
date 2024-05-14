@@ -13,7 +13,6 @@ public class DefaultFileSystem : IFileSystem
 
     public void Write(FileDto file)
     {
-        Console.WriteLine(file.Path);
         using (var fileStream = new FileStream(_webHostEnvironment.WebRootPath + "/" + file.Path, FileMode.Create))
         {
             file.Stream.CopyTo(fileStream);

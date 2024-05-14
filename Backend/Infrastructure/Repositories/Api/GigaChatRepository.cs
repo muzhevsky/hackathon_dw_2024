@@ -42,6 +42,7 @@ public class GigaChatRepository
 
             try
             {
+                Console.WriteLine(authorizationHeader);
                 var response = await httpClient.SendAsync(httpRequestMessage);
                 if (response.IsSuccessStatusCode)
                 {

@@ -1,5 +1,5 @@
 import { AchievementCreateDto } from "../dto/achievement/CreateDro";
-import { Achievement } from "../entities/achievement/Achievement";
+import { AchConnected, AchCustom, Achievement } from "../entities/achievement/Achievement";
 import { DataAchievementFromBack } from "../entities/achievement/FormAchievement";
 import $api, { API_URL } from "../shared/utils/Api";
 
@@ -24,6 +24,18 @@ class AchievementService{
             console.log(e);
             return []
         }
+    }
+
+    public static async connect(dto: AchConnected){
+        return (await $api.post(`${API_URL}/achievement/connected`, dto)).data;
+    }
+
+    public static async custom(dto: AchCustom){
+        return (await $api.post(`${API_URL}/achievement/custom`, dto)).data;
+    }
+
+    public static async requestScholar(ids: number[]){
+        return (await $api.post(`${API_URL}/request`, {achievements: ids})).data;
     }
 }
 

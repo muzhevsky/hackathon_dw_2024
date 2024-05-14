@@ -1,4 +1,5 @@
 ﻿using Hackaton_DW_2024.Data.Config;
+using Hackaton_DW_2024.Data.Dto;
 using Hackaton_DW_2024.Data.Dto.Achievements;
 using Hackaton_DW_2024.Data.Dto.Events;
 using Hackaton_DW_2024.Data.Dto.Users;
@@ -37,7 +38,7 @@ public class ApplicationContext : DbContext
     public DbSet<EventStatusDto> EventStatuses { get; set; }
     public DbSet<EventResultDto> EventResults { get; set; }
     public DbSet<UsersAndEventsDto> UsersAndEvents { get; set; }
-    public DbSet<AchievementsAndEventsDto> AchievementsAndEvents { get; set; }
+    public DbSet<QuestDto> Quests { get; set; }
     
     public ApplicationContext(DatabaseConnectionConfig config)
     {

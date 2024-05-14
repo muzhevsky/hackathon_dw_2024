@@ -2,19 +2,19 @@ import { ItemSelect } from "../../shared/ui/select/CustomizeSelect";
 
 export const ItemsEventLevel: ItemSelect[] = [
     {
-        value: "Международный",
+        value: "1",
         label: "Международный"
     },
     {
-        value: "Всероссийский",
+        value: "2",
         label: "Всероссийский"
     },
     {
-        value: "Региональный",
+        value: "3",
         label: "Региональный"
     },
     {
-        value: "Внутривузовский",
+        value: "4",
         label: "Внутривузовский"
     }
 ];

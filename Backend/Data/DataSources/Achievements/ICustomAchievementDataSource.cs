@@ -7,4 +7,5 @@ public interface ICustomAchievementDataSource
     CustomAchievementDto? SelectById(int id);
     CustomAchievementDto? SelectByAchievementId(int id);
     void Insert(CustomAchievementDto dto);
+    void RemoveById(int id);
 }

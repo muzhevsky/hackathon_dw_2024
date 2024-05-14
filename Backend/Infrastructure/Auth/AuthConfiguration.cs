@@ -9,7 +9,7 @@ public static class AuthConfiguration
     public static void AddJwtAuth(this IServiceCollection services, AuthTokenConfiguration config)
     {
         services.AddSingleton(config);
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)  
             .AddJwtBearer(x =>
                 {
                     x.TokenValidationParameters = new TokenValidationParameters()

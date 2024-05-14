@@ -1,4 +1,6 @@
+using Hackaton_DW_2024.App;
 using Hackaton_DW_2024.Data;
+using Hackaton_DW_2024.Data.Config;
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Logging;
 using Hackaton_DW_2024.Internal;
@@ -9,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.AddSingleton<ILogger>(new ConsoleLogger(builder.Environment.IsDevelopment()));
+services.AddSingleton<StaticFileConfig>();
 
 services.AddDataSources();
 services.AddDomain();
@@ -39,11 +42,7 @@ app.UseCors(policy =>
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath)),
-    RequestPath = "/static"
-});
+app.UseStaticFileServer(new StaticFileConfig());
 
 app.MapControllers();
 app.Run();
