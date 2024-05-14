@@ -41,7 +41,10 @@ public class AchievementsRepository
         _eventsDataSource = eventsDataSource;
         _eventResultsDataSource = eventResultsDataSource;
         _eventStatusesDataSource = eventStatusesDataSource;
-        _pathString = Path.Combine(fileConfig.StaticPath, "/achievements");
+
+        var combined = Path.Combine(fileConfig.StaticPath, "achievements");
+        Directory.CreateDirectory(combined);
+        _pathString = combined+"/";
     }
 
     public Achievement? GetById(int id)
