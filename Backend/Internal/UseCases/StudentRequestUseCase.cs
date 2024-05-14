@@ -1,6 +1,8 @@
 using Hackaton_DW_2024.Api.Auth;
+using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Infrastructure.Repositories.Api;
 using Hackaton_DW_2024.Infrastructure.Repositories.Database;
+using Hackaton_DW_2024.Internal.Entities;
 
 namespace Hackaton_DW_2024.Internal.UseCases;
 
@@ -23,11 +25,21 @@ public class StudentRequestUseCase
         _achievementsRepository = achievementsRepository;
     }
 
-    public void SendRequest(int userId)
+    public void SendRequest(AchievementSetRequest request, int userId)
     {
         var studentDetails = _studentRepository.GetStudentDetailsByUserId(userId);
         var groupDetails = _instituteStructureRepository.GetGroupDetails(studentDetails.Group.Id);
-        _docFileRepository.GenerateDoc(studentDetails, groupDetails);
+
+        var achievements = new List<AchievementForRequest>();
+        
+        foreach (var id in request.Achievements)
+        {
+            achievements.Add(_achievementsRepository.GetAchievementForRequestById(id));
+        }
+        
+        _docFileRepository.GenerateDoc(studentDetails, groupDetails, achievements
+            .Select(a => a.ToArray())
+            .ToList());
     }
     
     public StudentBasicDataResponse GetStudent(int userId)

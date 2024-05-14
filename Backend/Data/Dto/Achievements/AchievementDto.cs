@@ -25,6 +25,9 @@ public class AchievementDto: Dto
     
     [Column("result_id")]
     public int ResultId { get; set; }
+    
+    [Column("event_id")]
+    public int? EventId { get; set; }
 
     
     static string _structureName = "achievements";
