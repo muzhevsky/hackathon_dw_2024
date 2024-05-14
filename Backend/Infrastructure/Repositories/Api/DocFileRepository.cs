@@ -1,4 +1,6 @@
 using System.Drawing;
+using Hackaton_DW_2024.Data.DataSources.Requests;
+using Hackaton_DW_2024.Data.Dto.Achievements;
 using Hackaton_DW_2024.Internal.Entities;
 using Hackaton_DW_2024.Internal.Entities.Users;
 using Spire.Doc;
@@ -10,6 +12,13 @@ namespace Hackaton_DW_2024.Infrastructure.Repositories.Api;
 
 public class DocFileRepository
 {
+    IRequestDataSource _requestDataSource;
+
+    public DocFileRepository(IRequestDataSource requestDataSource)
+    {
+        _requestDataSource = requestDataSource;
+    }
+
     public void GenerateDoc(StudentDetails student, GroupDetails group, List<string[]> achievements)
     {
         var document = new Document();
@@ -80,7 +89,16 @@ public class DocFileRepository
         }
 
         document.PrivateFontList.Add(new PrivateFontPath("TimesNewRoman", "/usr/share/fonts/times.ttf"));
-        document.SaveToFile("./Requests/ReplacePlaceholders.docx", FileFormat.Docx);
+        var dto = new RequestDto
+        {
+            Confirmed = false,
+            UserId = student.User.Id
+        };
+        _requestDataSource.Insert(dto);
+        var filePath = dto.Id + ".docx";
+        _requestDataSource.UpdateById(dto.Id, requestDto => requestDto.FilePath = filePath);
+        
+        document.SaveToFile("./Requests/"+filePath, FileFormat.Docx);
         document.Close();
     }
 }
