@@ -7,45 +7,7 @@ import $api, { API_URL } from "../shared/utils/Api";
 
 class EventsService{
     public static async getEvents(): Promise<EventForCabinet[]>{
-        // return (await $api.get(`${API_URL}/events`)).data;
-        return [
-            {
-                type: "event",
-                id: 1,
-                title: "Event1",
-                startDate: new Date(),
-                endDate: new Date(),
-                statusId: "Международный",
-                description: "Какое-то описание..."
-            },
-            {
-                type: "event",
-                id: 2,
-                title: "Event2",
-                startDate: new Date(),
-                endDate: new Date(),
-                statusId: "Международный",
-                description: "Какое-то описание..."
-            },
-            {
-                type: "event",
-                id: 3,
-                title: "Event3",
-                startDate: new Date(),
-                endDate: new Date(),
-                statusId: "Международный",
-                description: "Какое-то описание..."
-            },
-            {
-                type: "event",
-                id: 4,
-                title: "Event4",
-                startDate: new Date(),
-                endDate: new Date(),
-                statusId: "Международный",
-                description: "Какое-то описание..."
-            }
-        ];
+        return (await $api.get(`${API_URL}/events`)).data;
     }
 
     public static async getAllEvents(): Promise<(EventForCabinet | New | Request)[]>{

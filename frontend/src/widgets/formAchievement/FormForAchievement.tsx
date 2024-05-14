@@ -1,11 +1,14 @@
-import { Input } from "antd";
+import { AutoComplete, Input } from "antd";
 import { observer } from "mobx-react-lite";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../..";
 import { DataAchievementFromBack, FormAchievement } from "../../entities/achievement/FormAchievement";
 import { Event } from "../../entities/event/Event";
+import { EventForCabinet } from "../../entities/event/EventForCabinet";
 import { ItemsEventLevel, ItemsTypeEvent } from "../../entities/event/TypeEvent";
 import useInput from "../../hooks/UseInput";
+import EventsService from "../../servises/EventsService";
+import AutoCompleteInput from "../../shared/ui/autoComplete/AutoCompleteInput";
 import PrimaryButton from "../../shared/ui/button/PrimaryButton";
 import CustomizeSelect from "../../shared/ui/select/CustomizeSelect";
 import styles from './FormForAchievement.module.css'
@@ -24,6 +27,8 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
     const placeState = useInput(result);
     const [eventLevelState, setEventLevelState] = useState<string>(ItemsEventLevel[0].value);
     const [typeEventState, setTypeEventState] = useState<string>(ItemsTypeEvent[0].value);
+    const [event, setEvent] = useState<EventForCabinet | null>(null);
+    const [events, setEvents] = useState<EventForCabinet[]>([]);
 
     const clickHandler = () => {
         const form: Event = {
@@ -39,11 +44,27 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
         closeHandler();
     }
 
+    const onSelectHandler = (str?: EventForCabinet) => {
+        setEvent(str ?? null);
+    }
+
+    useEffect(() => {
+        const response = EventsService.getEvents();
+        response.then(response => {
+            setEvents(response);
+        })
+    }, [])
+
     return (
         <div>
             <div>
                 <p>Наименование мероприятия</p>
-                <Input placeholder="Наименование мероприятия" value={title} onChange={nameEventState.onChange}/>
+                {/* <Input placeholder="Наименование мероприятия" value={title} onChange={nameEventState.onChange}/> */}
+                <AutoCompleteInput 
+                    items={events} 
+                    onSelectHandler={onSelectHandler} 
+                    placeholder={"Наименование мероприятия"} 
+                    defaultValue={nameEventState.value}/>
             </div>
 
             <div>
