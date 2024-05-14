@@ -1,8 +1,10 @@
 import { observer } from "mobx-react-lite";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../..";
 import { EventForCabinet } from "../../entities/event/EventForCabinet";
 import PrimaryButton from "../../shared/ui/button/PrimaryButton";
+import styles from "./GlobalEventCard.module.css";
+import Img from "../../shared/assets/sad.svg";
 
 interface GlobalEventCardProps{
     event: EventForCabinet;
@@ -28,12 +30,21 @@ const GlobalEventCard: React.FC<GlobalEventCardProps> = observer(({event}) => {
     }, [addHandler, hasInEvents])
 
     return(
-        <div>
-            <p>{event.title}</p>
-            <p>{event.description}</p>
-            <p>{event.startDate.toLocaleDateString()}</p>
-            <PrimaryButton content={hasInEvents ? "Уже участвуете" :"Участвовать"} disabled={hasInEvents} clickHandler={addHandler} size={"middle"}/>
-            <p>Подробнее...</p>
+        <div className={styles.cardViev}>
+            <div className={styles.container__image}>
+                <img className={styles.imgSize} src={Img} alt=""/>
+            </div>
+            <div className={styles.row}>
+                <p className={styles.title}>{event.title}</p>
+                <p className={styles.date}>{event.startDate.toLocaleDateString()}</p>
+            </div>
+
+            <p className={styles.description}>{event.description}</p>
+            <div className={styles.buttonWrap}>
+                <PrimaryButton content={hasInEvents ? "Уже участвуете" : "Участвовать"} disabled={hasInEvents}
+                               clickHandler={addHandler} size={"middle"}/>
+            </div>
+
         </div>
     )
 })

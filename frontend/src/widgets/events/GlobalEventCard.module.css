@@ -22,10 +22,24 @@
 .title{
     font-size: 1.5vw;
     font-weight: bold;
-    font-family: Inter, serif;
+    font-family: Inter, sans-serif;
     color: black;
     margin: 1vw;
-    width: 10vw;
+    width: 9vh;
+    height: fit-content;
+}
+.buttonWrap{
+    width: 15vw;
+    display: flex;
+    justify-content: center;
+    padding: 1vh;
+}
+.description{
+    font-size: 1vw;
+    font-weight: normal;
+    font-family: Inter, sans-serif;
+    margin: 0.75vh 1vw;
+    padding-bottom: 1vh;
 }
 
 .row{
@@ -44,19 +58,3 @@
     width: 7vw;
 }
 
-.status{
-    font-size: 1.5vw;
-    font-weight: bold;
-    font-family: Inter, serif;
-    color: #02006B;
-    margin: 0.25vh 0.5vw;
-    width: 4vw;
-}
-
-.description{
-    font-size: 1vw;
-    font-weight: bold;
-    font-family: Inter, Italic;
-    margin: 0.75vh 1vw;
-    padding-bottom: 1vh;
-}

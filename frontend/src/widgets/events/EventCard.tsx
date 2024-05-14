@@ -16,25 +16,32 @@ const EventCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, sta
 
     return (
         <div className={styles.cardViev}>
-            <p className={styles.title}>{title}</p>
             <div className={styles.container__image}>
-                <div className={styles.img}>
-                    <img src={Img} alt=""/>
-                </div>
+                <img className={styles.imgSize} src={Img} alt=""/>
+            </div>
+            <div className={styles.row}>
+                <p className={styles.status}>{statusId}</p>
+                <p className={styles.date}>{endDate.toLocaleDateString()}</p>
+            </div>
+            <div>
+                <p className={styles.title}>{title}</p>
+            </div>
+            <div>
                 <p className={styles.description}>{description}</p>
             </div>
 
-            <div className={styles.container}>
-                {startDate ? (
-                    <p className={styles.date}>{displayDate}</p>
-                ) : (
-                    <>
-                        <p className={styles.date}>{endDate.toLocaleDateString()}</p>
-                        <p className={styles.additions}>Подробнее (Мероприятие)</p>
-                    </>
 
-                )}
-            </div>
+            {/*<div className={styles.container}>*/}
+            {/*    {startDate ? (*/}
+            {/*        <p className={styles.date}>{displayDate}</p>*/}
+            {/*    ) : (*/}
+            {/*        <>*/}
+            {/*            <p className={styles.date}>{endDate.toLocaleDateString()}</p>*/}
+            {/*            <p className={styles.additions}>Подробнее (Мероприятие)</p>*/}
+            {/*        </>*/}
+
+            {/*    )}*/}
+            {/*</div>*/}
 
         </div>
     );

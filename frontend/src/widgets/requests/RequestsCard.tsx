@@ -19,8 +19,8 @@ const RequestCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, s
 
             <p className={styles.title}>{title}</p>
             <div className={styles.container__image}>
-                <div className={styles.img}>
-                    <img src={Img} alt=""/>
+                <div className={styles.imgS}>
+                    <img className={styles.img} src={Img} alt=""/>
                 </div>
                 <p className={styles.description}>{description}</p>
             </div>
@@ -30,8 +30,11 @@ const RequestCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, s
                     <p className={styles.date}>{displayDate}</p>
                 ) : (
                     <>
-                        <p className={styles.date}>{endDate.toLocaleDateString()}</p>
-                        <p className={styles.additions}>Подробнее</p>
+                        <div className={styles.row}>
+                            <p className={styles.date}>{endDate.toLocaleDateString()}</p>
+                            <p className={styles.additions}>Подробнее</p>
+                        </div>
+
                     </>
 
                 )}
