@@ -11,7 +11,6 @@ namespace Hackaton_DW_2024.Api;
 
 [ApiController]
 [Route("/")]
-[Authorize("")]
 public class StudentController : ControllerBase
 {
     StudentRequestUseCase _requestUseCase;
@@ -26,6 +25,7 @@ public class StudentController : ControllerBase
         _eventsRepository = eventsRepository;
     }
 
+    [Authorize]
     [HttpPost("/achievement/attach")]
     public async Task<IActionResult> AttachAchievementFile([FromForm] AddAchievementFileRequest fileRequest)
     {
@@ -38,27 +38,35 @@ public class StudentController : ControllerBase
     public ActionResult AddConnectedAchievement([FromBody] AddConnectedAchievementRequest request)
     {
         _achievementsUseCase.AddConnected(request);
-        return Ok();
+        return Ok("done");
     }
 
     [HttpPost("/achievement/custom")]
     public ActionResult AddCustomAchievement([FromBody] AddCustomAchievementRequest request)
     {
         _achievementsUseCase.AddCustom(request);
-        return Ok();
+        return Ok("done");
     }
 
+    [HttpGet("/achievement")]
+    public ActionResult<Achievement> GetAchievementById([FromQuery] int achievementId)
+    {
+        return Ok(_achievementsUseCase.GetAchievement(achievementId));
+    }
+
+    [Authorize]
     [HttpGet("/achievements")]
     public ActionResult<List<Achievement>> GetAchievements()
     {
         return Ok(_achievementsUseCase.GetAchievements(this.UserId() ?? throw new AuthException("unauthorized")));
     }
 
+    [Authorize]
     [HttpPost("/request")]
     public ActionResult GenerateDoc([FromBody] AchievementSetRequest request)
     {
         _requestUseCase.SendRequest(request, this.UserId() ?? throw new AuthException("unauthorized"));
-        return Ok();
+        return Ok("done");
     }
 
     [HttpGet("/student")]
@@ -67,17 +75,19 @@ public class StudentController : ControllerBase
         return _requestUseCase.GetStudent(id);
     }
 
+    [Authorize]
     [HttpPost("/event/subscribe")]
     public ActionResult SubscribeOnEvent([FromQuery] int eventId)
     {
         _eventsRepository.AddToUser(eventId, this.UserId() ?? throw new AuthException("unauthorized"));
-        return Ok();
+        return Ok("done");
     }
 
+    [Authorize]
     [HttpPost("/event/unsubscribe")]
     public ActionResult Unsubscribe([FromQuery] int eventId)
     {
         _eventsRepository.RemoveFromUser(eventId, this.UserId() ?? throw new AuthException("unauthorized"));
-        return Ok();
+        return Ok("done");
     }
 }

@@ -79,6 +79,13 @@ public class StudentAchievementsUseCase
         return _achievementsRepository.AchievementsOfStudent(student);
     }
 
+    public Achievement GetAchievement(int achievementId)
+    {
+        var achievement = _achievementsRepository.GetById(achievementId);
+        if (achievement == null) throw new EntityNotFoundException("no achievement found");
+        return achievement;
+    }
+
     public void AddConnected(AddConnectedAchievementRequest request)
     {
         var achievement = _achievementsRepository.GetById(request.Id);
