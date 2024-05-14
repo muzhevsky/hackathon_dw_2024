@@ -22,10 +22,11 @@ const EventCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, sta
             <div className={styles.WrapEventInfo}>
                 <div className={styles.row}>
                     <p className={styles.status}>Всероссийский |</p>
-                    <p className={styles.date}>{endDate.toLocaleDateString()}</p>
+                    {/* <p className={styles.date}>{endDate !== undefined ? endDate.getFullYear(): ''}</p> */}
+                    <p className={styles.date}>{(new Date()).toLocaleDateString()}</p>
                 </div>
                 <p className={styles.title}>{title}</p>
-                <p className={styles.description}>{description}</p>
+                {/* <p className={styles.description}>{description}</p> */}
                 <p className={styles.openContent}>Подробнее...</p>
             </div>
 
