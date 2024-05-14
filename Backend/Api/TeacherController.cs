@@ -18,7 +18,11 @@ public class TeacherController : ControllerBase
         _userRepository = userRepository;
     }
 
+<<<<<<< HEAD
     [HttpPost("/request")]
+=======
+    [HttpPost("/quest")]
+>>>>>>> a8d0791eb8c9c5ddb34b82f7a31d94666b5cab08
     public ActionResult CreateQuest([FromBody] CreateQuestRequest request)
     {
         var userId = 0;
