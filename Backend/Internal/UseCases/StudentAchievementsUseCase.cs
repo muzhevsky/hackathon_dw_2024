@@ -2,6 +2,7 @@ using Hackaton_DW_2024.Api.Student;
 using Hackaton_DW_2024.Infrastructure.Repositories.Api;
 using Hackaton_DW_2024.Infrastructure.Repositories.Database;
 using Hackaton_DW_2024.Internal.Entities;
+using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 using Newtonsoft.Json;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
@@ -32,11 +33,7 @@ public class StudentAchievementsUseCase
     public async Task<AddAchievementFileResponse> AddAchievement(AddAchievementFileRequest fileRequest, int userId)
     {
         var student = _studentRepository.GetStudentByUserId(userId);
-        if (student == null)
-        {
-            _logger.Warn("user not found");
-            return null;
-        }
+        if (student == null) throw new EntityNotFoundException("user not found");
 
         var achievement = new Achievement
         {
@@ -77,11 +74,7 @@ public class StudentAchievementsUseCase
     public List<Achievement> GetAchievements(int userId)
     {
         var student = _studentRepository.GetStudentByUserId(userId);
-        if (student == null)
-        {
-            _logger.Warn("user not found");
-            return [];
-        }
+        if (student == null) throw new EntityNotFoundException("no user found");
 
         return _achievementsRepository.AchievementsOfStudent(student);
     }
@@ -89,6 +82,7 @@ public class StudentAchievementsUseCase
     public void AddConnected(AddConnectedAchievementRequest request)
     {
         var achievement = _achievementsRepository.GetById(request.Id);
+        if (achievement == null) throw new EntityNotFoundException("no achievement found");
         achievement.WithTeam = request.WithTeam;
         achievement.ResultId = request.ResultId;
         Console.WriteLine($"{request.Id}, {request.ResultId}, {request.WithTeam}, {request.EventId}");
@@ -99,6 +93,7 @@ public class StudentAchievementsUseCase
     public void AddCustom(AddCustomAchievementRequest request)
     {
         var achievement = _achievementsRepository.GetById(request.Id);
+        if (achievement == null) throw new EntityNotFoundException("no achievement found");
         _achievementsRepository.AddCustom(achievement, request);
     }
 }

@@ -1,4 +1,3 @@
-using System.Net.Mime;
 using Hackaton_DW_2024.Api;
 using Hackaton_DW_2024.App;
 using Hackaton_DW_2024.Data;
@@ -6,9 +5,7 @@ using Hackaton_DW_2024.Data.Config;
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Logging;
 using Hackaton_DW_2024.Internal;
-using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.Extensions.FileProviders;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -52,10 +52,10 @@ public class AuthUseCase
             Surname = user.Surname,
             Name = user.Name,
             Patronymic = user.Patronymic,
-            Role = (int)Role.Student
+            Role = "student"
         };
 
-        return new SignUpResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id, Role.Student)));
+        return new SignUpResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id)));
     }
 
     public SignInResponse SignIn(SignInRequest request)
@@ -65,9 +65,9 @@ public class AuthUseCase
 
         var hashedPassword = _hashProvider.Hash(request.Password + user.Salt);
         if (!user.PasswordMatches(hashedPassword)) throw new AuthException("wrong password");
-
-        var role = Role.Student;
-        //if (_studentRepository.GetStudentByUserId(user.Id) != null)  todo проверять на препода / админа  / деканат 
+        
+        var role = "student";
+        if (_teacherRepository.GetTeacherByUserId(user.Id) != null) role = "teacher"; 
 
         var userResponse = new UserResponse()
         {
@@ -75,10 +75,10 @@ public class AuthUseCase
             Surname = user.Surname,
             Name = user.Name,
             Patronymic = user.Patronymic,
-            Role = (int)role
+            Role = role
         };
 
-        return new SignInResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id, role)));
+        return new SignInResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id)));
     }
 
     public SignUpResponse SignUpTeacher(TeacherSignUpRequest request)
@@ -98,10 +98,10 @@ public class AuthUseCase
             Surname = user.Surname,
             Name = user.Name,
             Patronymic = user.Patronymic,
-            Role = (int)Role.Student
+            Role = "teacher"
         };
 
-        return new SignUpResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id, Role.Student)));
+        return new SignUpResponse(userResponse, _tokenRepository.ProvideToken(new TokenClaims(user.Id)));
     }
 
     User CreateUser(string login, string password, string surname, string name, string patronymic)

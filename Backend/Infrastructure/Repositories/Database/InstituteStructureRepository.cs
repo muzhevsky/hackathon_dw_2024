@@ -2,7 +2,6 @@
 using Hackaton_DW_2024.Data.DataSources.Groups;
 using Hackaton_DW_2024.Data.DataSources.Institutes;
 using Hackaton_DW_2024.Data.DataSources.Specialities;
-using Hackaton_DW_2024.Data.Dto;
 using Hackaton_DW_2024.Data.Dto.Users.Hierarchy;
 using Hackaton_DW_2024.Internal.Converters;
 using Hackaton_DW_2024.Internal.Entities;
