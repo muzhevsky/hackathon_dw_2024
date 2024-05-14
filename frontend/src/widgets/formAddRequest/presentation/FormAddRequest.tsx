@@ -1,4 +1,4 @@
-import { Button, Input, Select, Space } from "antd";
+import { Button, Form, Input, Select, Space } from "antd";
 import { useForm } from "react-hook-form";
 import DefaultController from "../../../shared/hook-form-tools/DefaultController";
 import PrimaryButton from "../../../shared/ui/button/PrimaryButton";
@@ -8,6 +8,8 @@ import { observer } from "mobx-react-lite";
 import { ALL_SELECT } from "../../../shared/utils/baseCollection";
 import { LabeledValue } from "antd/es/select";
 import { Group } from "../../../entities/group/Group";
+import { AddRequestFormViewModel } from "./AddRequestFormViewModel";
+import { RequestStatus } from "../../../shared/utils/RequestStatus";
 
 interface AddRequestFormData {
     description: string,
@@ -22,7 +24,9 @@ export const FormAddRequest: React.FC = observer(() => {
 
     const addRequestFormApi = useForm<AddRequestFormData>();
 
-    const { control, setValue } = addRequestFormApi;
+    const addRequestFormModel = useMemo(() => new AddRequestFormViewModel(), [])
+
+    const { control, handleSubmit } = addRequestFormApi;
 
     const { groupRepository, eventRepository, eventResiltRepository } = useContext(Context);
 
@@ -57,55 +61,73 @@ export const FormAddRequest: React.FC = observer(() => {
         : [],
         [eventResiltRepository.isLoaded]);
 
+
     return (
-        <Space size={10} direction='vertical'>
-            <DefaultController
-                control={control}
-                name='description'
-                render={
-                    ({ field }) => <Input {...field} />
-                }
-            />
-            <DefaultController
-                control={control}
-                name='groupId'
-                render={
-                    ({ field }) => <Select
-                        {...field}
-                        style={{ width: '100%' }}
-                        labelInValue
-                        options={groupOptions}
-                        loading={groupRepository.isLoading}
-                    />
-                }
-            />
-            <DefaultController
-                control={control}
-                name='eventId'
-                render={
-                    ({ field }) => <Select
-                        {...field}
-                        style={{ width: '100%' }}
-                        labelInValue
-                        options={eventsOptions}
-                        loading={eventRepository.isLoading}
-                    />
-                }
-            />
-            <DefaultController
-                control={control}
-                name='resultId'
-                render={
-                    ({ field }) => <Select
-                        {...field}
-                        style={{ width: '100%' }}
-                        labelInValue
-                        options={eventResultOptions}
-                        loading={eventResiltRepository.isLoading}
-                    />
-                }
-            />
-            <PrimaryButton content="Добавить" clickHandler={() => { }} size='middle' />
-        </Space>
+        <Form onFinish={
+            handleSubmit((from) => addRequestFormModel.createQuest({
+                resultId: from.resultId,
+                groupId: from.groupId,
+                desctiption: from.description,
+                eventId: from.eventId
+            }))
+        }>
+            <Space size={10} direction='vertical'>
+                <DefaultController
+                    control={control}
+                    name='description'
+                    render={
+                        ({ field }) => <Input {...field} />
+                    }
+                />
+                <DefaultController
+                    control={control}
+                    name='groupId'
+                    render={
+                        ({ field }) => <Select
+                            {...field}
+                            style={{ width: '100%' }}
+                            labelInValue
+                            options={groupOptions}
+                            loading={groupRepository.isLoading}
+                        />
+                    }
+                />
+                <DefaultController
+                    control={control}
+                    name='eventId'
+                    render={
+                        ({ field }) => <Select
+                            {...field}
+                            style={{ width: '100%' }}
+                            labelInValue
+                            options={eventsOptions}
+                            loading={eventRepository.isLoading}
+                        />
+                    }
+                />
+                <DefaultController
+                    control={control}
+                    name='resultId'
+                    render={
+                        ({ field }) => <Select
+                            {...field}
+                            style={{ width: '100%' }}
+                            labelInValue
+                            options={eventResultOptions}
+                            loading={eventResiltRepository.isLoading}
+                        />
+                    }
+                />
+                <PrimaryButton
+                    content={addRequestFormModel.createStatus == RequestStatus.LOADING ? 'Загрузка' : "Отправить"}
+                    disabled={addRequestFormModel.createStatus == RequestStatus.LOADING}
+                    clickHandler={() => { }}
+                    size='large'
+                    htmlType='submit'
+                />
+            </Space>
+
+        </Form>
+
     );
 })
