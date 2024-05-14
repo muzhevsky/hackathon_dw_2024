@@ -25,7 +25,7 @@ public static class DataSourceConfiguration
         // configuration
         services.AddSingleton<DatabaseEnvironment, PostgresDatabaseEnvironment>();
         services.AddSingleton<DatabaseConnectionConfig, DatabaseConnectionConfig>();
-        services.AddSingleton<ApplicationContext, ApplicationContext>();
+        services.AddTransient<ApplicationContext, ApplicationContext>();
         
         //news and events
         services.AddSingleton<IEventsDataSource, EfEventsDataSource>();
