@@ -9,6 +9,6 @@ interface UserResponseAuth{
     id: number | string;
     surname: string;
     name: string;
-    pathronomyc: string;
+    patronymic: string;
     role: number | string;
 }
