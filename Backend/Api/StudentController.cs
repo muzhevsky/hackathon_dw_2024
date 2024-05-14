@@ -24,7 +24,6 @@ public class StudentController : ControllerBase
     }
 
     [HttpPost("/achievement/attach")]
-    [Authorize]
     public async Task<IActionResult> AttachAchievementFile([FromForm] AddAchievementFileRequest fileRequest)
     {
         var res = await _achievementsUseCase.AddAchievement(fileRequest, this.UserId());
@@ -46,7 +45,6 @@ public class StudentController : ControllerBase
     }
 
     [HttpGet("/achievements")]
-    [Authorize]
     public ActionResult<List<Achievement>> GetAchievements()
     {
         return Ok(_achievementsUseCase.GetAchievements(this.UserId()));
@@ -60,7 +58,6 @@ public class StudentController : ControllerBase
     }
    
     [HttpGet("/student")]
-    [Authorize]
     public ActionResult<StudentBasicDataResponse> GetStudent()
     {
         return _requestUseCase.GetStudent(this.UserId());
