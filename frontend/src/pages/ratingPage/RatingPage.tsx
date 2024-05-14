@@ -4,7 +4,6 @@ const RatingPage: React.FC = () => {
     return (
         <div>
             <h1>Рейтинг</h1>
-            <Requests />
         </div>
     )
 }
