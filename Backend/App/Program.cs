@@ -39,9 +39,11 @@ app.UseCors(policy =>
 
 app.UseAuthentication();
 app.UseAuthorization();
+Directory.CreateDirectory(builder.Environment.ContentRootPath);
+Directory.CreateDirectory(Path.Combine(builder.Environment.ContentRootPath, "static"));
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath)),
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath+"/static")),
     RequestPath = "/static"
 });
 

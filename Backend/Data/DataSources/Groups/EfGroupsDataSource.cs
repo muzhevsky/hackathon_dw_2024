@@ -20,6 +20,11 @@ public class EfGroupsDataSource: EntityFrameworkDataSource, IGroupsDataSource
         return Groups.FirstOrDefault(dto => dto.Id == id);
     }
 
+    public IEnumerable<GroupDto> SelectAll()
+    {
+        return Groups.ToList();
+    }
+
     public IEnumerable<GroupDto> SelectByDepartmentId(int departmentId)
     {
         return Groups.Where(dto => dto.DepartmentId == departmentId);
