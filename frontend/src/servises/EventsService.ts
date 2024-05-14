@@ -1,5 +1,7 @@
 import { Event } from "../entities/event/Event";
 import { EventForCabinet } from "../entities/event/EventForCabinet";
+import { EventResult } from "../entities/event/EventResult";
+import { EventStatus } from "../entities/event/EventStatus";
 import { testGroup } from "../entities/group/Group";
 import { New } from "../entities/new/New";
 import { Request } from "../entities/request/Request";
@@ -8,6 +10,18 @@ import $api, { API_URL } from "../shared/utils/Api";
 class EventsService{
     public static async getEvents(): Promise<EventForCabinet[]>{
         return (await $api.get(`${API_URL}/events`)).data;
+    }
+
+    public static async getMyEvents(): Promise<EventForCabinet[]>{
+        return (await $api.get(`${API_URL}/myEvents`)).data;
+    }
+
+    public static async getEventStatuses(): Promise<EventStatus[]>{
+        return (await $api.get(`${API_URL}/event_statuses`)).data;
+    }
+
+    public static async getEventResults(): Promise<EventResult[]>{
+        return (await $api.get(`${API_URL}/event_results`)).data;
     }
 
     public static async getAllEvents(): Promise<(EventForCabinet | New | Request)[]>{

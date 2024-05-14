@@ -7,9 +7,10 @@ interface AutoCompleteInputProps{
 	onSelectHandler: (str?: EventForCabinet) => void;
 	placeholder: string;
 	defaultValue: string;
+	changeHandler: (e: string) => void;
 }
 
-const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({items, onSelectHandler, placeholder, defaultValue}) => {
+const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({items, onSelectHandler, placeholder, defaultValue, changeHandler}) => {
 	const [value, setValue] = useState(defaultValue);
 	const [options, setOptions] = useState<{ value: string }[]>([]);
 
@@ -27,6 +28,7 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({items, onSelectHan
 
 	const onChange = (data: string) => {
 		setValue(data);
+		changeHandler(data);
 	};
 
 	return (

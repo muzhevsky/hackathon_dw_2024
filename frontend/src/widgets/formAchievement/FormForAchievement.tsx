@@ -22,7 +22,7 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
     const { userStore } = useContext(Context); 
     const { date, id, result, status, title } = data;
 
-    const nameEventState = useInput(title);
+    const [nameEventState, setNameEventState] = useState<string>(title);
     const dateEventState = useInput(date);
     const placeState = useInput(result);
     const [eventLevelState, setEventLevelState] = useState<string>(ItemsEventLevel[0].value);
@@ -32,7 +32,7 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
 
     const clickHandler = () => {
         const form: Event = {
-            title: nameEventState.value,
+            title: nameEventState,
             userId: userStore.user?.id ?? 1,
             dateStart: dateEventState.value,
             dateEnd: dateEventState.value,
@@ -41,11 +41,17 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
             place: placeState.value
         }
         console.log(form);
+
+        console.log(event);
         closeHandler();
     }
 
     const onSelectHandler = (str?: EventForCabinet) => {
         setEvent(str ?? null);
+    }
+
+    const changeNameEvent = (str: string) => {
+        setNameEventState(str);
     }
 
     useEffect(() => {
@@ -59,12 +65,12 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
         <div>
             <div>
                 <p>Наименование мероприятия</p>
-                {/* <Input placeholder="Наименование мероприятия" value={title} onChange={nameEventState.onChange}/> */}
                 <AutoCompleteInput 
-                    items={events} 
-                    onSelectHandler={onSelectHandler} 
-                    placeholder={"Наименование мероприятия"} 
-                    defaultValue={nameEventState.value}/>
+                    items={events}
+                    onSelectHandler={onSelectHandler}
+                    placeholder={"Наименование мероприятия"}
+                    defaultValue={nameEventState} 
+                    changeHandler={changeNameEvent}/>
             </div>
 
             <div>
