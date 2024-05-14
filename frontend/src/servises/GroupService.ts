@@ -3,7 +3,7 @@ import $api, { API_URL } from "../shared/utils/Api";
 
 class GroupService{
     public static async getGroupById(id: number | string): Promise<Group> {
-        return (await $api.get(`${API_URL}/group/${id}`)).data;
+        return (await $api.get(`${API_URL}/group?id=${id}`)).data;
     }
 }
 

@@ -5,7 +5,7 @@ export interface AuthResponse{
     user: UserResponseAuth;
 }
 
-interface UserResponseAuth{
+export interface UserResponseAuth{
     id: number | string;
     surname: string;
     name: string;

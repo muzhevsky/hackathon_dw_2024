@@ -6,6 +6,7 @@ import {Student} from "../../entities/student/Student";
 import LoadingPage from "../../pages/loadingPage/LoadingPage";
 import DepartamentService from "../../servises/DepartamentService";
 import GroupService from "../../servises/GroupService";
+import StudentService from "../../servises/StudentService";
 import StudentInfo from "../studentInfo/StudentInfo";
 import styles from './ProfileInfo.module.css'
 
@@ -16,12 +17,15 @@ const ProfileInfo: React.FC = observer(() => {
 
     useEffect(() => {
         console.log(userStore.user);
-        if (userStore.activeUserRole && userStore.activeUserRole.type === "student") {
-            const response = GroupService.getGroupById(userStore.activeUserRole.groupId);
-            response.then((response) => {
-                setAddInfo(response);
-                setIsLoading(true);
-                return;
+        if (userStore.user && userStore.user.role === "student") {
+            const resStudent = StudentService.GetStudentById(userStore.user.id);
+            resStudent.then(res => {
+                const response = GroupService.getGroupById(res.groupId);
+                response.then((response) => {
+                    setAddInfo(response);
+                    setIsLoading(true);
+                    return;
+                })
             })
         }
         setIsLoading(true);
