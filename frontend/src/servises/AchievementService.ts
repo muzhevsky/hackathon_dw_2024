@@ -33,6 +33,10 @@ class AchievementService{
     public static async custom(dto: AchCustom){
         return (await $api.post(`${API_URL}/achievement/custom`, dto)).data;
     }
+
+    public static async requestScholar(ids: number[]){
+        return (await $api.post(`${API_URL}/request`, {achievements: ids})).data;
+    }
 }
 
 export default AchievementService;
