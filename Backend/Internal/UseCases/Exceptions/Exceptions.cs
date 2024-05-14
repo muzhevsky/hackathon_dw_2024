@@ -6,3 +6,17 @@ public class AuthException: Exception
     {
     }
 }
+
+public class EntityNotFoundException : Exception
+{
+    public EntityNotFoundException(string? message) : base(message)
+    {
+    }
+}
+
+public class DuplicateEntityException : Exception
+{
+    public DuplicateEntityException(string? message) : base(message)
+    {
+    }
+}

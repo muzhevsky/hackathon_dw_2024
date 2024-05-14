@@ -16,25 +16,25 @@ public class InstituteStructureController:ControllerBase
     }
 
     [HttpGet("/groups")]
-    public ActionResult<GroupDto> GetGroups()
+    public ActionResult<List<GroupDto>> GetGroups()
     {
         return Ok(_instituteStructureRepository.GetAllGroups());
     } 
     
     [HttpGet("/departments")]
-    public ActionResult<GroupDto> GetDepartments()
+    public ActionResult<List<DepartmentDto>> GetDepartments()
     {
         return Ok(_instituteStructureRepository.GetAllDepartments());
     } 
     
     [HttpGet("/institutes")]
-    public ActionResult<GroupDto> GetInstitutes()
+    public ActionResult<List<InstituteDto>> GetInstitutes()
     {
         return Ok(_instituteStructureRepository.GetAllInstitutes());
     } 
         
     [HttpGet("/specialities")]
-    public ActionResult<GroupDto> GetSpecialities()
+    public ActionResult<List<SpecialityDto>> GetSpecialities()
     {
         return Ok(_instituteStructureRepository.GetAllSpecialities());
     } 
