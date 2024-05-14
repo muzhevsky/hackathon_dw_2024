@@ -2,11 +2,14 @@ import { AutoComplete, Input } from "antd";
 import { observer } from "mobx-react-lite";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../..";
+import { AchConnected, AchCustom } from "../../entities/achievement/Achievement";
 import { DataAchievementFromBack, FormAchievement } from "../../entities/achievement/FormAchievement";
 import { Event } from "../../entities/event/Event";
 import { EventForCabinet } from "../../entities/event/EventForCabinet";
+import { EventResult } from "../../entities/event/EventResult";
 import { ItemsEventLevel, ItemsTypeEvent } from "../../entities/event/TypeEvent";
 import useInput from "../../hooks/UseInput";
+import AchievementService from "../../servises/AchievementService";
 import EventsService from "../../servises/EventsService";
 import AutoCompleteInput from "../../shared/ui/autoComplete/AutoCompleteInput";
 import PrimaryButton from "../../shared/ui/button/PrimaryButton";
@@ -30,19 +33,51 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
     const [event, setEvent] = useState<EventForCabinet | null>(null);
     const [events, setEvents] = useState<EventForCabinet[]>([]);
 
-    const clickHandler = () => {
-        const form: Event = {
-            title: nameEventState,
-            userId: userStore.user?.id ?? 1,
-            dateStart: dateEventState.value,
-            dateEnd: dateEventState.value,
-            eventStatus: eventLevelState,
-            countEvent: typeEventState,
-            place: placeState.value
-        }
-        console.log(form);
+    const translate = (result: string, itemResult: EventResult[]) => {
+        if(result.toLocaleLowerCase() === "1 место" || result.toLocaleLowerCase() === "победитель") return itemResult[0];
+        if(result.toLocaleLowerCase() === "2 место" || result.toLocaleLowerCase() === "призер" || result.toLocaleLowerCase() === "3 место") return itemResult[1];
+        return itemResult[2];
+    }
 
-        console.log(event);
+    const clickHandler = async() => {
+        const resultItems: EventResult[] = await EventsService.getEventResults();
+        if(event){
+            const dto: AchConnected = {
+                id: Number(id),
+                eventId: Number(event.id),
+                resultId: translate(placeState.value, resultItems).id,
+                withTeam: typeEventState.toLowerCase() === "командное" ? true : false
+            }
+
+            const response = await AchievementService.connect(dto);
+            console.log(response);
+        }
+        else{
+            const dto: AchCustom = {
+                id: Number(id),
+                title: nameEventState,
+                date: dateEventState.value,
+                statusId: Number(eventLevelState),
+                resultId: translate(placeState.value, resultItems).id,
+                withTeam: typeEventState.toLowerCase() === "командное" ? true : false
+            }
+
+            const response = await AchievementService.custom(dto);
+            console.log(response);
+        }
+
+        // const form: Event = {
+        //     title: nameEventState,
+        //     userId: userStore.user?.id ?? 1,
+        //     dateStart: dateEventState.value,
+        //     dateEnd: dateEventState.value,
+        //     eventStatus: eventLevelState,
+        //     countEvent: typeEventState,
+        //     place: placeState.value
+        // }
+        // console.log(form);
+
+        // console.log(event);
         closeHandler();
     }
 
@@ -51,6 +86,7 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
     }
 
     const changeNameEvent = (str: string) => {
+        console.warn("hello");
         setNameEventState(str);
     }
 
