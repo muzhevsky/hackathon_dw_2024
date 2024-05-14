@@ -36,3 +36,20 @@
     font-size: 19px;
     color: white;
 }
+
+.WrapAdd{
+    background-color: #fff;
+    width: 280px;
+    height: 220px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.AddTitle{
+    font-family: 'Inter';
+    font-weight: 500;
+}

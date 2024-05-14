@@ -4,7 +4,8 @@ import { Context } from "../..";
 import LoadingPage from "../../pages/loadingPage/LoadingPage";
 import EventsService from "../../servises/EventsService";
 import EventCard from "./EventCard";
-import GoToEvents from "./GoToEvents"
+import GoToEvents from "./GoToEvents";
+import styles from "./EventCard.module.css";
 
 const Events: React.FC = observer(() => {
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
@@ -26,7 +27,7 @@ const Events: React.FC = observer(() => {
         <>
         {
             isLoading
-            ?   <>
+            ?   <div className={styles.WrapEvents}>
                     <GoToEvents/>
                     {
                         eventsStore.events.map((item, index) => {
@@ -39,7 +40,7 @@ const Events: React.FC = observer(() => {
                                         description={item.description}/>
                         })
                     }
-                </>
+                </div>
             : <LoadingPage/>
         }
         </>

@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router";
 import { GLOBAL_EVENTS_PATH } from "../../routing/RouterConstants";
+import styles from "./EventCard.module.css";
 
 const GoToEvents: React.FC = () => {
     const navigate = useNavigate();
 
     return(
-        <div onClick={() => navigate(GLOBAL_EVENTS_PATH)}>
-            <p>Перейти к выбору мероприятия</p>
+        <div className={styles.WrapNavigate} onClick={() => navigate(GLOBAL_EVENTS_PATH)}>
+            <p className={styles.NavigateTitle}>Перейти к выбору мероприятия</p>
         </div>
     )
 }

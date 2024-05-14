@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./EventCard.module.css"
-import Img from "../../shared/assets/sad.svg";
+import Img from "../../shared/assets/web.png";
 
 interface EventCardProps {
     id: number;
@@ -17,17 +17,16 @@ const EventCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, sta
     return (
         <div className={styles.cardViev}>
             <div className={styles.container__image}>
-                <img className={styles.imgSize} src={Img} alt=""/>
+                <img className={styles.imgSize} style={{width: "100%"}} src={Img} alt=""/>
             </div>
-            <div className={styles.row}>
-                <p className={styles.status}>{statusId}</p>
-                <p className={styles.date}>{endDate.toLocaleDateString()}</p>
-            </div>
-            <div>
+            <div className={styles.WrapEventInfo}>
+                <div className={styles.row}>
+                    <p className={styles.status}>Всероссийский |</p>
+                    <p className={styles.date}>{endDate.toLocaleDateString()}</p>
+                </div>
                 <p className={styles.title}>{title}</p>
-            </div>
-            <div>
                 <p className={styles.description}>{description}</p>
+                <p className={styles.openContent}>Подробнее...</p>
             </div>
 
 

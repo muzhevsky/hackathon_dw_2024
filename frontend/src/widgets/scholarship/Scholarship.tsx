@@ -1,8 +1,10 @@
+import AddScholarship from "./AddScholarship";
+
 const Scholarship: React.FC = () => {
     return(
-        <>
-            <h2>Стипендии</h2>
-        </>
+        <div>
+            <AddScholarship/>
+        </div>
     )
 }
 
