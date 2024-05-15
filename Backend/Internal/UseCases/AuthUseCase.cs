@@ -63,8 +63,7 @@ public class AuthUseCase
         var user = _userRepository.GetUser(request.Login);
         if (user == null) throw new AuthException("user not found");
 
-        var hashedPassword = _hashProvider.Hash(request.Password + user.Salt);
-        if (!user.PasswordMatches(hashedPassword)) throw new AuthException("wrong password");
+        if (!user.PasswordMatches(request.Password)) throw new AuthException("wrong password");
         
         var role = "student";
         if (_teacherRepository.GetTeacherByUserId(user.Id) != null) role = "teacher"; 
@@ -117,11 +116,6 @@ public class AuthUseCase
         };
 
         if (_userRepository.GetUser(user.Login) != null) throw new AuthException("user already exist");
-
-
-        var salt = _saltProvider.GetSalt(8);
-        var hashed = _hashProvider.Hash(user.Password + salt);
-        user.SetHashedPassword(hashed, salt);
 
         _userRepository.CreateUser(user);
 

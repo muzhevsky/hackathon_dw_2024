@@ -353,3 +353,14 @@ values ('международный', 100), ('всероссийский', 50), 
 
 insert into events(title, start_date, end_date, status_id, description)
 values ('Хакатон "Цифровой Ветер 2024"', '2024-05-13', '2024-05-15', '2','описание потом придумаем');
+
+insert into users(login, surname, name, patronymic, password_hash, salt)
+values ('sstuedudom/123456', 'Иванов', 'Иван', 'Иванович', 123456, 0);
+
+insert into users(login, surname, name, patronymic, password_hash, salt)
+values ('petrov_pp', 'Петров', 'Петр', 'Петрович', 123456, 0);
+
+insert into students(student_id, group_id, user_id)
+values ('123456', 1, 1);
+
+insert into teachers(user_id, department_id) values (2,1);
