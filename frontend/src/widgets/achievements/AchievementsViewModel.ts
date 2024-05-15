@@ -28,10 +28,13 @@ export class AchivementsViewModel {
 
     @action
     loadAchievements = async (refresh?: boolean) => {
-        
+        console.warn("tyt");
         if (refresh) this.achievementsRepository.getAchievements();
         else {
-            this.getAchievementsStatus = RequestStatus.LOADING;
+            runInAction(() => {
+                this.getAchievementsStatus = RequestStatus.LOADING;
+            })
+            
             try {
                 await this.achievementsRepository.getAchievements();
                 runInAction(() => {

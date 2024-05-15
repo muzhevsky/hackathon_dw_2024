@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styles from "./RequestsCard.module.css"
-import Img from "../../shared/assets/sad.svg";
+import Img from "../../shared/assets/ticket.png";
 import RequestsCardModal from "./RequestsCardModal";
 
 interface EventCardProps {
@@ -29,31 +29,32 @@ const RequestCard: React.FC<EventCardProps> = ({id, title, startDate, endDate, s
             <div className={styles.cardViev}>
 
                 <p className={styles.title}>{title}</p>
-                <div className={styles.container__image}>
-                    <div className={styles.imgS}>
-                        <img className={styles.img} src={Img} alt=""/>
+                <div className={styles.wrapContent}>
+                    <div className={styles.container__image}>
+                        {/* <div className={styles.imgS}> */}
+                            <img className={styles.img} src={Img} alt=""/>
+                        {/* </div> */}
                     </div>
-                    <p className={styles.description}>{description}</p>
+
+                    <div className={styles.container}>
+                        <p className={styles.description}>{description}</p>
+                        {startDate ? (
+                            <p className={styles.date}>{displayDate}</p>
+                        ) : (
+                            <>
+                                <div className={styles.row}>
+                                    <p className={styles.date}>{endDate.toLocaleDateString()}</p>
+                                    <p
+                                        className={styles.additions}
+                                        onClick={() => setOpen(true)}
+                                    >Подробнее</p>
+                                </div>
+
+                            </>
+
+                        )}
+                    </div>
                 </div>
-
-                <div className={styles.container}>
-                    {startDate ? (
-                        <p className={styles.date}>{displayDate}</p>
-                    ) : (
-                        <>
-                            <div className={styles.row}>
-                                <p className={styles.date}>{endDate.toLocaleDateString()}</p>
-                                <p
-                                    className={styles.additions}
-                                    onClick={() => setOpen(true)}
-                                >Подробнее</p>
-                            </div>
-
-                        </>
-
-                    )}
-                </div>
-
             </div>
         </>
 

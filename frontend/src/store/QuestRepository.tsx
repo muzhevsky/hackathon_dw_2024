@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx"
 import { Request } from "../entities/request/Request";
 import { CreateQuestRequest, QuestDto, TeacherService } from "../api-generated";
+import { userStore } from "..";
 
 export class QuestRepository {
 
@@ -32,6 +33,7 @@ export class QuestRepository {
     create = async (quest: CreateQuestRequest) => {
         try {
             const res = await TeacherService.postQuest(quest);
+            localStorage.setItem("lk_teacherId", res.teacherId?.toString() ?? "");
             this._quests.set(res.id ?? -1, res);
             // this._quests.set();
             //  TODO добавление здесь в quest

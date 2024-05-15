@@ -16,10 +16,10 @@ const ProfileInfo: React.FC = observer(() => {
     const [addInfo, setAddInfo] = useState<Group>();
 
     useEffect(() => {
-        console.log(userStore.user);
         if (userStore.user && userStore.user.role === "student") {
             const resStudent = StudentService.GetStudentById(userStore.user.id);
             resStudent.then(res => {
+                userStore.activeUserRole = res;
                 const response = GroupService.getGroupById(res.groupId);
                 response.then((response) => {
                     setAddInfo(response);

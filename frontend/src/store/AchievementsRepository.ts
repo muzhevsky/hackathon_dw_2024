@@ -12,6 +12,7 @@ export class AchievementsRepository {
 
     getAchievements = async () => {
         try {
+            console.log("HELLO");
             const achievements = await StudentService.getAchievements();
             runInAction(() => {
                 this.achievements = achievements;

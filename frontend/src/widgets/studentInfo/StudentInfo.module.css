@@ -8,6 +8,12 @@
     padding-bottom: 0.25vh;
 }
 
+.wrapModule{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .container{
     display: block;
     flex-direction: column;

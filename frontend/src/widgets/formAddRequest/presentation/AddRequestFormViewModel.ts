@@ -28,6 +28,7 @@ export class AddRequestFormViewModel {
         this.createStatus = RequestStatus.LOADING;
         try {
             await this.questRepository.create(request);
+            console.log(this.questRepository.quests);
             this.createStatus = RequestStatus.SUCCESSFUL;   
         }
         catch(e) {

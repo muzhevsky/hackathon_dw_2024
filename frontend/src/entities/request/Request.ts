@@ -12,3 +12,13 @@ export interface Request{
     participation?: string;
     additionalRequirements: string;
 }
+
+export interface Quest{
+    type: "quest";
+    id?: number;
+    teacherId?: number;
+    eventId?: number;
+    resultId?: number;
+    groupId?: number;
+    description?: string | null;
+}

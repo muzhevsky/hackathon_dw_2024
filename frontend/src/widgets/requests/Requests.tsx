@@ -22,15 +22,16 @@ const Requests: React.FC = observer(() => {
                     ? <>
                         <AddRequestButton />
                         {
-                            questViewModel.mergedQuests.map(quest => (
-                                <RequestCard
+                            questViewModel.mergedQuests.map((quest, index) => {
+                                return <RequestCard
+                                    key={index}
                                     title='Купон'
                                     id={quest.id ?? -1}
                                     endDate={quest.event?.endDate ?? new Date()}
                                     statusId={quest.resultId ?? -1}
                                     description={quest.description ?? 'Награда останется сюрпризом'}
                                 />
-                            ))
+                            })
                         }
                     </>
                     : <LoadingPage />

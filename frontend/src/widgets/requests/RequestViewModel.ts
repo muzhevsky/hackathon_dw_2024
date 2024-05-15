@@ -1,10 +1,11 @@
-import { action, computed, makeObservable, observable } from "mobx";
+import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { RequestStatus } from "../../shared/utils/RequestStatus";
 import { EventRepository } from "../../store/EventsRepository";
 import { QuestRepository } from "../../store/QuestRepository";
 import { ALL_SELECT } from "../../shared/utils/baseCollection";
 import { QuestDto } from "../../api-generated";
 import { EventForCabinet } from "../../entities/event/EventForCabinet";
+import { async } from "q";
 
 type MergedQuest = Omit<QuestDto, 'eventId'> & {event: EventForCabinet | null}
 
@@ -42,10 +43,14 @@ export class RequestViewModel {
         this.loadQuests();
     }
 
-    @action 
-    loadQuests = async () => {
-        this.getQuestStatus = RequestStatus.LOADING;
-        await this._questRepository.getTeacherQuests(this._teacherId);
-        this.getQuestStatus = RequestStatus.SUCCESSFUL;
+    // @action 
+    loadQuests =  async() => {
+            runInAction(() => {
+                this.getQuestStatus = RequestStatus.LOADING;
+            })
+            await this._questRepository.getTeacherQuests(Number(localStorage.getItem("lk_teacherId")) ?? this._teacherId);
+            runInAction(() => {
+                this.getQuestStatus = RequestStatus.SUCCESSFUL;
+            })
     }
 }

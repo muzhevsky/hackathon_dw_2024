@@ -19,6 +19,7 @@ const Achievements: React.FC = observer(() => {
     const achievementsViewModel = useMemo(() => new AchivementsViewModel(achievementsRepository, eventResiltRepository), []);
 
     useEffect(() => {
+        console.warn("tyt1");
         achievementsViewModel.loadAchievements();
     }, [])
 
