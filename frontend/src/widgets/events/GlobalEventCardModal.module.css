@@ -1,0 +1,11 @@
+.cardViev{
+    width: 100%;
+    background-color: rgba(124,124,124,0.13);
+    border-radius: 20px;
+}
+
+.imgSize{
+    display: block;
+    width: 100%;
+    /* height: 25vh; */
+}

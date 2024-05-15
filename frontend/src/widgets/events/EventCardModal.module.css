@@ -1,0 +1,22 @@
+.cardViev{
+    width: fit-content  ;
+    height: fit-content;
+    object-fit: cover;
+    overflow: hidden;
+    background-color: rgba(124,124,124,0.13);
+    border-radius: 20px;
+}
+
+.imgSize{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.description{
+    font-size: 14px;
+    font-family: Inter, sans-serif;
+    font-weight: normal;
+    margin: 0;
+    text-align: left;
+}

@@ -1,0 +1,85 @@
+.cardViev{
+    width: 380px;
+    height: 220px;
+    background-color: #fff;
+    border-radius: 30px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.wrapContent{
+    display: flex;
+    height: 190px;
+}
+
+.title{
+    background-color: #02006B;
+    height: 30px;
+    padding-left: 15px;
+    padding-top: 0.5vh;
+    font-family: Inter, serif;
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+    border-radius: 30px 30px 0 0;
+    margin: 0;
+}
+
+.description{
+    font-family: Inter, serif;
+    font-size: 19px;
+    font-weight: normal;
+    color: #02006B;
+}
+
+.img{
+    display: block;
+    width: 100%;
+}
+
+.imgS{
+    display: flex;
+    justify-content: center;
+    width: 7vw;
+    height: 7vh;
+    padding-top: 3vh;
+    padding-left: 2vh;
+}
+
+.date{
+    width: 10vw;
+    margin-top: 3vh;
+    padding-left: 1vh;
+    font-family: Inter, serif;
+    font-size: 17px;
+    color: #02006B;
+}
+
+.container {
+    width: 65%;
+    height: 3vh;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    padding: 15px;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.container__image {
+    height:100%;
+    width: 35%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.additions{
+    width: 10vw;
+    margin-top: 2vh;
+    padding: 1vh;
+    color: #02006B;
+}

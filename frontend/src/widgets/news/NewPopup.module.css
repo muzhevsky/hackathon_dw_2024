@@ -1,0 +1,14 @@
+.cardViev{
+    width: fit-content;
+    height: fit-content;
+    background-color: rgba(124,124,124,0.13);
+    border-radius: 20px;
+    margin: 2vh;
+}
+
+.imgSize{
+    display: block;
+    width: fit-content;
+    height: 25vh;
+    margin: auto;
+}

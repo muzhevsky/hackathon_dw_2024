@@ -1,0 +1,26 @@
+.profileWrap{
+    width: 95%;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    height: fit-content;
+    border-radius: 20px;
+    margin-left: 2vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.nsp{
+    font-family: Inter, serif;
+    font-size: 19px;
+    color: #02006B;
+    font-weight: normal;
+    margin: 0.25vh 0.5vw;
+}
+
+.noPad{
+    display: flex;
+    /*padding: 0.5vh;*/
+    margin-bottom: 0;
+    justify-content: start;
+}

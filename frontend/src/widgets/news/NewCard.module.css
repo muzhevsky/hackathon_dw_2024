@@ -1,0 +1,68 @@
+/* .row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+} */
+
+.col{
+    display: flex;
+    justify-content: space-around;
+}
+
+.col1{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 15px;
+    width: 65%;
+}
+
+.cardViev{
+    width: 35vw;
+    background-color: #fff;
+    border-radius: 30px;
+    height: 220px;
+    /* display: flex; */
+    overflow: hidden;
+}
+
+.ImgWrap{
+    width: 35%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.imgSize{
+    /* width: 100%; */
+    height: 220px;
+}
+
+.date{
+    font-size: 15px;
+    font-weight: bold;
+    font-family: Inter, serif;
+    color: black;
+    margin: 0;
+    text-align: start;
+}
+
+.title{
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Inter, serif;
+    color: black;
+    margin: 0;
+}
+
+.description{
+    font-size: 14px;
+    font-weight: normal;
+    font-family: Inter, sans-serif;
+    height: fit-content;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

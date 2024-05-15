@@ -1,0 +1,55 @@
+.requestCard{
+    width: 13vw;
+    height: 21vh;
+    background-color: #02006B;
+    border-radius: 20px;
+    margin: 2vh;
+}
+
+.title{
+    height: 1vh;
+    padding: 1vw;
+    margin-top: 1vh;
+    font-family: Inter, serif;
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+}
+
+.subtitle{
+    display: flex;
+    justify-content: start;
+    /*width: 5vw;*/
+    height: 1vh;
+    padding-left: 1vw;
+    font-family: Inter, serif;
+    font-size: 19px;
+    font-weight: bolder;
+    color: white;
+}
+
+.date{
+    height: 1vh;
+    margin-top: 8vh;
+    padding-left: 1vw;
+    font-family: Inter, serif;
+    font-size: 19px;
+    color: white;
+}
+
+.WrapAdd{
+    background-color: #fff;
+    width: 280px;
+    height: 220px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.AddTitle{
+    font-family: 'Inter';
+    font-weight: 500;
+}

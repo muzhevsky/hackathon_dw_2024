@@ -1,0 +1,34 @@
+.DivForm{
+
+}
+
+.container {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 20px;
+    background-color: white;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding: 5vh;
+    backdrop-filter: blur(10px);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 5;
+}
+
+.closeElement{
+    display: flex;
+    justify-content: end;
+    padding-bottom: 1vh;
+}
