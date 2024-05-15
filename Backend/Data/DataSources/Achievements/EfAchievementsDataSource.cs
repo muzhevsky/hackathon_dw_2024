@@ -16,7 +16,7 @@ public class EfAchievementsDataSource : IAchievementsDataSource
     public IEnumerable<AchievementDto> SelectByUserId(int userId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Achievements.Where(dto => dto.UserId == userId);
+        return context.Achievements.Where(dto => dto.UserId == userId).ToList();
     }
 
     public AchievementDto? SelectById(int id)

@@ -28,6 +28,6 @@ public class EfDepartmentsDataSource:  IDepartmentsDataSource
     public IEnumerable<DepartmentDto> SelectByInstituteId(int instituteId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Departments.Where(dto => dto.InstituteId == instituteId);
+        return context.Departments.Where(dto => dto.InstituteId == instituteId).ToList();
     }
 }

@@ -21,19 +21,19 @@ public class EfQuestsDataSource:  IQuestsDataSource
     public IEnumerable<QuestDto> SelectByEventId(int eventId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Quests.Where(dto => dto.EventId == eventId);
+        return context.Quests.Where(dto => dto.EventId == eventId).ToList();
     }
 
     public IEnumerable<QuestDto> SelectByTeacherId(int teacherId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Quests.Where(dto => dto.TeacherId == teacherId);
+        return context.Quests.Where(dto => dto.TeacherId == teacherId).ToList();
     }
 
     public IEnumerable<QuestDto> SelectByGroupId(int groupId)
     {
         using var context = _factory.CreateDbContext();
-        return context.Quests.Where(dto => dto.GroupId == groupId);
+        return context.Quests.Where(dto => dto.GroupId == groupId).ToList();
     }
 
     public void Insert(QuestDto quest)
