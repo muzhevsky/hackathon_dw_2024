@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from "antd/lib/modal/Modal";
 import styles from "../events/EventCardModal.module.css";
-import {API_URL} from "../../shared/utils/Api";
+import { API_URL } from "../../shared/utils/Api";
+import PrimaryButton from '../../shared/ui/button/PrimaryButton';
 
 interface AchievementCardModalProps {
     id: number;
@@ -14,8 +15,12 @@ interface AchievementCardModalProps {
     result: string;
 }
 
-const AchievementCardModal:React.FC<AchievementCardModalProps> = ({id,userId,fileName,score,isOpen,setIsOpen, withTeam, result}) => {
-    let Img = `${API_URL}/static/achievements/${fileName.slice(fileName.lastIndexOf("/") + 1)}`
+const AchievementCardModal: React.FC<AchievementCardModalProps> = ({ id, userId, fileName, score, isOpen, setIsOpen, withTeam, result }) => {
+    const splittedFileName = fileName.split('.');
+    let Img = `${API_URL}/static/achievements/${id}.${splittedFileName[splittedFileName.length - 1]}`
+
+
+
     return (
         <Modal
             title={withTeam ? "Командное" : "Личное"}
@@ -27,7 +32,7 @@ const AchievementCardModal:React.FC<AchievementCardModalProps> = ({id,userId,fil
         >
             <div className={styles.row}>
                 <div className={styles.imgSize}>
-                    <img className={styles.imgSize} src={Img} alt=""/>
+                    <img className={styles.imgSize} src={Img} alt="" />
                 </div>
                 <div>
                     <p className={styles.subtitle}>{result}</p>

@@ -1,4 +1,4 @@
-import { computed, makeObservable, observable } from "mobx";
+import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { RequestStatus } from "../../shared/utils/RequestStatus";
 import { AchievementsRepository } from "../../store/AchievementsRepository";
 import { EventResultRepository } from "../../store/EventsResultRepository";
@@ -26,12 +26,26 @@ export class AchivementsViewModel {
         this.eventResultsRepository = eventResultsRepository;
     }
 
+    @action
     loadAchievements = async (refresh?: boolean) => {
-        if(refresh) this.achievementsRepository.getAchievements();
+        
+        if (refresh) this.achievementsRepository.getAchievements();
         else {
             this.getAchievementsStatus = RequestStatus.LOADING;
-            await this.achievementsRepository.getAchievements();
-            this.getAchievementsStatus = RequestStatus.SUCCESSFUL;
+            try {
+                await this.achievementsRepository.getAchievements();
+                runInAction(() => {
+                    console.log('УСПЕХ');
+                    
+                    this.getAchievementsStatus = RequestStatus.SUCCESSFUL;
+                })
+            }
+
+            catch (e) {
+                console.log('ERROR');
+                
+                runInAction(() => this.getAchievementsStatus = RequestStatus.ERROR);
+            }
         }
     }
 

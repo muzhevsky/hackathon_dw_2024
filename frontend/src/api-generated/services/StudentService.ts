@@ -65,7 +65,7 @@ export class StudentService {
     public static getAchievements(): CancelablePromise<Array<Achievement>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/achievements',
+            url: '/student/achievements',
         });
     }
     /**

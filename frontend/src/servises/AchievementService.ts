@@ -19,7 +19,7 @@ class AchievementService{
 
     public static async getAchievements(): Promise<Achievement[]>{
         try {
-            return (await $api.get<Achievement[]>(`${API_URL}/achievements`)).data;
+            return (await $api.get<Achievement[]>(`${API_URL}/student/achievements`)).data;
         } catch (e){
             console.log(e);
             return []
