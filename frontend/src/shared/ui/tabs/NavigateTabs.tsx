@@ -15,8 +15,8 @@ const NavigateTabs: React.FC = observer(() => {
     const { userStore } = useContext(Context);
 
     const navigatePaths: string[] = useMemo(() => {
-        switch(userStore.activeRole?.title){
-            case "user":
+        switch(userStore.user?.role){
+            case "student":
                 return itemsNavigateStudent;
             case "teacher": 
                 return itemsNavigateTeacher;
@@ -28,8 +28,8 @@ const NavigateTabs: React.FC = observer(() => {
     }, [userStore.activeRole]);
 
     const items: TabsProps['items'] = useMemo(() => {
-        switch(userStore.activeRole?.title){
-            case "user":
+        switch(userStore.user?.role){
+            case "student":
                 return itemsStudent;
             case "teacher": 
                 return itemsTeacher;

@@ -22,7 +22,7 @@ interface FormForAchievementProps{
 }
 
 const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, closeHandler }) => {
-    const { userStore } = useContext(Context); 
+    const { userStore, achievementsRepository } = useContext(Context); 
     const { date, id, result, status, title } = data;
 
     const [nameEventState, setNameEventState] = useState<string>(title);
@@ -65,7 +65,7 @@ const FormForAchievement: React.FC<FormForAchievementProps> = observer(({ data, 
             const response = await AchievementService.custom(dto);
             console.log(response);
         }
-
+        achievementsRepository.getAchievements();
         // const form: Event = {
         //     title: nameEventState,
         //     userId: userStore.user?.id ?? 1,

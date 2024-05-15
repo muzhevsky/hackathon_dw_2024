@@ -14,15 +14,12 @@ const Home: React.FC = observer(() => {
     const { userStore } = useContext(Context);
 
     useEffect(() => {
-        const response = RoleService.GetRoleById(userStore.user?.role_id ?? 4);
-        response.then(response => {
-            userStore.activeRole = response;
-            if(userStore.activeRole.title === "user"){
+            if(userStore.user?.role === "student"){
                 const responseUserRole = StudentService.GetStudentById(userStore.user?.id ?? 1);
                 responseUserRole.then(response => {
                     userStore.activeUserRole = response;
                 })
-            } else if(userStore.activeRole.title === "teacher"){
+            } else if(userStore.user?.role === "teacher"){
                 const responseUserRole = TeacherService.GetTeacherById(userStore.user?.id ?? 1);
                 responseUserRole.then(response => {
                     userStore.activeUserRole = response;
@@ -34,7 +31,6 @@ const Home: React.FC = observer(() => {
                 })
             }
             setIsLoading(true);
-        })
     }, [])
 
     return (

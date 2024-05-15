@@ -5,12 +5,12 @@
 //
 // namespace Hackaton_DW_2024.Data.DataSources.CustomizationItems;
 //
-// public class EfCustomizationItemsDataSource : EntityFrameworkDataSource, ICustomizationItemsDataSource
+// public class EfCustomizationItemsDataSource :  ICustomizationItemsDataSource
 // {
 //     DbSet<AchievementDto> _achievements;
 //
 //
-//     public EfAchievementsDataSource(ApplicationContext context) : base(context)
+//     public EfAchievementsDataSource(IDbContextFactory<ApplicationContext>  context)
 //     {
 //         _achievements = context.Achievements;
 //     }

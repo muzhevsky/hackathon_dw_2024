@@ -5,37 +5,48 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Events;
 
-public class EfEventsDataSource : EntityFrameworkDataSource, IEventsDataSource
+public class EfEventsDataSource : IEventsDataSource
 {
-    DbSet<EventDto> _events;
-    DbSet<UsersAndEventsDto> _usersAndEvents;
+    IDbContextFactory<ApplicationContext> _factory;
 
-    public EfEventsDataSource(ApplicationContext context) : base(context)
+    public EfEventsDataSource(IDbContextFactory<ApplicationContext> context)
     {
-        _usersAndEvents = context.UsersAndEvents;
-        _events = context.Events;
+        _factory = context;
     }
 
     public EventDto? SelectById(int id)
     {
-        return _events.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.Events.FirstOrDefault(dto => dto.Id == id);
     }
 
-    public IEnumerable<EventDto> SelectAll() => _events.ToList();
+    public IEnumerable<EventDto> SelectAll()
+    {
+        using var context = _factory.CreateDbContext();
+        return context.Events.ToList();
+    }
 
-    public IEnumerable<EventDto> SelectActive() =>
-        _events.Where(dto => dto.StartDate < DateTime.Now && dto.EndDate > DateTime.Now);
+    public IEnumerable<EventDto> SelectActive()
+    {
+        using var context = _factory.CreateDbContext();
+        return context.Events.Where(dto => dto.StartDate < DateTime.Now && dto.EndDate > DateTime.Now).ToList();
+    }
 
-    public IEnumerable<EventDto> SelectByStatusId(int statusId) =>
-        _events.Where(dto => dto.StatusId == statusId);
+    public IEnumerable<EventDto> SelectByStatusId(int statusId)
+    {
+        using var context = _factory.CreateDbContext();
+        return context.Events.Where(dto => dto.StatusId == statusId).ToList();
+        
+    }
 
     public IEnumerable<EventDto> SelectByUserId(int userId)
     {
-        var usersAndEvents = _usersAndEvents.Where(dto => dto.UserId == userId);
+        using var context = _factory.CreateDbContext();
+        var usersAndEvents = context.UsersAndEvents.Where(dto => dto.UserId == userId).ToList();
         var result = new List<EventDto>();
         foreach (var ue in usersAndEvents)
         {
-            result.AddRange(_events.Where(dto => dto.Id == ue.EventId));
+            result.AddRange(context.Events.Where(dto => dto.Id == ue.EventId).ToList());
         }
 
         return result;
@@ -43,22 +54,25 @@ public class EfEventsDataSource : EntityFrameworkDataSource, IEventsDataSource
 
     public int InsertOne(EventDto dto)
     {
-        _events.Add(dto);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.Events.Add(dto);
+        context.SaveChanges();
         return dto.Id;
     }
 
     public void UpdateById(int id, Action<EventDto> updateFunc)
     {
-        var updateTarget = _events.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        var updateTarget = context.Events.FirstOrDefault(dto => dto.Id == id);
         updateFunc(updateTarget);
-        Context.SaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteById(int id)
     {
-        var deleteTarget = _events.FirstOrDefault(dto => dto.Id == id);
-        _events.Remove(deleteTarget);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        var deleteTarget = context.Events.FirstOrDefault(dto => dto.Id == id);
+        context.Events.Remove(deleteTarget);
+        context.SaveChanges();
     }
 }

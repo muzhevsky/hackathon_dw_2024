@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../..";
-import { testUser } from "../../entities/user/User";
 import useInput from "../../hooks/UseInput";
 import { HOME_PATH } from "../../routing/RouterConstants";
 import AuthService from "../../servises/AuthService";
@@ -22,10 +21,9 @@ const LoginForm: React.FC = observer(() => {
     const authHandler = async () => {
         const response = await AuthService.login({ login: login.value, password: password.value });
         userStore.activeToken = response.token;
-        const user = await UserService.GetUserById(response.user.id);
-        userStore.user = user;
+        userStore.user = response.user;
         localStorage.setItem(STORAGE_TOKEN, response.token);
-        localStorage.setItem(STORAGE_USER, JSON.stringify(response.user ?? testUser));
+        localStorage.setItem(STORAGE_USER, JSON.stringify(response.user));
         userStore.isAuth = true;
         navigate(HOME_PATH);
     }
@@ -57,8 +55,6 @@ const LoginForm: React.FC = observer(() => {
                     size={"large"}
                 />
             </div>
-
-
         </div>
     )
 })

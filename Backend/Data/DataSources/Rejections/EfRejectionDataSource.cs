@@ -4,22 +4,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Rejections;
 
-public class EfRejectionDataSource: EntityFrameworkDataSource, IRejectionsDataSource
+public class EfRejectionDataSource:  IRejectionsDataSource
 {
-    DbSet<RejectionDto> Rejections { get; set; }
-    public EfRejectionDataSource(ApplicationContext context) : base(context)
+    IDbContextFactory<ApplicationContext> _factory;
+    public EfRejectionDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        Rejections = context.Rejections;
+        _factory = context;
     }
 
-    public RejectionDto? SelectById(int id) => Rejections.FirstOrDefault(dto => dto.Id == id);
+    public RejectionDto? SelectById(int id)
+    {
+        using var context = _factory.CreateDbContext();
+        return context.Rejections.FirstOrDefault(dto => dto.Id == id);
+    }
 
-    public IEnumerable<RejectionDto> SelectByRequestId(int requestId) =>
-        Rejections.Where(dto => dto.RequestId == requestId);
+    public IEnumerable<RejectionDto> SelectByRequestId(int requestId)
+    {
+        using var context = _factory.CreateDbContext();
+        return context.Rejections.Where(dto => dto.RequestId == requestId).ToList();
+    }
 
     public void Insert(RejectionDto dto)
     {
-        Rejections.Add(dto);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.Rejections.Add(dto);
+        context.SaveChanges();
     }
 }

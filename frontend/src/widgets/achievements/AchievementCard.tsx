@@ -15,6 +15,7 @@ interface AchievementsProps {
 
 const AchievementCard: React.FC<AchievementsProps> = ({id, userId, fileName, score, withTeam, result}) => {
     const [isOpen, setIsOpen] = React.useState(false);
+    const splittedFileName = fileName.split('.');
     return (
         <>
             {
@@ -25,7 +26,7 @@ const AchievementCard: React.FC<AchievementsProps> = ({id, userId, fileName, sco
             <div className={styles.cardViev}>
                 <div className={styles.img}>
                     <img style={{width: "100%"}}
-                         src={`${API_URL}/static/achievements/${fileName.slice(fileName.lastIndexOf("/") + 1)}`}
+                         src={`${API_URL}/static/achievements/${id}.${splittedFileName[splittedFileName.length-1]}`}
                          alt=""/>
                 </div>
                 <div className={styles.wrapInfo}>

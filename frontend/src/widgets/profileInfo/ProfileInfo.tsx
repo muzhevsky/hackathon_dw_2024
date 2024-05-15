@@ -6,6 +6,7 @@ import {Student} from "../../entities/student/Student";
 import LoadingPage from "../../pages/loadingPage/LoadingPage";
 import DepartamentService from "../../servises/DepartamentService";
 import GroupService from "../../servises/GroupService";
+import StudentService from "../../servises/StudentService";
 import StudentInfo from "../studentInfo/StudentInfo";
 import styles from './ProfileInfo.module.css'
 
@@ -15,12 +16,16 @@ const ProfileInfo: React.FC = observer(() => {
     const [addInfo, setAddInfo] = useState<Group>();
 
     useEffect(() => {
-        if (userStore.activeUserRole && userStore.activeUserRole.type === "student") {
-            const response = GroupService.getGroupById(userStore.activeUserRole.groupId);
-            response.then((response) => {
-                setAddInfo(response);
-                setIsLoading(true);
-                return;
+        console.log(userStore.user);
+        if (userStore.user && userStore.user.role === "student") {
+            const resStudent = StudentService.GetStudentById(userStore.user.id);
+            resStudent.then(res => {
+                const response = GroupService.getGroupById(res.groupId);
+                response.then((response) => {
+                    setAddInfo(response);
+                    setIsLoading(true);
+                    return;
+                })
             })
         }
         setIsLoading(true);
@@ -34,12 +39,12 @@ const ProfileInfo: React.FC = observer(() => {
                         <div className={styles.nsp}>
                             <p className={styles.nsp}>{`Фамилия: ${userStore.user?.surname}`}</p>
                             <p className={styles.nsp}>{`Имя: ${userStore.user?.name}`}</p>
-                            <p className={styles.nsp}>{`Отчество: ${userStore.user?.pathronomyc}`}</p>
+                            <p className={styles.nsp}>{`Отчество: ${userStore.user?.patronymic}`}</p>
                         </div>
 
 
                         {
-                            userStore.activeRole?.title === "user"
+                            userStore.user?.role === "student"
                                 ? <StudentInfo departamentTitle={"Инпит"} groupInfo={addInfo ?? testGroup}/>
                                 : null
                         }

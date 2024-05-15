@@ -4,35 +4,36 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Groups;
 
-public class EfGroupsDataSource: EntityFrameworkDataSource, IGroupsDataSource
+public class EfGroupsDataSource:  IGroupsDataSource
 {
-    DbSet<GroupDto> Groups { get; set; }
-    DbSet<DepartmentDto> Departments { get; set; }
-
-    public EfGroupsDataSource(ApplicationContext context) : base(context)
+    IDbContextFactory<ApplicationContext> _factory;
+    public EfGroupsDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        Departments = context.Departments;
-        Groups = context.Groups;
+        _factory = context;
     }
     
     public GroupDto? SelectById(int id)
     {
-        return Groups.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.Groups.FirstOrDefault(dto => dto.Id == id);
     }
 
     public IEnumerable<GroupDto> SelectAll()
     {
-        return Groups.ToList();
+        using var context = _factory.CreateDbContext();
+        return context.Groups.ToList();
     }
 
     public IEnumerable<GroupDto> SelectByDepartmentId(int departmentId)
     {
-        return Groups.Where(dto => dto.DepartmentId == departmentId);
+        using var context = _factory.CreateDbContext();
+        return context.Groups.Where(dto => dto.DepartmentId == departmentId).ToList();
     }
 
     public void Insert(GroupDto dto)
     {
-        Groups.Add(dto);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.Groups.Add(dto);
+        context.SaveChanges();
     }
 }

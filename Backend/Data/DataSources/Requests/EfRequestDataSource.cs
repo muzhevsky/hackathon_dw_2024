@@ -4,36 +4,47 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Requests;
 
-public class EfRequestDataSource : EntityFrameworkDataSource, IRequestDataSource
+public class EfRequestDataSource :  IRequestDataSource
 {
-    DbSet<RequestDto> Requests { get; set; }
+    IDbContextFactory<ApplicationContext> _factory;
 
-    public EfRequestDataSource(ApplicationContext context) : base(context)
+    public EfRequestDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        Requests = context.Requests;
+        _factory = context;
     }
 
-    public RequestDto? SelectById(int id) => Requests.FirstOrDefault(dto => dto.Id == id);
+    public RequestDto? SelectById(int id)
+    {
+        using var context = _factory.CreateDbContext();
+        return context.Requests.FirstOrDefault(dto => dto.Id == id);
+    }
 
-    public IEnumerable<RequestDto> SelectByUserId(int userId) => Requests.Where(dto => dto.UserId == userId);
+    public IEnumerable<RequestDto> SelectByUserId(int userId)
+    {
+        using var context = _factory.CreateDbContext();
+        return context.Requests.Where(dto => dto.UserId == userId).ToList();
+    }
 
     public void Insert(RequestDto dto)
     {
-        Requests.Add(dto);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.Requests.Add(dto);
+        context.SaveChanges();
     }
 
     public void UpdateById(int id, Action<RequestDto> updateFunc)
     {
-        var updateTarget = Requests.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        var updateTarget = context.Requests.FirstOrDefault(dto => dto.Id == id);
         updateFunc(updateTarget);
-        Context.SaveChanges();
+        context.SaveChanges();
     }
 
     public void DeleteById(int id)
     {
-        var deleteTarget = Requests.FirstOrDefault(dto => dto.Id == id);
-        Requests.Remove(deleteTarget);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        var deleteTarget = context.Requests.FirstOrDefault(dto => dto.Id == id);
+        context.Requests.Remove(deleteTarget);
+        context.SaveChanges();
     }
 }

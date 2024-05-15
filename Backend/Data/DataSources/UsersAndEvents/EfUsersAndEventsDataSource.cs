@@ -4,40 +4,45 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.UsersAndEvents;
 
-public class EfUsersAndEventsDataSource: EntityFrameworkDataSource, IUsersAndEventsDataSource
+public class EfUsersAndEventsDataSource:  IUsersAndEventsDataSource
 {
-    DbSet<UsersAndEventsDto> _usersAndEvents;
-    public EfUsersAndEventsDataSource(ApplicationContext context) : base(context)
+    IDbContextFactory<ApplicationContext> _factory;
+    public EfUsersAndEventsDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        _usersAndEvents = context.UsersAndEvents;
+        _factory = context;
     }
 
     public UsersAndEventsDto? SelectById(int id)
     {
-        return _usersAndEvents.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.UsersAndEvents.FirstOrDefault(dto => dto.Id == id);
     }
 
     public UsersAndEventsDto? SelectByUserIdAndEventId(int userId, int eventId)
     {
-        return _usersAndEvents.FirstOrDefault(dto => dto.UserId == userId && dto.EventId == eventId);
+        using var context = _factory.CreateDbContext();
+        return context.UsersAndEvents.FirstOrDefault(dto => dto.UserId == userId && dto.EventId == eventId);
     }
 
     public IEnumerable<UsersAndEventsDto> SelectByUserId(int userId)
     {
-        return _usersAndEvents.Where(dto => dto.UserId == userId);
+        using var context = _factory.CreateDbContext();
+        return context.UsersAndEvents.Where(dto => dto.UserId == userId).ToList();
     }
 
     public void Insert(UsersAndEventsDto dto)
     {
-        _usersAndEvents.Add(dto);
-        Context.SaveChanges();
+        using var context = _factory.CreateDbContext();
+        context.UsersAndEvents.Add(dto);
+        context.SaveChanges();
     }
 
     public void DeleteById(int id)
     {
+        using var context = _factory.CreateDbContext();
         var deleteTarget = SelectById(id);
         if (deleteTarget == null) return;
-        _usersAndEvents.Remove(deleteTarget);
-        Context.SaveChanges();
+        context.UsersAndEvents.Remove(deleteTarget);
+        context.SaveChanges();
     }
 }

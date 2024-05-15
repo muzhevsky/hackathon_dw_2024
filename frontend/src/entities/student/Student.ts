@@ -1,15 +1,24 @@
 export interface Student{
     type: "student";
-    userId: number | string;
-    studentId: number | string;
-    groupId:  number | string;
-    tgTag : string;
+    groupId: number;
+    id: number;
+    name: string;
+    patronymic?: string;
+    phoneNumber: string | null;
+    studentId: string;
+    surname: string;
+    telegram: string | null;
+    userId: number;
 }
 
-export const testStudent: Student = {
-    type: "student",
-    userId: "1",
-    studentId: "1",
-    groupId: "1",
-    tgTag: ""
+export interface StudentDto{
+    groupId: number;
+    id: number;
+    name: string;
+    patronymic?: string;
+    phoneNumber: string | null;
+    studentId: string;
+    surname: string;
+    telegram: string | null;
+    userId: number;
 }

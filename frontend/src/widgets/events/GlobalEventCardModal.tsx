@@ -1,7 +1,7 @@
 import React from 'react';
 import {EventForCabinet} from "../../entities/event/EventForCabinet";
-import styles from "./EventCardModal.module.css";
-import Img from "../../shared/assets/sad.svg";
+import styles from "./GlobalEventCardModal.module.css";
+import Img from "../../shared/assets/web.png";
 import Modal from "antd/lib/modal/Modal";
 
 interface GlobalEventCardProps {

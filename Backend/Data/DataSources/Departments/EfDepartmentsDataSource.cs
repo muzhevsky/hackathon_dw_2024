@@ -4,28 +4,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hackaton_DW_2024.Data.DataSources.Departments;
 
-public class EfDepartmentsDataSource: EntityFrameworkDataSource, IDepartmentsDataSource
+public class EfDepartmentsDataSource:  IDepartmentsDataSource
 {
-    DbSet<DepartmentDto> _departments;
+    IDbContextFactory<ApplicationContext> _factory;
 
-
-    public EfDepartmentsDataSource(ApplicationContext context) : base(context)
+    public EfDepartmentsDataSource(IDbContextFactory<ApplicationContext>  context)
     {
-        _departments = context.Departments;
+        _factory = context;
     }
 
     public DepartmentDto? SelectById(int id)
     {
-        return _departments.FirstOrDefault(dto => dto.Id == id);
+        using var context = _factory.CreateDbContext();
+        return context.Departments.FirstOrDefault(dto => dto.Id == id);
     }
 
     public IEnumerable<DepartmentDto> SelectAll()
     {
-        return _departments.ToList();
+        using var context = _factory.CreateDbContext();
+        return context.Departments.ToList();
     }
 
     public IEnumerable<DepartmentDto> SelectByInstituteId(int instituteId)
     {
-        return _departments.Where(dto => dto.InstituteId == instituteId);
+        using var context = _factory.CreateDbContext();
+        return context.Departments.Where(dto => dto.InstituteId == instituteId).ToList();
     }
 }

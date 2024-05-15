@@ -1,3 +1,5 @@
+using Hackaton_DW_2024.Internal.Entities.Users;
+
 namespace Hackaton_DW_2024.Infrastructure.Auth;
 
 public class TokenClaims

@@ -1,5 +1,7 @@
+import Requests from "../../widgets/requests/Requests";
+
 const RatingPage: React.FC = () => {
-    return(
+    return (
         <div>
             <h1>Рейтинг</h1>
         </div>

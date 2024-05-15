@@ -20,7 +20,7 @@
 
 .cardViev{
     width: 35vw;
-    background-color: rgba(124,124,124,0.13);
+    background-color: #fff;
     border-radius: 30px;
     height: 220px;
     /* display: flex; */

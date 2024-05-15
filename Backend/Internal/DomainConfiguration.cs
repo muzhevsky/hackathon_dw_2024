@@ -48,6 +48,8 @@ public static class DomainConfiguration
         services.AddSingleton<RecognizeTextApiRepository>();
         services.AddSingleton<GigaChatRepository>();
         services.AddSingleton<DocFileRepository>();
+        services.AddSingleton<QuestRepository>();
+        services.AddSingleton<TeacherRepository>();
         
         
         services.AddSingleton<AuthUseCase>();

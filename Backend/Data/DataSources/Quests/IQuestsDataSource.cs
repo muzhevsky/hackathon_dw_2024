@@ -6,6 +6,7 @@ public interface IQuestsDataSource
 {
     QuestDto? SelectById(int id);
     IEnumerable<QuestDto> SelectByEventId(int eventId);
+    IEnumerable<QuestDto> SelectByTeacherId(int teacherId);
     IEnumerable<QuestDto> SelectByGroupId(int groupId);
     void Insert(QuestDto quest);
 }

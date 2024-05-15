@@ -1,6 +1,5 @@
 ﻿using Hackaton_DW_2024.Api.Auth;
 using Hackaton_DW_2024.Internal.UseCases;
-using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hackaton_DW_2024.Api;
@@ -16,37 +15,21 @@ public class AuthController : ControllerBase
         _authUseCase = authUseCase;
     }
 
-    [HttpPost("/signup")]
-    public ActionResult<SignUpResponse> SignUp([FromBody] SignUpRequest request)
+    [HttpPost("/signup/student")]
+    public ActionResult<SignUpResponse> SignUp([FromBody] StudentSignUpRequest request)
     {
-        try
-        {
-            return Ok(_authUseCase.SignUpStudent(request));
-        }
-        catch (AuthException ex)
-        {
-            return Unauthorized(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500);
-        }
+        return Ok(_authUseCase.SignUpStudent(request));
+    }
+    
+    [HttpPost("/signup/teacher")]
+    public ActionResult<SignUpResponse> SignUp([FromBody] TeacherSignUpRequest request)
+    {
+        return Ok(_authUseCase.SignUpTeacher(request));
     }
 
     [HttpPost("/signin")]
     public ActionResult<SignInResponse> SignIn([FromBody] SignInRequest request)
     {
-        try
-        {
-            return Ok(_authUseCase.SignIn(request));
-        }
-        catch (AuthException ex)
-        {
-            return Unauthorized(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500);
-        }
+        return Ok(_authUseCase.SignIn(request));
     }
 }

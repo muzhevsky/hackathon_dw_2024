@@ -5,10 +5,10 @@ export interface AuthResponse{
     user: UserResponseAuth;
 }
 
-interface UserResponseAuth{
+export interface UserResponseAuth{
     id: number | string;
     surname: string;
     name: string;
-    pathronomyc: string;
-    role: number | string;
+    patronymic: string;
+    role: string;
 }
