@@ -51,7 +51,7 @@ const NavBar: React.FC<NavBarProps> = ({children}) => {
     const items: MenuItem[] = [
         getItem('Личный кабинет','1', () => navigate(HOME_PATH), <HomeOutlined/>),
         getItem('Мероприятия', '2', () => navigate(GLOBAL_EVENTS_PATH), <CalendarOutlined />),
-        getItem('Рейтинг студентов', '3', () => navigate(RATING_PATH), <StockOutlined />),
+        // getItem('Рейтинг студентов', '3', () => navigate(RATING_PATH), <StockOutlined />),
         getItem('Магазин купонов', '4', () => navigate(SHOP_PATH), <BankOutlined />),
     ];
 
