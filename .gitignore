@@ -120,6 +120,6 @@ src/.vs/config/applicationhost.config
 
 
 # env
-.env
+# .env
 
 ./frontend/node_modules
