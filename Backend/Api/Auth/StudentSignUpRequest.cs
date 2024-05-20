@@ -8,4 +8,6 @@ public class StudentSignUpRequest
     public string Name { get; set; }
     public string Patronymic { get; set; }
     public int GroupId { get; set; }
+    public string? PhoneNumber { get; set; }
+    public string? Telegram { get; set; }
 }

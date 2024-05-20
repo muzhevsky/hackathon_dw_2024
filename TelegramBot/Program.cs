@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Npgsql;
+﻿using Npgsql;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
@@ -47,7 +46,8 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
     
     var connectionString = $"Host={host};Username={username};Password={password};Database={database};Port={port}";
     await using var dataSource = NpgsqlDataSource.Create(connectionString);
-
+    
+    
     if (messageText == "/events")
     {
         await using (var cmd = dataSource.CreateCommand("SELECT title, start_date, end_date FROM events"))

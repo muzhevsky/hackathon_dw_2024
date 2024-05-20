@@ -20,12 +20,12 @@ public class ApplicationContext : DbContext
     public DbSet<InstituteDto> Institutes { get; set; }
     public DbSet<SpecialityDto> Specialities { get; set; }
     
-    public DbSet<UserDto> Users { get; set; }
-    public DbSet<StudentDto> Students { get; set; }
+    public DbSet<EfUserDto> Users { get; set; }
+    public DbSet<EfStudentDto> Students { get; set; }
     public DbSet<RejectionDto> Rejections { get; set; }
     public DbSet<RequestDto> Requests { get; set; }
     public DbSet<NewsDto> News { get; set; }
-    public DbSet<TeacherDto> Teachers { get; set; }
+    public DbSet<EfTeacherDto> Teachers { get; set; }
     public DbSet<EventStatusDto> EventStatuses { get; set; }
     public DbSet<EventResultDto> EventResults { get; set; }
     public DbSet<UsersAndEventsDto> UsersAndEvents { get; set; }

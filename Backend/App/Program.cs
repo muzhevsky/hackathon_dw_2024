@@ -1,12 +1,11 @@
-using System.Net.Mime;
 using Hackaton_DW_2024.Api;
 using Hackaton_DW_2024.App;
-using Hackaton_DW_2024.Data;
 using Hackaton_DW_2024.Data.Config;
+using Hackaton_DW_2024.Infrastructure;
 using Hackaton_DW_2024.Infrastructure.Auth;
 using Hackaton_DW_2024.Infrastructure.Logging;
+using Hackaton_DW_2024.Infrastructure.Repositories;
 using Hackaton_DW_2024.Internal;
-using Hackaton_DW_2024.Internal.UseCases.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using ILogger = Hackaton_DW_2024.Infrastructure.Logging.ILogger;
 
@@ -18,6 +17,7 @@ services.AddSingleton<IExceptionHandler,ExceptionHandler>();
 services.AddSingleton<StaticFileConfig>();
 
 services.AddDataSources();
+services.AddRepositories();
 services.AddDomain();
 services.AddJwtAuth(new AuthTokenConfiguration(new AuthTokenEnvironment()));
 

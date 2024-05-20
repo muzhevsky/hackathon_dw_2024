@@ -1,7 +1,6 @@
 using Hackaton_DW_2024.Data.Dto.Events;
-using Hackaton_DW_2024.Infrastructure.Repositories.Database;
+using Hackaton_DW_2024.Infrastructure.Repositories.UNREFACTORED;
 using Hackaton_DW_2024.Internal.UseCases.Exceptions;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hackaton_DW_2024.Api;

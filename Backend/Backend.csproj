@@ -6,9 +6,11 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <RootNamespace>Hackaton_DW_2024</RootNamespace>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Confluent.Kafka" Version="2.4.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.4"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
@@ -23,23 +25,24 @@
         <Link>.dockerignore</Link>
         <DependentUpon>Dockerfile</DependentUpon>
       </Content>
-      <Content Remove="Internal\UseCases\Converters\**" />
       <Content Remove="Api\Requests\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Internal\UseCases\Converters\**" />
       <Compile Remove="Api\Requests\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Remove="Internal\UseCases\Converters\**" />
       <EmbeddedResource Remove="Api\Requests\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Internal\UseCases\Converters\**" />
       <None Remove="Api\Requests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Api\Http\" />
+      <Folder Include="Data\DataSources\UNREFACTORED\" />
     </ItemGroup>
 
 </Project>
